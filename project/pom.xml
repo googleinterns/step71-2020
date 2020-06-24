@@ -45,7 +45,11 @@
         <version>2.2.0</version>
         <configuration>
           <!-- TODO: set project ID. -->
+<<<<<<< HEAD
           <deploy.projectId>music-collab-280719</deploy.projectId>
+=======
+          <deploy.projectId>PROJECTIDHERE</deploy.projectId>
+>>>>>>> 5d994876f055808f93cf545a5834c4acb001acec
           <deploy.version>1</deploy.version>
         </configuration>
       </plugin>
