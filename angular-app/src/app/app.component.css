@@ -1,0 +1,18 @@
+::ng-deep :root {
+  --color-background: #222;
+  --color-primary: LemonChiffon;
+  --color-accent: CadetBlue;
+  --font-text: 'Open Sans', sans-serif;
+  --font-title: 'Pacifico', cursive;
+  background-color: var(--color-background);
+}
+
+body {
+  font-family: var(--font-text);
+}
+
+h1 {
+  font-family: var(--font-title);
+  color: var(--color-accent);
+  font-size: 30px;
+}
