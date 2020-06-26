@@ -1,0 +1,16 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/../app.component.css">
+</head>
+<body>
+    <h2>Projects</h2>
+    <ul class="projects">
+      <li *ngFor="let project of projects" 
+        [class.selected]="project === selectedProject"
+        (click)="onSelect(project)">
+        <span>{{project.title}}</span>
+      </li>
+    </ul>
+    <app-project-info [project]="selectedProject"></app-project-info>
+</body>

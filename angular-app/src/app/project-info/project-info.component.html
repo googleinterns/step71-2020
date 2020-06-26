@@ -1,10 +1,11 @@
-<!--#include file="include_head.html" -->
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/app.component.css">
+    <link rel="stylesheet" href="/../app.component.css">
 </head>
 <body>
-    <h1>{{title}}</h1>
-    <app-projects></app-projects>
+    <div *ngIf="project">
+      <h3>Project: {{project.title}}</h3>
+      <p>Owner: {{project.owner}}</p>
+    </div>
 </body>
