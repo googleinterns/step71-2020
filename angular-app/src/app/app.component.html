@@ -1,10 +1,20 @@
 <!--#include file="include_head.html" -->
 <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/app.component.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/app.component.css">
 </head>
 <body>
-    <h1>{{title}}</h1>
-    <app-projects></app-projects>
+  <div class="page-layout">
+    <div class="header">
+      <h1>{{title}}</h1>
+      <div class="navbar">
+        <span>Main Feed</span>
+        <span>Discovery</span>
+        <span>Workspace</span>
+        <span>Profile</span>
+      </div>
+    </div>
+    <app-projects class="main-component"></app-projects>
+  </div>
 </body>
