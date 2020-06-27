@@ -1,11 +1,18 @@
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/../app.component.css">
 </head>
 <body>
     <div *ngIf="project">
-      <h3>Project: {{project.title}}</h3>
+      <h3>{{project.title}}</h3>
       <p>Owner: {{project.owner}}</p>
+      <ul>Collaborators:
+        <li *ngFor="let collaborator of project.collaborators">
+          {{collaborator}}
+        </li>
+      </ul>
+      <ul class="tag-list">Tags:
+        <li *ngFor="let tag of project.tags">{{tag}}</li>
+      </ul>
     </div>
 </body>
