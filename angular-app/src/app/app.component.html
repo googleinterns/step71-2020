@@ -3,5 +3,9 @@
     <app-left-menu></app-left-menu>
   </mat-sidenav>
   <mat-sidenav-content>
+    <app-projects></app-projects>
   </mat-sidenav-content>
+  <mat-sidenav #chat (click)="toggleChat()" class="sidenav-container" mode="side" position="end" opened>
+    <app-chat-drawer></app-chat-drawer>
+  </mat-sidenav>
 </mat-sidenav-container>

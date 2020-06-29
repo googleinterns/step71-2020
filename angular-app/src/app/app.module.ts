@@ -1,36 +1,45 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { ProjectInfoComponent } from './project-info/project-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
+import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
+import { ToggleChatService } from './toggle-chat.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectsComponent,
-    ProjectInfoComponent,
-    LeftMenuComponent
+    LeftMenuComponent,
+    ChatDrawerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatButtonModule,
+    MatChipsModule,
     MatDividerModule,
+    MatExpansionModule,
     MatIconModule,
     MatListModule,
     MatSidenavModule,
     MatTooltipModule,
+    MatToolbarModule,
   ],
-  providers: [],
+  providers: [ToggleChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../project';
 import { PROJECTS } from '../mock-projects';
+import { ToggleChatService } from '../toggle-chat.service';
 
 @Component({
   selector: 'app-projects',
@@ -13,13 +14,12 @@ export class ProjectsComponent implements OnInit {
   projects: Project[] = PROJECTS;
   selectedProject: Project;
 
-  constructor() { }
+  constructor(private chat: ToggleChatService) { }
 
   ngOnInit(): void {
   }
 
-  onSelect(project: Project): void {
-    this.selectedProject = project;
+  toggleChat() {
+    this.chat.toggle();
   }
-
 }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToggleChatService } from './toggle-chat.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Ensemble';
+  @ViewChild('chat') public chat: MatSidenav;
+
+  constructor(private toggleChatService: ToggleChatService) {
+  }
+
+  ngOnInit(): void {
+    this.toggleChatService.setChat(this.chat);
+  }
+
+  toggleChat() {
+    this.toggleChatService.toggle();
+  }
 }
