@@ -1,0 +1,71 @@
+.header{
+  padding: 30px;
+  text-align: center;
+  background: white;
+}
+
+.profile-header {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.profile-header__left-column {
+  float: left;
+  width: 25%;
+}
+
+.profile-header__right-column{
+  float: left;
+  width: 75%;
+}
+
+.profile-header__bio {
+  float: left;
+  text-align: left;
+  padding: 30px;
+  background-color: white;
+  border-color: black;
+}
+
+.profile-header__counts-column {
+  float: left;
+  width: 33.3%;
+  align-content: center;
+  text-align: center;
+  background-color:white;
+  padding: 30px;
+  border-color: black;
+}
+
+.profile-header__right-buttons {
+  align-content: right;
+  padding-right: 30px;
+  text-align: center;
+}
+
+.profile-posts {
+  text-align: left;
+  padding: 30px;
+}
+
+.profile-snippets {
+  text-align: center;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.left-column {
+    float: left;
+    width: 75%;
+}
+.right-column {
+  float: left;
+  width: 25%;
+  background-color:#f1f1f1;
+  padding-left: 20px;
+}
