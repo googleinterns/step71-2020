@@ -13,3 +13,17 @@ body {
   font-family: "Pacifico", cursive;
   font-size: 2em;
 }
+
+.sidenav-container {
+  min-width: 70px;
+  height: 100vh;
+}
+
+.sidechat-container {
+  min-width: 400px;
+  height: 100vh;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

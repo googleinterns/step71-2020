@@ -5,23 +5,35 @@
   <mat-divider></mat-divider>
 </mat-list>
 <mat-nav-list role="list">
-  <mat-list-item role="listitem" matTooltip="Home">
-    <mat-icon aria-hidden="false" aria-label="profile icon">account_circle</mat-icon>
+  <mat-list-item role="listitem" matTooltip="Profile">
+    <a mat-icon-button aria-label="profile page link" routerLink="/user-profile" routerLinkActive="active">
+      <mat-icon>account_circle</mat-icon>
+    </a>
   </mat-list-item>
   <mat-list-item role="listitem" matTooltip="Settings">
-    <mat-icon aria-hidden="false" aria-label="settings icon">settings</mat-icon>
+    <a mat-icon-button aria-label="user settings page link" routerLink="/user-settings" routerLinkActive="active">
+      <mat-icon>settings</mat-icon>
+    </a>
   </mat-list-item>
   <mat-divider></mat-divider>
   <mat-list-item role="listitem" matTooltip="Main Feed">
-    <mat-icon aria-hidden="false" aria-label="feed icon">dashboard</mat-icon>
+    <a mat-icon-button aria-label="main feed page link" routerLink="/main-feed" routerLinkActive="active">
+      <mat-icon>dashboard</mat-icon>
+    </a>
   </mat-list-item>
   <mat-list-item role="listitem" matTooltip="Discover">
-    <mat-icon aria-hidden="false" aria-label="discover icon">explore</mat-icon>
+    <a mat-icon-button aria-label="discover page link" routerLink="/discover" routerLinkActive="active">
+      <mat-icon>explore</mat-icon>
+    </a>
   </mat-list-item>
   <mat-list-item role="listitem" matTooltip="Projects">
-    <mat-icon aria-hidden="false" aria-label="projects icon">source</mat-icon>
+    <a mat-icon-button aria-label="projects page link" routerLink="/projects-overview" routerLinkActive="active">
+      <mat-icon>source</mat-icon>
+    </a>
   </mat-list-item>
   <mat-list-item role="listitem" matTooltip="New Project">
-    <mat-icon aria-hidden="false" aria-label="create new icon">add_box</mat-icon>
+    <a mat-icon-button aria-label="create new button" routerLink="/" routerLinkActive="active">
+      <mat-icon>add_box</mat-icon>
+    </a>
   </mat-list-item>
 </mat-nav-list>

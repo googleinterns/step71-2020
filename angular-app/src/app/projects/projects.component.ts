@@ -6,8 +6,7 @@ import { ToggleChatService } from '../toggle-chat.service';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
-  styleUrls: ['../app.component.css',
-    './projects.component.css']
+  styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
 
