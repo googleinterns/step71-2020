@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Workspace</title>
     <link rel="stylesheet" href="workspace-style.css">
-    <script></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="waveform.js"></script>
   </head>
     <body>
 
@@ -14,6 +15,9 @@
 
         <div id="top-element" class="adjustable">
             <h1>Audio File Name</h1>
+
+            <div id="waveform"></div>
+
             <form action="/action_page.php">
                 <label for="wav">Select audio:</label>
                 <input type="file" id="aud" name="aud" accept="audio/*">
