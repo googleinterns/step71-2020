@@ -1,7 +1,8 @@
 <mat-toolbar>
   <span>Projects Overview</span>
-  <button (click)="toggleChat()">
-    <mat-icon aria-hidden="false" aria-label="toggle chat">chat</mat-icon>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="toggleChat()" aria-label="toggle chat">
+    <mat-icon>chat</mat-icon>
   </button>
 </mat-toolbar>
 <mat-accordion>

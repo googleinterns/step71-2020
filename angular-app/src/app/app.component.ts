@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { ToggleChatService } from './toggle-chat.service';
 import { MatSidenav } from '@angular/material/sidenav';
 
@@ -7,17 +7,13 @@ import { MatSidenav } from '@angular/material/sidenav';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   @ViewChild('chat') public chat: MatSidenav;
 
   constructor(private toggleChatService: ToggleChatService) {
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.toggleChatService.setChat(this.chat);
-  }
-
-  toggleChat() {
-    this.toggleChatService.toggle();
   }
 }

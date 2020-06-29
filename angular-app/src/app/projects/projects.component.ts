@@ -19,7 +19,8 @@ export class ProjectsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  toggleChat() {
+  toggleChat(): void {
+    console.log("toggling chat");
     this.chat.toggle();
   }
 }
