@@ -32,7 +32,9 @@ body {
   display: flex;
 }
 
-.chat-form {
+.mat-form-field.chat-form {
   position: absolute;
   bottom: 0;
+  width: calc(100% - 60px);
+  padding:30px;
 }
