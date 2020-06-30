@@ -5,5 +5,5 @@ window.onload = function() {
         scrollParent: true
     });
 
-    wavesurfer.load('audio.wav');
+    wavesurfer.load('gtr-jazz-3.mp3');
 }
