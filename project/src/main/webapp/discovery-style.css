@@ -1,0 +1,91 @@
+.header{
+  padding: 30px;
+  text-align: center;
+  background: white;
+}
+
+.subheader {
+  padding: 50px;
+  text-align: center;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.left-column {
+    float: left;
+    width: 25%;
+}
+.right-column {
+  float: left;
+  width: 75%;
+  background-color:#f1f1f1;
+  padding-left: 20px;
+}
+
+
+.profile-header {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.profile-header__left-column {
+  float: left;
+  width: 25%;
+}
+
+.profile-header__right-column{
+  float: left;
+  width: 75%;
+}
+
+.profile-header__bio {
+  float: left;
+  text-align: left;
+  padding: 30px;
+  background-color: white;
+  border-color: black;
+}
+
+img {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+}
+
+#myInput {
+  background-image: url(''); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myUL {
+  /* Remove default list styling */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  border: 1px solid #ddd; /* Add a border to all links */
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6; /* Grey background color */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 18px; /* Increase the font-size */
+  color: black; /* Add a black text color */
+  display: block; /* Make it into a block element to fill the whole list */
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
