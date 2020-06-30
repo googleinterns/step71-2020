@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatDrawerComponent implements OnInit {
 
+  chats: string[] = ["hi", "lorem ipsum"];
+  message: string;
+
   constructor() { }
 
   ngOnInit(): void {
