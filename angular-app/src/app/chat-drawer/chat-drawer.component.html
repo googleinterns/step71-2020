@@ -1,0 +1,16 @@
+<mat-list>
+  <mat-list-item *ngFor="let chat of chats">
+    <div class="list-item-content">
+      <mat-icon>account_circle</mat-icon>
+      <span><p>{{chat}}</p></span>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>
+<mat-form-field class="chat-form">
+  <mat-label>Type your message here</mat-label>
+  <input matInput type="text" [(ngModel)]="message">
+  <button mat-button *ngIf="message" matSuffix mat-icon-button aria-label="Send">
+    <mat-icon>send</mat-icon>
+  </button>
+</mat-form-field>
