@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Workspace</title>
+    <link rel="stylesheet" href="workspace-style.css">
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="waveform.js"></script>
+  </head>
+    <body>
+
+        <div id="project-name">
+            <header>Project Name</header>
+        </div>
+
+        <div id="top-element" class="adjustable">
+            <h1>Audio File Name</h1>
+
+            <div id="waveform"></div>
+
+            <form action="/action_page.php">
+                <label for="wav">Select audio:</label>
+                <input type="file" id="aud" name="aud" accept="audio/*">
+                <input type="submit">
+            </form>
+        </div>
+
+        <div id="bottom-element" class="adjustable">
+            <h1>Lyric Document Name</h1>
+        </div>
+
+    </body>
+</html>
