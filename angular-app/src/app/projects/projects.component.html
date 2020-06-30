@@ -1,7 +1,7 @@
 <mat-toolbar>
   <span>Projects Overview</span>
   <span class="spacer"></span>
-  <button mat-icon-button (click)="toggleChat()" aria-label="toggle chat">
+  <button mat-icon-button (click)="toggleChat()" aria-label="toggle chat" matTooltip="Toggle Chat">
     <mat-icon>chat</mat-icon>
   </button>
 </mat-toolbar>
@@ -24,7 +24,7 @@
       </mat-chip-list>
     </div>
     <mat-action-row>
-      <a mat-button aria-label="Open project button" routerLink="/project-detail" routerLinkActive="active">Open Project</a>
+      <a mat-button aria-label="Open project button" [routerLink]="['/project-detail', project.title]" routerLinkActive="active">Open Project</a>
     </mat-action-row>
   </mat-expansion-panel>
   <mat-divider></mat-divider>
