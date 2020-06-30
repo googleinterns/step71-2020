@@ -1,7 +1,9 @@
-var wavesurfer = WaveSurfer.create({
-    container: '#waveform',
-    waveColor: 'violet',
-    progressColor: 'purple'
-});
+window.onload = function() {
 
-wavesurfer.load("audio.wav");
+    var wavesurfer = WaveSurfer.create({
+        container: document.getElementById("wave-container"),
+        scrollParent: true
+    });
+
+    wavesurfer.load('audio.wav');
+}

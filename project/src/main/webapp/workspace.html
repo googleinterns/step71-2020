@@ -4,32 +4,32 @@
     <meta charset="UTF-8">
     <title>Workspace</title>
     <link rel="stylesheet" href="workspace-style.css">
-    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js@4.0.1/dist/wavesurfer.js"></script>
     <script src="waveform.js"></script>
   </head>
     <body>
         <div id="workspace-content">
-        <div id="project-name" class="center">
-            <header>Project Name</header>
-        </div>
+            <div id="project-name" class="center">
+                <header>Project Name</header>
+            </div>
 
-        <div id="top-element" class="adjustable">
-            <h1 class="center">Audio File Name</h1>
+            <div id="top-element" class="resizeable-content">
+                <h1 class="center">Audio File Name</h1>
 
-            <div id="waveform"></div>
+                <div id="wave-container"></div>
 
-            <form action="/action_page.php">
                 <label for="wav">Select audio:</label>
-                <input type="file" id="aud" name="aud" accept="audio/*">
-                <input type="submit">
-            </form>
-        </div>
+                <input type="file" id="input"/>
+                <audio id="sound"></audio>
 
-        <div id="bottom-element" class="adjustable">
-            <h1 class="center">Lyric Document Name</h1>
-            <div contenteditable="true">
-                <p>Type lyrics here...</p>
-        </div>
+            </div>
+
+            <div id="bottom-element" class="resizeable-content">
+                <h1 class="center">Lyric Document Name</h1>
+                <div contenteditable="true">
+                    <p>Type lyrics here...</p>
+                </div>
+            </div>
         </div>
     </body>
 </html>
