@@ -1,0 +1,14 @@
+.adjustable {
+    resize: vertical;
+    overflow: auto;
+}
+
+#workspace-content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+}
+
+.center {
+    text-align: center;
+}
