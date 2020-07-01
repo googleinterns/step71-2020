@@ -1,16 +1,23 @@
-<mat-list>
-  <mat-list-item *ngFor="let chat of chats">
-    <div class="list-item-content">
+<div class="chat-drawer-contents">
+  <mat-toolbar>
+    <span>Chat</span>
+  </mat-toolbar>
+  <mat-list id="chat-channel" class="chat-channel">
+    <mat-list-item *ngFor="let chat of chats" class="chat-entry">
       <mat-icon>account_circle</mat-icon>
       <span><p>{{chat}}</p></span>
-    </div>
-    <mat-divider></mat-divider>
-  </mat-list-item>
-</mat-list>
-<mat-form-field class="chat-form">
-  <mat-label>Type your message here</mat-label>
-  <input matInput type="text" [(ngModel)]="message">
-  <button mat-button *ngIf="message" matSuffix mat-icon-button aria-label="Send">
-    <mat-icon>send</mat-icon>
-  </button>
-</mat-form-field>
+    </mat-list-item>
+  </mat-list>
+  <mat-divider></mat-divider>
+  <mat-form-field class="chat-form">
+    <mat-label>Type your message here</mat-label>
+    <textarea matInput [(ngModel)]="message" 
+              (keyup.enter)="sendMessage(message)"
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"></textarea>
+    <button mat-button *ngIf="message" matSuffix mat-icon-button aria-label="Send" (click)="sendMessage(message)">
+      <mat-icon>send</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
