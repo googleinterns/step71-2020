@@ -1,0 +1,17 @@
+<div *ngIf="project$ | async as project">
+  <div>Owner: {{project.owner}}</div>
+  <div>
+    Collaborators:
+    <mat-chip-list aria-label="project collaborators">
+      <mat-chip *ngFor="let collaborator of project.collaborators">{{collaborator}}</mat-chip>
+    </mat-chip-list>
+  </div>
+  <div>
+    Tags:
+    <mat-chip-list aria-label="project tags">
+      <mat-chip *ngFor="let tag of project.tags">{{tag}}</mat-chip>
+    </mat-chip-list>
+  </div>
+  <button mat-button>Delete Project</button>
+</div>
+<button mat-button (click)="exitSettings()">Exit Settings</button>
