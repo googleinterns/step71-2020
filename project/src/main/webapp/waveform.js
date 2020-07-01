@@ -1,7 +1,17 @@
-var wavesurfer = WaveSurfer.create({
-    container: '#waveform',
-    waveColor: 'violet',
-    progressColor: 'purple'
-});
+var wavesurfer;
 
-wavesurfer.load("audio.wav");
+window.onload = function() {
+
+    wavesurfer = WaveSurfer.create({
+        container: document.getElementById("wave-container"),
+        scrollParent: true,
+        waveColor : 'red',
+        progressColor: 'purple',
+    });
+
+    wavesurfer.load('gtr-jazz-3.mp3');
+}
+
+function playPause() {
+    wavesurfer.playPause();
+}
