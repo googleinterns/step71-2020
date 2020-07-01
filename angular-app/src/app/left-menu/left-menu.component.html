@@ -1,0 +1,44 @@
+<mat-list>
+  <mat-list-item role="listitem">
+    <span class="logo primary">E</span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
+<mat-nav-list role="list">
+  <mat-list-item role="listitem" matTooltip="Profile">
+    <a mat-icon-button aria-label="profile page link" routerLink="/user-profile" routerLinkActive="active">
+      <mat-icon>account_circle</mat-icon>
+    </a>
+  </mat-list-item>
+  <mat-list-item role="listitem" matTooltip="Settings">
+    <a mat-icon-button aria-label="user settings page link" routerLink="/user-settings" routerLinkActive="active">
+      <mat-icon>settings</mat-icon>
+    </a>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item role="listitem" matTooltip="Main Feed">
+    <a mat-icon-button aria-label="main feed page link" routerLink="/main-feed" routerLinkActive="active">
+      <mat-icon>dashboard</mat-icon>
+    </a>
+  </mat-list-item>
+  <mat-list-item role="listitem" matTooltip="Discover">
+    <a mat-icon-button aria-label="discover page link" routerLink="/discover" routerLinkActive="active">
+      <mat-icon>explore</mat-icon>
+    </a>
+  </mat-list-item>
+  <mat-list-item role="listitem" matTooltip="Projects">
+    <a mat-icon-button aria-label="projects page link" routerLink="/projects" routerLinkActive="active">
+      <mat-icon>source</mat-icon>
+    </a>
+  </mat-list-item>
+  <mat-list-item role="listitem" matTooltip="Workspace">
+    <a mat-icon-button aria-label="workspace page link" routerLink="/workspace" routerLinkActive="active">
+      <mat-icon>picture_in_picture</mat-icon>
+    </a>
+  </mat-list-item>
+  <mat-list-item role="listitem" matTooltip="New Project">
+    <a mat-icon-button aria-label="create new button" routerLink="/create-new" routerLinkActive="active">
+      <mat-icon>add_box</mat-icon>
+    </a>
+  </mat-list-item>
+</mat-nav-list>

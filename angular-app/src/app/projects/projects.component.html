@@ -1,0 +1,31 @@
+<mat-toolbar>
+  <span>Projects Overview</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="toggleChat()" aria-label="toggle chat" matTooltip="Toggle Chat">
+    <mat-icon>chat</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let project of projects">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{project.title}}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>Owner: {{project.owner}}</div>
+    <div>
+      Collaborators:
+      <mat-chip-list aria-label="project collaborators">
+        <mat-chip *ngFor="let collaborator of project.collaborators">{{collaborator}}</mat-chip>
+      </mat-chip-list>
+    </div>
+    <div>
+      Tags:
+      <mat-chip-list aria-label="project tags">
+        <mat-chip *ngFor="let tag of project.tags">{{tag}}</mat-chip>
+      </mat-chip-list>
+    </div>
+    <mat-action-row>
+      <a mat-button aria-label="Open project button" [routerLink]="['/projects', project.title]" routerLinkActive="active">Open Project</a>
+    </mat-action-row>
+  </mat-expansion-panel>
+  <mat-divider></mat-divider>
+</mat-accordion>

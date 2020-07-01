@@ -1,0 +1,23 @@
+<div *ngIf="project$ | async as project">
+  <mat-toolbar>
+    <span>Project: {{project.title}}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button matTooltip="Project Settings">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button (click)="toggleChat()" aria-label="toggle chat" matTooltip="Toggle Chat">
+      <mat-icon>chat</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let file of files">
+      <div class="list-item-content">
+        <span>{{file}}</span>
+        <span class="spacer"></span>
+        <button mat-icon-button matTooltip="Open in Workspace">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+</div>
