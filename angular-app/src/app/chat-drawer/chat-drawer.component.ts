@@ -20,7 +20,7 @@ export class ChatDrawerComponent implements AfterViewInit {
   }
 
   async delay(ms: number) {
-    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+    await new Promise(resolve => setTimeout(() => resolve(), ms));
   }
 
   sendMessage(message: string) {
