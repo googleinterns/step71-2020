@@ -13,13 +13,15 @@
 }
 
 #workspace-content {
+    background-color: gray;
+    color: white;
     margin-left: auto;
     margin-right: auto;
     width: 700px;
 }
 
 #wave-container {
-    
+    background-color: blue;
 }
 
 .center {
