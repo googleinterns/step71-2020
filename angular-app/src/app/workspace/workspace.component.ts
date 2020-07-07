@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import WaveSurfer from './wavesurfer.js';
-var wavesurfer = Object.create(WaveSurfer);
-
+import * as WaveSurfer from '../../assets/js/wavesurfer.js';
 
 @Component({
   selector: 'app-workspace',
@@ -12,23 +10,19 @@ var wavesurfer = Object.create(WaveSurfer);
 export class WorkspaceComponent implements OnInit {
 
   constructor() { }
-
-    public audiofile = "audio.wav";
+    public audiofile = '../../assets/audio.mp3';
     public context = new AudioContext();
+    public wavesurfer;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.context.resume();
-    console.log("works");
-    wavesurfer = WaveSurfer.create({
+    this.wavesurfer = WaveSurfer.create({
         container: '#wave-container',
-        height:100,
         waveColor : 'red',
         scrollParent: true,
         progressColor: 'purple',
     });
-    wavesurfer.load(this.audiofile);
-  }
- 
-
+    console.log("works");
+    this.wavesurfer.load(this.audiofile);
 }
-
+}

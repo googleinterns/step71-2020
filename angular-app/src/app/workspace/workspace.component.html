@@ -1,4 +1,5 @@
-<script src="https://unpkg.com/wavesurfer.js@4.0.1/dist/wavesurfer.js"></script>
+<!-- <script src="https://unpkg.com/wavesurfer.js@4.0.1/dist/wavesurfer.js"></script> -->
+
 <body>
     <div id="workspace-content">
         <div id="project-name" class="center">
@@ -8,7 +9,7 @@
         <div id="top-element" class="resizeable-content">
             <h1 class="center">Audio File Name</h1>
             <div id="wave-container"></div>
-                <button>Pause/Play</button>
+                <button ng-click="playPause()">Play/Pause</button>
             <label for="wav">Select audio:</label>
             <input type="file" id="input"/>
             <audio id="sound"></audio>
