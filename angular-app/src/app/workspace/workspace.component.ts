@@ -22,12 +22,11 @@ export class WorkspaceComponent implements OnInit {
         scrollParent: true,
         progressColor: 'purple',
     });
-    console.log("works");
     this.wavesurfer.load(this.audiofile);
-}
+  }
 
     myFunction() {
-        console.log("function called");
         this.wavesurfer.playPause();
     }
+
 }
