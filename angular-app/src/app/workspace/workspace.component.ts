@@ -10,11 +10,15 @@ import * as WaveSurfer from '../../assets/js/wavesurfer.js';
 export class WorkspaceComponent implements OnInit {
 
   constructor() { }
-    public audiofile = '../../assets/audio.mp3';
+
+    public audiofile = '../../assets/audio.wav';
     public context = new AudioContext();
     public wavesurfer;
 
+    public audioFileToUpload: File = null;
+
   ngOnInit() {
+    this.getAudioName();
     this.context.resume();
     this.wavesurfer = WaveSurfer.create({
         container: '#wave-container',
@@ -22,6 +26,7 @@ export class WorkspaceComponent implements OnInit {
         scrollParent: true,
         progressColor: 'purple',
     });
+
     this.wavesurfer.load(this.audiofile);
   }
 
@@ -29,4 +34,17 @@ export class WorkspaceComponent implements OnInit {
         this.wavesurfer.playPause();
     }
 
+    handleFileInput(files: FileList) {
+        this.audioFileToUpload = files.item(0);
+        this.getAudioName();
+    }
+
+    getAudioName() {
+        var audioName = document.getElementById("audio-name");
+        if (this.audioFileToUpload == null) {
+            audioName.innerHTML = "Please Select an Audio File to Upload";
+        } else {
+            audioName.innerHTML = this.audioFileToUpload.name;
+        }
+    }
 }

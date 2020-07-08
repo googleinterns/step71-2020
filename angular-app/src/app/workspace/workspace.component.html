@@ -1,16 +1,18 @@
 <body>
-    <div id="workspace-content">
+    <div id="wcontent">
         <div id="project-name" class="center">
             <header>Project Name</header>
         </div>
 
         <div id="top-element" class="resizeable-content">
-            <h1 class="center">Audio File Name</h1>
+            <h1 id="audio-name" class="center">Audio File Name</h1>
             <div id="wave-container"></div>
                 <button (click)="myFunction()">Play/Pause</button>
             <label for="wav">Select audio:</label>
-            <input type="file" id="input"/>
+            <input type="file" id="input" (change)="handleFileInput($event.target.files)"/>
             <audio id="sound"></audio>
+
+            <button (click)="getAudioName()">Name</button>
         </div>
 
         <div id="bottom-element" class="resizeable-content">
