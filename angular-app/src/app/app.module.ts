@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -24,7 +25,9 @@ import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { ToggleChatService } from './toggle-chat.service';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { ProjectSettingsDialog } from './project-detail/project-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { WorkspaceComponent } from './workspace/workspace.component';
 
 @NgModule({
   declarations: [
@@ -33,13 +36,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     LeftMenuComponent,
     ChatDrawerComponent,
     ProjectDetailComponent,
-    PageNotFoundComponent
+    ProjectSettingsDialog,
+    PageNotFoundComponent,
+    WorkspaceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     MatButtonModule,
     MatChipsModule,
     MatDialogModule,
