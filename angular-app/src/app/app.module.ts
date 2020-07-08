@@ -23,6 +23,8 @@ import { ToggleChatService } from './toggle-chat.service';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { DiscoveryComponent } from './discovery/discovery.component';
+import { MainFeedComponent } from './main-feed/main-feed.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ChatDrawerComponent,
     ProjectDetailComponent,
     PageNotFoundComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    DiscoveryComponent,
+    MainFeedComponent
   ],
   imports: [
     BrowserModule,
