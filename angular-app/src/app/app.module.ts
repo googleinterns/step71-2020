@@ -9,6 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -31,6 +32,9 @@ import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { ProjectSettingsDialog } from './project-detail/project-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { DiscoveryComponent } from './discovery/discovery.component';
+import { MainFeedComponent } from './main-feed/main-feed.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 
 import { AuthService } from './auth.service';
@@ -43,6 +47,10 @@ import { ToggleChatService } from './toggle-chat.service';
     LeftMenuComponent,
     ChatDrawerComponent,
     ProjectDetailComponent,
+    PageNotFoundComponent,
+    UserProfileComponent,
+    DiscoveryComponent,
+    MainFeedComponent,
     ProjectSettingsDialog,
     PageNotFoundComponent,
     WorkspaceComponent
@@ -56,6 +64,7 @@ import { ToggleChatService } from './toggle-chat.service';
     FormsModule,
     HttpClientModule,
     MatButtonModule,
+    MatCardModule,
     MatChipsModule,
     MatDialogModule,
     MatDividerModule,
