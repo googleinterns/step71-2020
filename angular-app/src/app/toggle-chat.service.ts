@@ -17,7 +17,6 @@ export class ToggleChatService {
     return this.chat.open();
   }
 
-
   public close() {
     return this.chat.close();
   }

@@ -1,4 +1,4 @@
-<div *ngIf="auth.user | async as user; else showLogin">
+<div *ngIf="user$ | async as user; else showLogin">
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav mode="side" opened>
       <app-left-menu></app-left-menu>
