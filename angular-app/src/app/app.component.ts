@@ -1,6 +1,9 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
-import { ToggleChatService } from './toggle-chat.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 import { MatSidenav } from '@angular/material/sidenav';
+
+import { ToggleChatService } from './toggle-chat.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +13,20 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class AppComponent implements AfterViewInit {
   @ViewChild('chat') public chat: MatSidenav;
 
-  constructor(private toggleChatService: ToggleChatService) {
-  }
+  constructor(
+    public auth: AngularFireAuth,
+    private toggleChatService: ToggleChatService
+  ) {}
 
   ngAfterViewInit(): void {
     this.toggleChatService.setChat(this.chat);
+  }
+
+  login() {
+    this.auth.signInWithPopup(new auth.GoogleAuthProvider());
+  }
+
+  logout() {
+    this.auth.signOut();
   }
 }

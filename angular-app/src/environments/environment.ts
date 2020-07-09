@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  const firebaseConfig = {
+  firebase: {
     apiKey: "AIzaSyAf2uEjfbX8aE6AR_hpwUYSlEjTifrDECg",
     authDomain: "music-collab-280719.firebaseapp.com",
     databaseURL: "https://music-collab-280719.firebaseio.com",
@@ -13,7 +13,7 @@ export const environment = {
     messagingSenderId: "1051530697955",
     appId: "1:1051530697955:web:620ab60be989799f2179d6",
     measurementId: "G-6Q1K4XZSKD"
-  };
+  },
 };
 
 /*
