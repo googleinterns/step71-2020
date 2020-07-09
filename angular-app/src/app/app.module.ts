@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -27,7 +28,11 @@ import { ToggleChatService } from './toggle-chat.service';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { ProjectSettingsDialog } from './project-detail/project-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { DiscoveryComponent } from './discovery/discovery.component';
+import { MainFeedComponent } from './main-feed/main-feed.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +41,10 @@ import { WorkspaceComponent } from './workspace/workspace.component';
     LeftMenuComponent,
     ChatDrawerComponent,
     ProjectDetailComponent,
+    PageNotFoundComponent,
+    UserProfileComponent,
+    DiscoveryComponent,
+    MainFeedComponent
     ProjectSettingsDialog,
     PageNotFoundComponent,
     WorkspaceComponent
@@ -47,6 +56,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
     FormsModule,
     HttpClientModule,
     MatButtonModule,
+    MatCardModule,
     MatChipsModule,
     MatDialogModule,
     MatDividerModule,
