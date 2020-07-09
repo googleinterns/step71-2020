@@ -24,6 +24,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    console.log("setting chat for toggle service");
     this.toggleChatService.setChat(this.chat);
   }
 

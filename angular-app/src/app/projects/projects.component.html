@@ -6,7 +6,7 @@
   </button>
 </mat-toolbar>
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let project of projects">
+  <mat-expansion-panel *ngFor="let project of projects$ | async">
     <mat-expansion-panel-header>
       <mat-panel-title>{{project.title}}</mat-panel-title>
     </mat-expansion-panel-header>
