@@ -1,0 +1,50 @@
+.header{
+  padding: 30px;
+  text-align: center;
+  background: white;
+}
+
+.subheader {
+  padding: 50px;
+  text-align: center;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.main-feed-user-posts__text-area{
+float: left;
+width: 65%;
+text-align: left;
+padding-bottom:100px
+}
+
+.main-feed-user-posts__submission{
+float: left;
+width: 15%;
+text-align: center;
+padding-bottom: 100px;
+}
+
+.main-feed-posts__left-column {
+  float: left;
+  width: 25%;
+  text-align: center;
+  
+}
+
+.main-feed-posts__right-column {
+  float: left;
+  width: 50%;
+  text-align: left;
+  padding-top: 20px;
+}
+
+img {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+}

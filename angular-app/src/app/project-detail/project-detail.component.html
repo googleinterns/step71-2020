@@ -2,7 +2,7 @@
   <mat-toolbar>
     <span>Project: {{project.title}}</span>
     <span class="spacer"></span>
-    <button mat-icon-button matTooltip="Project Settings">
+    <button mat-icon-button matTooltip="Project Settings" (click)="openDialog()">
       <mat-icon>settings</mat-icon>
     </button>
     <button mat-icon-button (click)="toggleChat()" aria-label="toggle chat" matTooltip="Toggle Chat">

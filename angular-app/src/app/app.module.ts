@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +15,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,10 +26,13 @@ import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { ToggleChatService } from './toggle-chat.service';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { ProjectSettingsDialog } from './project-detail/project-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DiscoveryComponent } from './discovery/discovery.component';
 import { MainFeedComponent } from './main-feed/main-feed.component';
+import { WorkspaceComponent } from './workspace/workspace.component';
+
 
 @NgModule({
   declarations: [
@@ -38,15 +45,20 @@ import { MainFeedComponent } from './main-feed/main-feed.component';
     UserProfileComponent,
     DiscoveryComponent,
     MainFeedComponent
+    ProjectSettingsDialog,
+    PageNotFoundComponent,
+    WorkspaceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
     MatIconModule,
@@ -56,6 +68,8 @@ import { MainFeedComponent } from './main-feed/main-feed.component';
     MatSidenavModule,
     MatTooltipModule,
     MatToolbarModule,
+    CdkScrollableModule,
+    TextFieldModule,
   ],
   providers: [ToggleChatService],
   bootstrap: [AppComponent]

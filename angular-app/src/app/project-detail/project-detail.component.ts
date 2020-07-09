@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router'; 
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -22,7 +23,8 @@ export class ProjectDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private projectService: ProjectService,
-    private chatService: ToggleChatService
+    private chatService: ToggleChatService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -33,8 +35,27 @@ export class ProjectDetailComponent implements OnInit {
     );
   }
 
+  openDialog(): void {
+    const dialogRed = this.dialog.open(ProjectSettingsDialog, { data: this.project$ });
+  }
+
   toggleChat(): void {
     console.log("toggling chat");
     this.chatService.toggle();
+  }
+}
+
+@Component({
+  selector: 'app-project-settings-dialog',
+  templateUrl: 'project-settings-dialog.html',
+})
+export class ProjectSettingsDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ProjectSettingsDialog>,
+    @Inject(MAT_DIALOG_DATA) public project$: Observable<Project>) {}
+
+  exitSettings() {
+    this.dialogRef.close();
   }
 }
