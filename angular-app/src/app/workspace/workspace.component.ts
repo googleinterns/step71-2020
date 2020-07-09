@@ -11,6 +11,9 @@ export class WorkspaceComponent implements OnInit {
 
   constructor() { }
 
+    public waveHTML : HTMLElement;
+    public uploadHTML : HTMLElement;
+
     public context = new AudioContext();
     public wavesurfer;
 
@@ -19,10 +22,14 @@ export class WorkspaceComponent implements OnInit {
     public audioFileToUpload: File = null;
 
   ngOnInit() {
+    
+    this.waveHTML = document.getElementById("wave-html");
+    this.uploadHTML = document.getElementById("wave-upload-html");
+
     this.getAudioName();
     this.context.resume();
     if (this.audioFileToUpload == null) {
-        document.getElementById("wave-html").innerHTML = "Upload Audio File";
+        this.waveHTML.innerHTML = "Upload Audio File";
     } else {
         this.loadWaveSurfer(this.audioFileToUpload);
     }
@@ -34,13 +41,13 @@ export class WorkspaceComponent implements OnInit {
 
     upload() {
         if (this.hasFileChanged) {
-            document.getElementById("wave-upload-html").innerHTML = "";
+            this.uploadHTML.innerHTML = "";
             this.loadWaveSurfer(this.audioFileToUpload);
         }
     }
 
     removeErrorText() {
-        document.getElementById("wave-html").innerHTML = "";
+        this.waveHTML.innerHTML = "";
     }
 
     handleFileInput(files: FileList) {
@@ -48,7 +55,7 @@ export class WorkspaceComponent implements OnInit {
         this.audioFileToUpload = files.item(0);
         this.getAudioName();
         this.removeErrorText();
-        document.getElementById("wave-upload-html").innerHTML = "Please Select the Upload Button";
+        this.uploadHTML.innerHTML = "Please Select the Upload Button";
     }
 
     loadWaveSurfer(audio) {
