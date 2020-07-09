@@ -15,7 +15,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   public user$;
 
   constructor(
-    public authService: AuthService,
+    private authService: AuthService,
     private toggleChatService: ToggleChatService
   ) { }
 
