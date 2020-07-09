@@ -33,6 +33,11 @@ $dark-theme: mat-dark-theme((
 // that you are using.
 @include angular-material-theme($dark-theme);
 
+.dark-theme {
+  background-color: map-get(map-get($dark-theme, background), background);
+  color: map-get(map-get($dark-theme, foreground),text);
+}
+
 .primary {
   color: mat-color($dark-primary, 600);
 }
