@@ -49,7 +49,7 @@ import { ToggleChatService } from './toggle-chat.service';
     PageNotFoundComponent,
     UserProfileComponent,
     DiscoveryComponent,
-    MainFeedComponent
+    MainFeedComponent,
     ProjectSettingsDialog,
     PageNotFoundComponent,
     WorkspaceComponent
