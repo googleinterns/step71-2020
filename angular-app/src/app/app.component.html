@@ -1,11 +1,21 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav mode="side" opened>
-    <app-left-menu></app-left-menu>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-  <mat-sidenav #chat class="sidechat-container" mode="side" position="end" opened>
-    <app-chat-drawer></app-chat-drawer>
-  </mat-sidenav>
-</mat-sidenav-container>
+<div *ngIf="user$ | async as user; else showLogin">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened>
+      <app-left-menu></app-left-menu>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+    <mat-sidenav #chat class="sidechat-container" mode="side" position="end" opened>
+      <app-chat-drawer></app-chat-drawer>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>
+<ng-template #showLogin>
+  <div class="vertical-center-container">
+    <div class="horizontal-center-container">
+      <p>Please login.</p>
+      <button mat-button (click)="login()">Login with Google</button>
+    </div>
+  </div>
+</ng-template>

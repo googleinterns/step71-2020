@@ -15,6 +15,11 @@
       <mat-icon>settings</mat-icon>
     </a>
   </mat-list-item>
+  <mat-list-item role="listitem" matTooltip="Logout">
+    <a mat-icon-button aria-label="logout button" (click)="logout()">
+      <mat-icon>lock</mat-icon>
+    </a>
+  </mat-list-item>
   <mat-divider></mat-divider>
   <mat-list-item role="listitem" matTooltip="Main Feed">
     <a mat-icon-button aria-label="main feed page link" routerLink="/main-feed" routerLinkActive="active">

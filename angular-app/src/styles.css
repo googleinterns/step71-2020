@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { 
-  height: 100%; 
+  height: 100vh; 
 }
 
 body { 
@@ -12,6 +12,17 @@ body {
 .logo {
   font-family: "Pacifico", cursive;
   font-size: 2em;
+}
+
+.vertical-center-container {
+  height:100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.horizontal-center-container {
+  text-align: center;
 }
 
 .sidenav-container {

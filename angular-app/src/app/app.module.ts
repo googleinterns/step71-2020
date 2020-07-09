@@ -1,7 +1,12 @@
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { AngularFireModule } from '@angular/fire';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -18,13 +23,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { TextFieldModule } from '@angular/cdk/text-field';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 import { ProjectsComponent } from './projects/projects.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
-import { ToggleChatService } from './toggle-chat.service';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { ProjectSettingsDialog } from './project-detail/project-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -33,6 +36,8 @@ import { DiscoveryComponent } from './discovery/discovery.component';
 import { MainFeedComponent } from './main-feed/main-feed.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 
+import { AuthService } from './auth.service';
+import { ToggleChatService } from './toggle-chat.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
     PageNotFoundComponent,
     UserProfileComponent,
     DiscoveryComponent,
-    MainFeedComponent
+    MainFeedComponent,
     ProjectSettingsDialog,
     PageNotFoundComponent,
     WorkspaceComponent
@@ -52,6 +57,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
@@ -71,7 +77,10 @@ import { WorkspaceComponent } from './workspace/workspace.component';
     CdkScrollableModule,
     TextFieldModule,
   ],
-  providers: [ToggleChatService],
+  providers: [
+    AuthService,
+    ToggleChatService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
