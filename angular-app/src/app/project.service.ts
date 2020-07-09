@@ -9,16 +9,10 @@ import { Project } from './project';
 })
 export class ProjectService {
 
-  // private projects: Project[] = PROJECTS;
   private projects$: Observable<Project[]>;
   private currentProject: Project;
 
   constructor(private firestore: AngularFirestore) { 
-    // for (let project of this.projects) {
-    //  firestore.collection("projects").doc<Project>(project.title).set(project)
-    //    .then(_ => console.log("document written"))
-    //    .catch(error => console.error("error writing document", error));
-    //}
     this.projects$ = firestore.collection<Project>('projects').valueChanges();
   }
 
