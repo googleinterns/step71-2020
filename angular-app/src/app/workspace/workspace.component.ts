@@ -62,7 +62,7 @@ export class WorkspaceComponent implements OnInit {
         this.wavesurfer = WaveSurfer.create({
         container: '#wave-container',
         waveColor : 'red',
-        backgroundColor: 'black',
+        backgroundColor: '#303030',
         scrollParent: true,
         progressColor: 'purple',
         });
