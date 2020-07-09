@@ -12,4 +12,5 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  panelOpenState = false;
 }
