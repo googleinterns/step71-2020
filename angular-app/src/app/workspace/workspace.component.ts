@@ -11,32 +11,55 @@ export class WorkspaceComponent implements OnInit {
 
   constructor() { }
 
-    public audiofile = '../../assets/audio.wav';
     public context = new AudioContext();
     public wavesurfer;
+
+    public hasFileChanged: boolean = false;
 
     public audioFileToUpload: File = null;
 
   ngOnInit() {
     this.getAudioName();
     this.context.resume();
-    this.wavesurfer = WaveSurfer.create({
-        container: '#wave-container',
-        waveColor : 'red',
-        scrollParent: true,
-        progressColor: 'purple',
-    });
-
-    this.wavesurfer.load(this.audiofile);
+    if (this.audioFileToUpload == null) {
+        document.getElementById("wave-html").innerHTML = "Upload Audio File";
+    } else {
+        this.loadWaveSurfer(this.audioFileToUpload);
+    }
   }
 
-    myFunction() {
+    playPause() {
         this.wavesurfer.playPause();
     }
 
+    upload() {
+        if (this.hasFileChanged) {
+            document.getElementById("wave-upload-html").innerHTML = "";
+            this.loadWaveSurfer(this.audioFileToUpload);
+        }
+    }
+
+    removeErrorText() {
+        document.getElementById("wave-html").innerHTML = "";
+    }
+
     handleFileInput(files: FileList) {
+        this.hasFileChanged = true;
         this.audioFileToUpload = files.item(0);
         this.getAudioName();
+        this.removeErrorText();
+        document.getElementById("wave-upload-html").innerHTML = "Please Select the Upload Button";
+    }
+
+    loadWaveSurfer(audio) {
+        this.wavesurfer = WaveSurfer.create({
+        container: '#wave-container',
+        waveColor : 'red',
+        backgroundColor: 'black',
+        scrollParent: true,
+        progressColor: 'purple',
+        });
+        this.wavesurfer.loadBlob(audio);
     }
 
     getAudioName() {
