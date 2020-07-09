@@ -1,7 +1,12 @@
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { AngularFireModule } from '@angular/fire';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -17,8 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { TextFieldModule } from '@angular/cdk/text-field';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 import { ProjectsComponent } from './projects/projects.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
@@ -43,6 +47,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
