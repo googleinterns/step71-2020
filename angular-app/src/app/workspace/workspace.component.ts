@@ -10,23 +10,71 @@ import * as WaveSurfer from '../../assets/js/wavesurfer.js';
 export class WorkspaceComponent implements OnInit {
 
   constructor() { }
-    public audiofile = '../../assets/audio.mp3';
+
+    public waveHTML : HTMLElement;
+    public uploadHTML : HTMLElement;
+
     public context = new AudioContext();
     public wavesurfer;
 
+    public hasFileChanged: boolean = false;
+
+    public audioFileToUpload: File = null;
+
   ngOnInit() {
+    
+    this.waveHTML = document.getElementById("wave-html");
+    this.uploadHTML = document.getElementById("wave-upload-html");
+
+    this.getAudioName();
     this.context.resume();
-    this.wavesurfer = WaveSurfer.create({
-        container: '#wave-container',
-        waveColor : 'red',
-        scrollParent: true,
-        progressColor: 'purple',
-    });
-    this.wavesurfer.load(this.audiofile);
+    if (this.audioFileToUpload == null) {
+        this.waveHTML.innerHTML = "Upload Audio File";
+    } else {
+        this.loadWaveSurfer(this.audioFileToUpload);
+    }
   }
 
-    myFunction() {
+    playPause() {
         this.wavesurfer.playPause();
     }
 
+    upload() {
+        if (this.hasFileChanged) {
+            this.uploadHTML.innerHTML = "";
+            this.loadWaveSurfer(this.audioFileToUpload);
+        }
+    }
+
+    removeErrorText() {
+        this.waveHTML.innerHTML = "";
+    }
+
+    handleFileInput(files: FileList) {
+        this.hasFileChanged = true;
+        this.audioFileToUpload = files.item(0);
+        this.getAudioName();
+        this.removeErrorText();
+        this.uploadHTML.innerHTML = "Please Select the Upload Button";
+    }
+
+    loadWaveSurfer(audio) {
+        this.wavesurfer = WaveSurfer.create({
+        container: '#wave-container',
+        waveColor : 'red',
+        backgroundColor: '#303030',
+        scrollParent: true,
+        progressColor: 'purple',
+        });
+        this.wavesurfer.loadBlob(audio);
+    }
+
+    getAudioName() {
+        var audioName = document.getElementById("audio-name");
+        if (this.audioFileToUpload == null) {
+            audioName.innerHTML = "Please Select an Audio File to Upload";
+        } else {
+            audioName.innerHTML = this.audioFileToUpload.name;
+        }
+    }
 }
