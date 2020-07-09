@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DiscoveryComponent implements OnInit {
 
+  tagOptions: string[] = ['Producer', 'Guitar', 'HipHop', 'Singer', 'Songwriter'];
+
   constructor() { }
 
   ngOnInit(): void {
