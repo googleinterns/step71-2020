@@ -15,7 +15,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   public user$;
 
   constructor(
-    public authService: AuthService,
+    private authService: AuthService,
     private toggleChatService: ToggleChatService
   ) { }
 
@@ -24,6 +24,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    console.log("setting chat for toggle service");
     this.toggleChatService.setChat(this.chat);
   }
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Project } from '../project';
-import { PROJECTS } from '../mock-projects';
 import { ToggleChatService } from '../toggle-chat.service';
+import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-projects',
@@ -10,16 +11,20 @@ import { ToggleChatService } from '../toggle-chat.service';
 })
 export class ProjectsComponent implements OnInit {
 
-  projects: Project[] = PROJECTS;
+  projects$: Observable<Project[]>;
   selectedProject: Project;
 
-  constructor(private chat: ToggleChatService) { }
+  constructor(
+    private toggleChatService: ToggleChatService,
+    private projectService: ProjectService
+  ) { }
 
   ngOnInit(): void {
+    this.projects$ = this.projectService.getProjects();
   }
 
   toggleChat(): void {
     console.log("toggling chat");
-    this.chat.toggle();
+    this.toggleChatService.toggle();
   }
 }
