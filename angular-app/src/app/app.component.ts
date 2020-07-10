@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { ToggleChatService } from './toggle-chat.service';
@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('chat') public chat: MatSidenav;
   public user$;
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.user$ = this.authService.getUser();
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewChecked(): void {
     console.log("setting chat for toggle service");
     this.toggleChatService.setChat(this.chat);
   }
