@@ -15,7 +15,13 @@
 #workspace-content {
     margin-left: auto;
     margin-right: auto;
-    width: 700px;
+    width: 1000px;
+}
+
+#new-workspace-prompt {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
 }
 
 #wave-container {
@@ -40,6 +46,12 @@ mat-form-field {
     font-size: 32px;
     line-height: 32px;
     font-weight: 400;
+}
+
+.save-button {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .hidden {

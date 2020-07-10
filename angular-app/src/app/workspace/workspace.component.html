@@ -1,5 +1,10 @@
 <body>
-    <div id="wcontent">
+    <div id="new-workspace-prompt">
+        <h1 id="prompt">Create a New Project?</h1>
+        <button id="new-project-button" (click)="newProject()">New Project</button>
+    </div>
+    <div id="workspace-content" class="hidden">
+        <button class="save-button">Save</button>
         <div id="project-name" class="center">
             <mat-form-field class="center input-project-name">
                     <mat-label>Project Name</mat-label>
@@ -11,7 +16,7 @@
                 </mat-form-field>
         </div>
 
-        <div id="top-element" class="resizeable-content">
+        <div id="top-element" class="resizeable-content center">
             <h1 id="audio-name" class="center">Audio File Name</h1>
             <p id="wave-html"></p>
             <p id="wave-upload-html"></p>
