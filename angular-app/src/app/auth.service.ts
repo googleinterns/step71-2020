@@ -14,7 +14,11 @@ export class AuthService {
   }
 
   login() {
-    this.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    let googleAuthProvider = new auth.GoogleAuthProvider();
+    googleAuthProvider.setCustomParameters({
+      prompt: 'consent' // TODO: probably better as 'select_account' when in production
+    });
+    this.auth.signInWithPopup(googleAuthProvider);
   }
 
   logout() {
