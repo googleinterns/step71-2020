@@ -66,4 +66,9 @@ export class ProjectService {
       (error) => console.log("Error uploading file: " + error.message)
     )
   }
+
+  public addProject(project: Project): void {
+    this.firestore.collection<Project>("projects").doc(project.title).set(project)
+    .catch(error => console.error("Error adding document: ", error));
+  }
 }
