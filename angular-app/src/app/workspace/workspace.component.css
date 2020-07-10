@@ -25,3 +25,23 @@
 .center {
     text-align: center;
 }
+
+mat-form-field {
+  margin-right: 12px;
+}
+
+.input-headline {
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 400;
+}
+
+.input-project-name {
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 400;
+}
+
+.hidden {
+    display: none;
+}

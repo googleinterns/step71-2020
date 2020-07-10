@@ -1,7 +1,14 @@
 <body>
     <div id="wcontent">
         <div id="project-name" class="center">
-            <header>Project Name</header>
+            <mat-form-field class="center input-project-name">
+                    <mat-label>Project Name</mat-label>
+                    <textarea matInput
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="2"></textarea>
+                </mat-form-field>
         </div>
 
         <div id="top-element" class="resizeable-content">
@@ -14,13 +21,21 @@
             <input type="file" id="input" (change)="handleFileInput($event.target.files)"/>
             <audio id="sound"></audio>
 
-            <button (click)="upload()">Upload</button>
+            <button id="upload-button" (click)="upload()">Upload</button>
         </div>
 
-        <div id="bottom-element" class="resizeable-content">
-            <h1 class="center">Lyric Document Name</h1>
-            <div contenteditable="true">
-                <p>Type lyrics here...</p>
+        <div id="bottom-element" class="resizeable-content center">
+            <div id="bottom-content">
+                <mat-form-field class="center input-headline">
+                    <mat-label>Doc Name</mat-label>
+                    <textarea matInput
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="2"></textarea>
+                </mat-form-field>
+                <br/>
+                <textarea id="lyric-doc" placeholder="Type Here..." rows="50" cols="100"></textarea>
             </div>
         </div>
     </div>
