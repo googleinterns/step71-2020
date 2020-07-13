@@ -1,5 +1,6 @@
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TagFilterPipe} from './filter.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,8 +15,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -43,6 +46,7 @@ import { ToggleChatService } from './toggle-chat.service';
 @NgModule({
   declarations: [
     AppComponent,
+    TagFilterPipe,
     ProjectsComponent,
     LeftMenuComponent,
     ChatDrawerComponent,
@@ -69,9 +73,11 @@ import { ToggleChatService } from './toggle-chat.service';
     MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
+    MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
     MatTooltipModule,
