@@ -17,12 +17,17 @@ export class ProjectService {
 
   private projects$: Observable<Project[]>;
   private currentProject: Project;
+  private blobstoreUploadUrl: string;
 
   constructor(
     private firestore: AngularFirestore,
     private httpClient: HttpClient,
   ) { 
     this.projects$ = firestore.collection<Project>('projects').valueChanges();
+    httpClient.get<string>('/blobstore-upload-url').pipe(
+        switchMap(url => this.blobstoreUploadUrl = url)
+      )
+      .subscribe(result => this.blobstoreUploadUrl = result);
   }
 
   public getBlobstoreUploadUrl(): Observable<string> {
@@ -70,5 +75,17 @@ export class ProjectService {
   public addProject(project: Project): void {
     this.firestore.collection<Project>("projects").doc(project.title).set(project)
     .catch(error => console.error("Error adding document: ", error));
+  }
+
+  public uploadFile(project: Project, file: File): void {
+    const formData: FormData = new FormData();
+    formData.append('project', project.title);
+    formData.append('file', file, file.name);
+    this.httpClient
+    .post(this.blobstoreUploadUrl, formData)
+    .subscribe(
+      (response) => console.log(response),
+      (error) => console.log("Error uploading file: " + error)
+    )
   }
 }
