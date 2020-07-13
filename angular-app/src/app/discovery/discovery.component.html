@@ -41,7 +41,7 @@
                                #tagSearch
                                placeholder="Search for tags">
                     </mat-form-field>
-                    <mat-selection-list #tags
+                    <mat-selection-list #interestTags
                                         (selectionChange)="onSelectedOptionsChange()"
                                         [disableRipple]="true">
                         <mat-list-option *ngFor="let tag of (tags | tagSearch:tagSearch.value)"
