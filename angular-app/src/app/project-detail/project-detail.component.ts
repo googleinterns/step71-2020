@@ -17,7 +17,6 @@ import { ProjectService } from '../project.service';
 export class ProjectDetailComponent implements OnInit {
 
   private blobstoreUploadUrl: string;
-  private files: string[] = ['audio.wav', 'audio.mp3', 'lyric1.txt', 'lyric2.docx']
   project$: Observable<Project>;
   files$: Observable<ProjectFile[]>;
 
@@ -30,19 +29,21 @@ export class ProjectDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("opening project detail view")
     this.route.paramMap.subscribe((params: ParamMap) => {
       let title = params.get('id');
       this.project$ = this.projectService.getProject(title);
       this.files$ = this.projectService.getProjectFiles(title);
     }
     );
+  }
+
+  setBlobstoreUploadUrl(): void {
     this.projectService.getBlobstoreUploadUrl().subscribe(
       url => { 
         this.blobstoreUploadUrl = url;
-        console.log("blobstore upload url set to " + this.blobstoreUploadUrl);
+        console.log("blobstore upload URL set");
       },
-      error => console.log("Error uploading file: " + error)
+      error => console.log("Error getting blobstore upload URL: " + error)
     );
   }
 
@@ -56,8 +57,11 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   upload(project, event): void {
-    let file: File = event.target.files[0];
-    this.projectService.uploadFile(this.blobstoreUploadUrl, project, file);
+    if (event.target.files.length > 0) {
+      let file: File = event.target.files[0];
+      this.projectService.uploadFile(this.blobstoreUploadUrl, project, file);
+      event.target.value = '';
+    }
   }
 }
 
