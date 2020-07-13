@@ -47,7 +47,11 @@ public class UploadServlet extends HttpServlet {
 
   private static final String FILE_INPUT_NAME = "file";
   private static final BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-  private static final Firestore db = FirestoreOptions.getDefaultInstance().getService();
+  private static final FirestoreOptions firestoreOptions =
+    FirestoreOptions.getDefaultInstance().toBuilder()
+    .setProjectId(Constants.PROJECT_ID)
+    .build();
+  private static final Firestore db = firestoreOptions.getService();
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

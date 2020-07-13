@@ -18,6 +18,8 @@ import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.ensemble.data.Constants;
 import java.io.IOException;
+import java.net.MalformedURLException; 
+import java.net.URL; 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +32,8 @@ public class BlobstoreUploadUrlServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      URL uploadUrl = new URL(blobstoreService.createUploadUrl(Constants.SERVLET_UPLOAD));
       response.setContentType("text/html");
-      response.getWriter().println(blobstoreService.createUploadUrl(Constants.SERVLET_UPLOAD));
+      response.getWriter().println(uploadUrl.getPath());
     }
 }
