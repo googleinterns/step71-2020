@@ -77,4 +77,12 @@ export class WorkspaceComponent implements OnInit {
             audioName.innerHTML = this.audioFileToUpload.name;
         }
     }
+
+    newProject() {
+        var new_prompt = document.getElementById("new-workspace-prompt");
+        var project = document.getElementById("workspace-content");
+
+        new_prompt.classList.add("hidden");
+        project.classList.remove("hidden");
+    }
 }
