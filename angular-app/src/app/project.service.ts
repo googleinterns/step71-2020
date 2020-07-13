@@ -29,10 +29,6 @@ export class ProjectService {
     return this.httpClient.get('/blobstore-upload-url', {responseType: 'text'});
   }
 
-  public getBlobstoreUploadUrl(): Observable<string> {
-    return this.httpClient.get('/blobstore-upload-url', {responseType: 'text'});
-  }
-
   public getProjects(): Observable<Project[]> {
     return this.projects$;
   }
@@ -51,24 +47,6 @@ export class ProjectService {
 
   public getProjectFiles(title: string): Observable<ProjectFile[]> {
     return this.firestore.collection(COLLECTION_PROJECTS).doc<Project>(title).collection<ProjectFile>(COLLECTION_FILES).valueChanges();
-  }
-
-  public addProject(project: Project): void {
-    this.firestore.collection<Project>(COLLECTION_PROJECTS).doc(project.title).set(project)
-    .catch(error => console.error("Error adding document: ", error));
-  }
-
-  public uploadFile(blobstoreUploadUrl: string, project: Project, file: File): void {
-    const formData: FormData = new FormData();
-    formData.append('project', project.title);
-    formData.append('filename', file.name);
-    formData.append('file', file, file.name);
-    this.httpClient
-    .post(blobstoreUploadUrl, formData)
-    .subscribe(
-      (response) => console.log("Successfully uploaded " + file.name),
-      (error) => console.log("Error uploading file: " + error.message)
-    )
   }
 
   public addProject(project: Project): void {
