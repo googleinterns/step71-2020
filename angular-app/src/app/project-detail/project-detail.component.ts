@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router'; 
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 import { Project } from '../project';
 import { ProjectFile } from '../project-file';
@@ -33,12 +33,14 @@ export class ProjectDetailComponent implements OnInit {
       let title = params.get('id');
       this.project$ = this.projectService.getProject(title);
       this.files$ = this.projectService.getProjectFiles(title);
-    }
-    );
+    });
+    this.setBlobstoreUploadUrl();
   }
 
   setBlobstoreUploadUrl(): void {
-    this.projectService.getBlobstoreUploadUrl().subscribe(
+    this.projectService.getBlobstoreUploadUrl().pipe(
+      first()
+    ).subscribe(
       url => { 
         this.blobstoreUploadUrl = url;
         console.log("blobstore upload URL set");
@@ -62,6 +64,7 @@ export class ProjectDetailComponent implements OnInit {
       this.projectService.uploadFile(this.blobstoreUploadUrl, project, file);
       event.target.value = '';
     }
+    this.setBlobstoreUploadUrl();
   }
 }
 
