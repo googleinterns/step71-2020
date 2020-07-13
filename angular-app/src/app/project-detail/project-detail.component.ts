@@ -58,7 +58,6 @@ export class ProjectDetailComponent implements OnInit {
   upload(project, event): void {
     let file: File = event.target.files[0];
     this.projectService.uploadFile(this.blobstoreUploadUrl, project, file);
-    this.projectService.uploadFile(project, file);
   }
 }
 
