@@ -14,11 +14,15 @@
 
 package com.google.ensemble.servlets;
 
+import com.google.api.core.ApiFuture;
 import com.google.appengine.api.blobstore.BlobInfo;
 import com.google.appengine.api.blobstore.BlobInfoFactory;
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.FirestoreOptions;
+import com.google.cloud.firestore.WriteResult;
 import com.google.ensemble.data.Constants;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -28,8 +32,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.gson.Gson;
+import java.lang.InterruptedException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,21 +42,28 @@ import java.util.Map;
 /**
  * Servlet that stores and returns visitor comments
  */
-@WebServlet(Constants.SERVLET_DATA)
-public class DataServlet extends HttpServlet {
+@WebServlet(Constants.SERVLET_UPLOAD)
+public class UploadServlet extends HttpServlet {
 
-  private static final String IMAGE_INPUT_NAME = "image";
-  private static final Gson gson = new Gson();
+  private static final String FILE_INPUT_NAME = "file";
   private static final BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-  }
-
+  private static final Firestore db = FirestoreOptions.getDefaultInstance().getService();
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String imageUrl = getUploadedFileUrl(request, IMAGE_INPUT_NAME);
+    String project = request.getParameter("project");
+    String filename = request.getParameter("filename");
+    String fileUrl = getUploadedFileUrl(request, FILE_INPUT_NAME);
+
+    Map<String, Object> docData = new HashMap<>();
+    docData.put("filename", filename);
+    docData.put("fileUrl", fileUrl);
+    ApiFuture<WriteResult> future = db.collection("projects").document(project).collection("files").document(filename).set(docData);
+    try {
+      System.out.println("File " + filename + " uploaded at time " + future.get().getUpdateTime());
+    } catch (Exception e) {
+      System.out.println(e);
+    }
   }
 
   /** 
