@@ -1,0 +1,54 @@
+/* Add application styles & imports to this file! */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+mat-chip {
+  max-width: 200px;
+}
+
+.pi-ui .pi-chip-filter .pi-chip-filter-dropdown {
+	 cursor: default;
+}
+ .mat-menu-panel.pi-chip-filter-menu {
+	 margin-top: 4px;
+	 width: 344px;
+	 max-height: 416px;
+}
+ .mat-menu-panel.pi-chip-filter-menu .mat-menu-content {
+	 padding: 0;
+}
+ .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-header {
+	 background-color: whitesmoke;
+	 display: flex;
+	 align-items: center;
+	 justify-content: space-between;
+	 height: 56px;
+	 padding: 0 8px 0 16px;
+}
+ .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-header .pi-chip-filter-title, .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-header .pi-chip-filter-close {
+	 display: block;
+	 color: grey;
+}
+ .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-header .pi-chip-filter-title {
+	 font-size: 16px;
+	 font-weight: 500;
+}
+ .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-content {
+	 padding: 8px;
+}
+ .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-content mat-form-field {
+	 min-width: 100%;
+}
+ .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-content .mat-selection-list {
+	 padding: 0;
+}
+ .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-content .pi-chip-filter-radio-list {
+	 display: inline-flex;
+	 flex-direction: column;
+}
+ .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-content .pi-chip-filter-radio-list mat-radio-button {
+	 margin: 8px;
+}
+ .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-content .mat-list-option:hover, .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-content .mat-list-item:hover, .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-content .mat-list-option.mat-list-item-focus, .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-content .mat-list-item.mat-list-item-focus {
+	 background: none;
+}
+ 
