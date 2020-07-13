@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { Project } from '../project';
-import { PROJECTS } from '../mock-projects';
+import { ProjectFile } from '../project-file';
 import { ToggleChatService } from '../toggle-chat.service';
 import { ProjectService } from '../project.service';
 
@@ -16,8 +16,10 @@ import { ProjectService } from '../project.service';
 })
 export class ProjectDetailComponent implements OnInit {
 
+  private blobstoreUploadUrl: string;
   private files: string[] = ['audio.wav', 'audio.mp3', 'lyric1.txt', 'lyric2.docx']
-  project$: Observable<Project>; // $ postfix simply indicates an Observable and has no function
+  project$: Observable<Project>;
+  files$: Observable<ProjectFile[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,14 +31,23 @@ export class ProjectDetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("opening project detail view")
-    this.project$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.projectService.getProject(params.get('id')))
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      let title = params.get('id');
+      this.project$ = this.projectService.getProject(title);
+      this.files$ = this.projectService.getProjectFiles(title);
+    }
+    );
+    this.projectService.getBlobstoreUploadUrl().subscribe(
+      url => { 
+        this.blobstoreUploadUrl = url;
+        console.log("blobstore upload url set to " + this.blobstoreUploadUrl);
+      },
+      error => console.log("Error uploading file: " + error)
     );
   }
 
-  openDialog(): void {
-    const dialogRed = this.dialog.open(ProjectSettingsDialog, { data: this.project$ });
+  openDialog(project): void {
+    this.dialog.open(ProjectSettingsDialog, { data: project });
   }
 
   toggleChat(): void {
@@ -46,7 +57,7 @@ export class ProjectDetailComponent implements OnInit {
 
   upload(project, event): void {
     let file: File = event.target.files[0];
-    this.projectService.uploadFile(project, file);
+    this.projectService.uploadFile(this.blobstoreUploadUrl, project, file);
   }
 }
 
@@ -58,7 +69,7 @@ export class ProjectSettingsDialog {
 
   constructor(
     public dialogRef: MatDialogRef<ProjectSettingsDialog>,
-    @Inject(MAT_DIALOG_DATA) public project$: Observable<Project>) {}
+    @Inject(MAT_DIALOG_DATA) public project: Project) {}
 
   exitSettings() {
     this.dialogRef.close();
