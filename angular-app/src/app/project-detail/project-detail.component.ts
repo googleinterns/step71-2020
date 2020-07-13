@@ -43,6 +43,11 @@ export class ProjectDetailComponent implements OnInit {
     console.log("toggling chat");
     this.chatService.toggle();
   }
+
+  upload(project, event): void {
+    let file: File = event.target.files[0];
+    this.projectService.uploadFile(project, file);
+  }
 }
 
 @Component({
