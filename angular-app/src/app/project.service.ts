@@ -32,4 +32,9 @@ export class ProjectService {
     console.log(title);
     return this.firestore.collection("projects").doc<Project>(title).valueChanges();
   }
+
+  public addProject(project: Project): void {
+    this.firestore.collection<Project>("projects").doc(project.title).set(project)
+    .catch(error => console.error("Error adding document: ", error));
+  }
 }

@@ -2,16 +2,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TagFilterPipe} from './filter.pipe';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatChipsModule, MAT_CHIPS_DEFAULT_OPTIONS, MatChipsDefaultOptions } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -31,6 +32,7 @@ import { environment } from '../environments/environment';
 import { ProjectsComponent } from './projects/projects.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
+import { CreateProjectDialog } from './left-menu/left-menu.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { ProjectSettingsDialog } from './project-detail/project-detail.component';
@@ -50,8 +52,8 @@ import { ToggleChatService } from './toggle-chat.service';
     ProjectsComponent,
     LeftMenuComponent,
     ChatDrawerComponent,
+    CreateProjectDialog,
     ProjectDetailComponent,
-    PageNotFoundComponent,
     UserProfileComponent,
     DiscoveryComponent,
     MainFeedComponent,
@@ -87,7 +89,13 @@ import { ToggleChatService } from './toggle-chat.service';
   ],
   providers: [
     AuthService,
-    ToggleChatService
+    ToggleChatService,
+    {
+      provide: MAT_CHIPS_DEFAULT_OPTIONS,
+      useValue: {
+        separatorKeyCodes: [ ENTER, COMMA ]
+      } as MatChipsDefaultOptions
+    }
   ],
   bootstrap: [AppComponent]
 })
