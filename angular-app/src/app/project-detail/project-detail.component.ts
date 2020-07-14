@@ -31,8 +31,10 @@ export class ProjectDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       let title = params.get('id');
-      this.project$ = this.projectService.getProject(title);
-      this.files$ = this.projectService.getProjectFiles(title);
+      if (title !== null && title.length > 0) {
+        this.project$ = this.projectService.getProject(title);
+        this.files$ = this.projectService.getProjectFiles(title);
+      }
     });
     this.setBlobstoreUploadUrl();
   }

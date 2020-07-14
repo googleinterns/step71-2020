@@ -3,7 +3,7 @@ const PROXY_CONFIG = [
     context: [
       "/blobstore-upload-url",
       "/serve",
-      "/_ah"
+      "/_ah/upload/"
     ],
     target: "http://localhost:8080",
     secure: false,

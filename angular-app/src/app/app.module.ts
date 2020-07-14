@@ -1,5 +1,6 @@
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,9 +29,8 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { environment } from '../environments/environment';
 import { ProjectsComponent } from './projects/projects.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
-import { CreateProjectDialog } from './left-menu/left-menu.component';
+import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { ProjectSettingsDialog } from './project-detail/project-detail.component';
@@ -42,7 +42,6 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 
 import { AuthService } from './auth.service';
 import { ProjectService } from './project.service';
-import { ToggleRightDrawerService } from './toggle-right-drawer.service';
 
 @NgModule({
   declarations: [
@@ -50,14 +49,15 @@ import { ToggleRightDrawerService } from './toggle-right-drawer.service';
     ProjectsComponent,
     LeftMenuComponent,
     ChatDrawerComponent,
-    CreateProjectDialog,
+    CreateProjectDialogComponent,
     ProjectDetailComponent,
     UserProfileComponent,
     DiscoveryComponent,
     MainFeedComponent,
     ProjectSettingsDialog,
     PageNotFoundComponent,
-    WorkspaceComponent
+    WorkspaceComponent,
+    CreateProjectDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +87,6 @@ import { ToggleRightDrawerService } from './toggle-right-drawer.service';
   providers: [
     AuthService,
     ProjectService,
-    ToggleRightDrawerService,
     {
       provide: MAT_CHIPS_DEFAULT_OPTIONS,
       useValue: {
