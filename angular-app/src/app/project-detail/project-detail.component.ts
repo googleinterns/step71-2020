@@ -6,7 +6,7 @@ import { first } from 'rxjs/operators';
 
 import { Project } from '../project';
 import { ProjectFile } from '../project-file';
-import { ToggleChatService } from '../toggle-chat.service';
+import { ToggleRightDrawerService } from '../toggle-right-drawer.service';
 import { ProjectService } from '../project.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class ProjectDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private projectService: ProjectService,
-    private chatService: ToggleChatService,
+    private toggleRightDrawerService: ToggleRightDrawerService,
     public dialog: MatDialog
   ) { }
 
@@ -53,9 +53,8 @@ export class ProjectDetailComponent implements OnInit {
     this.dialog.open(ProjectSettingsDialog, { data: project });
   }
 
-  toggleChat(): void {
-    console.log("toggling chat");
-    this.chatService.toggle();
+  toggleRightDrawer(): void {
+    this.toggleRightDrawerService.toggle();
   }
 
   upload(project, event): void {

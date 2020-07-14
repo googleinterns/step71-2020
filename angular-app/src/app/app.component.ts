@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 
-import { ToggleChatService } from './toggle-chat.service';
+import { ToggleRightDrawerService } from './toggle-right-drawer.service';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -11,12 +11,12 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent implements OnInit, AfterViewChecked {
 
-  @ViewChild('chat') public chat: MatSidenav;
+  @ViewChild('rightDrawer') public rightDrawer: MatSidenav;
   public user$;
 
   constructor(
     private authService: AuthService,
-    private toggleChatService: ToggleChatService
+    private toggleRightDrawerService: ToggleRightDrawerService
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    this.toggleChatService.setChat(this.chat);
+    this.toggleRightDrawerService.setRightDrawer(this.rightDrawer);
   }
 
   login() {

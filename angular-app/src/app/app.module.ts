@@ -41,7 +41,8 @@ import { MainFeedComponent } from './main-feed/main-feed.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 
 import { AuthService } from './auth.service';
-import { ToggleChatService } from './toggle-chat.service';
+import { ProjectService } from './project.service';
+import { ToggleRightDrawerService } from './toggle-right-drawer.service';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { ToggleChatService } from './toggle-chat.service';
   ],
   providers: [
     AuthService,
-    ToggleChatService,
+    ProjectService,
+    ToggleRightDrawerService,
     {
       provide: MAT_CHIPS_DEFAULT_OPTIONS,
       useValue: {
