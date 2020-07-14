@@ -37,7 +37,6 @@ export class ProjectService {
     this.currentProject$.next(this.getProject(id));
   }
 
-  /* Subscribe to the returned Subject to get a Project Observable */
   public getCurrentProject(): Subject<Observable<Project>> {
     return this.currentProject$;
   }
