@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -16,7 +16,7 @@ const COLLECTION_FILES: string = "files";
 export class ProjectService {
 
   private projects$: Observable<Project[]>;
-  private currentProject: Project;
+  private currentProject$: Subject<Observable<Project>>;
 
   constructor(
     private firestore: AngularFirestore,
@@ -33,20 +33,20 @@ export class ProjectService {
     return this.projects$;
   }
 
-  public setCurrentProject(project: Project): void {
-    this.currentProject = project;
+  public setCurrentProject(id: string): void {
+    this.currentProject$.next(this.getProject(id));
   }
 
-  public getCurrentProject(): Observable<Project> {
-    return of(this.currentProject);
+  public getCurrentProject(): Subject<Observable<Project>> {
+    return this.currentProject$;
   }
 
-  public getProject(title: string): Observable<Project> {
-    return this.firestore.collection(COLLECTION_PROJECTS).doc<Project>(title).valueChanges();
+  public getProject(id: string): Observable<Project> {
+    return this.firestore.collection(COLLECTION_PROJECTS).doc<Project>(id).valueChanges();
   }
 
-  public getProjectFiles(title: string): Observable<ProjectFile[]> {
-    return this.firestore.collection(COLLECTION_PROJECTS).doc<Project>(title).collection<ProjectFile>(COLLECTION_FILES).valueChanges();
+  public getProjectFiles(id: string): Observable<ProjectFile[]> {
+    return this.firestore.collection(COLLECTION_PROJECTS).doc<Project>(id).collection<ProjectFile>(COLLECTION_FILES).valueChanges();
   }
 
   public addProject(project: Project): void {
