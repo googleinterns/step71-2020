@@ -7,7 +7,6 @@ import { Project } from '../project';
 import { ProjectFile } from '../project-file';
 import { ToggleRightDrawerService } from '../toggle-right-drawer.service';
 import { ProjectService } from '../project.service';
-import { ProjectSettingsComponent } from '../project-settings/project-settings.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -50,10 +49,6 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
       },
       error => console.log("Error getting blobstore upload URL: " + error)
     );
-  }
-
-  openDialog(project): void {
-    this.dialog.open(ProjectSettingsComponent, { data: project });
   }
 
   toggleRightDrawer(): void {

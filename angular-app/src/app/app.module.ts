@@ -57,7 +57,6 @@ import { ProjectService } from './project.service';
     UserProfileComponent,
     DiscoveryComponent,
     MainFeedComponent,
-    ProjectSettingsComponent,
     PageNotFoundComponent,
     WorkspaceComponent,
     CreateProjectDialogComponent,
