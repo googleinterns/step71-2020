@@ -5,7 +5,6 @@ import { first } from 'rxjs/operators';
 
 import { Project } from '../project';
 import { ProjectFile } from '../project-file';
-import { ToggleRightDrawerService } from '../toggle-right-drawer.service';
 import { ProjectService } from '../project.service';
 
 @Component({
@@ -21,7 +20,6 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
 
   constructor(
     private projectService: ProjectService,
-    private toggleRightDrawerService: ToggleRightDrawerService,
     public dialog: MatDialog
   ) { }
 
@@ -49,10 +47,6 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
       },
       error => console.log("Error getting blobstore upload URL: " + error)
     );
-  }
-
-  toggleRightDrawer(): void {
-    this.toggleRightDrawerService.toggle();
   }
 
   upload(project, event): void {
