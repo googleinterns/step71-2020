@@ -1,0 +1,6 @@
+.main-feed-post {
+    border-color: grey;
+    border-width: 10px;
+    max-width: 600px;
+    align-self: center;
+}

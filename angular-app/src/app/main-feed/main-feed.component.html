@@ -3,24 +3,29 @@
 </mat-toolbar>
 
 <div>
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Make a Post</mat-label>
     <textarea matInput></textarea>
     </mat-form-field>
 </div>
-<button mat-button color="accent">Attach Audio</button>
+<button mat-button color="Teal">Attach Audio</button>
 <button mat-raised-button>Post</button>
 
+<br>
+
 <div> Posts:
-<mat-card class= "main-feed-post">
+<mat-card class= "main-feed-post" *ngFor="let post of posts$ | async">
     <mat-card-header>
         <div mat-card-avatar></div>
-        <mat-card-title>John Doe</mat-card-title>
-        <mat-card-subtitle>johndoe</mat-card-subtitle>
+        <mat-card-title>{{post.user}}</mat-card-title>
+        <mat-card-subtitle>nickname</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <p>
-            Excited to join Ensemble! This is awesome!
+           {{post.content}}
+           <br>
+           <br>
+           {{post.audio}}
         </p>    
     </mat-card-content>
     <mat-card-actions>
@@ -28,8 +33,10 @@
           <mat-icon>favorite</mat-icon>
         </button>  
     </mat-card-actions>
+    <p> {{post.likes}} </p>
+    
     <mat-card-footer>
-        07/09/20 at 10:30 AM
+        {{post.timestamp}}
     </mat-card-footer>
 </mat-card>
 </div>
