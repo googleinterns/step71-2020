@@ -1,5 +1,5 @@
 <div *ngIf="project$ | async as project">
-  <mat-tab-group animationDuration="0ms">
+  <mat-tab-group>
     <mat-tab label="Files">
       <mat-selection-list [multiple]="false">
         <mat-list-option *ngFor="let file of files$ | async">

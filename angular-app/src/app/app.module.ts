@@ -24,7 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatTabsModule, MAT_TABS_CONFIG } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
@@ -96,7 +96,13 @@ import { ProjectService } from './project.service';
       useValue: {
         separatorKeyCodes: [ ENTER, COMMA ]
       } as MatChipsDefaultOptions
-    }
+    },
+    {
+      provide: MAT_TABS_CONFIG,
+      useValue: {
+        animationDuration: '0ms'
+      }
+    },
   ],
   bootstrap: [AppComponent]
 })
