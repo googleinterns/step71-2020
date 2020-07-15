@@ -1,14 +1,34 @@
 <div *ngIf="project$ | async as project">
-  <mat-selection-list [multiple]="false">
-    <mat-list-option *ngFor="let file of files$ | async">
-      <div class="list-item-content">
-        <a target="_blank" rel="noopener noreferrer" href="{{file.fileUrl}}">{{file.filename}}</a>
-        <span class="spacer"></span>
-        <button mat-icon-button matTooltip="Open in Workspace">
-          <mat-icon>edit</mat-icon>
-        </button>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Files">
+      <mat-selection-list [multiple]="false">
+        <mat-list-option *ngFor="let file of files$ | async">
+          <div class="list-item-content">
+            <a target="_blank" rel="noopener noreferrer" href="{{file.fileUrl}}">{{file.filename}}</a>
+            <span class="spacer"></span>
+            <button mat-icon-button matTooltip="Open in Workspace">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+        </mat-list-option>
+      </mat-selection-list>
+      <input type="file" name="file" (change)="upload(project, $event)">
+    </mat-tab>
+    <mat-tab label="Settings">
+      <div>Owner: {{project.owner}}</div>
+      <div>
+        Collaborators:
+        <mat-chip-list aria-label="project collaborators">
+          <mat-chip *ngFor="let collaborator of project.collaborators">{{collaborator}}</mat-chip>
+        </mat-chip-list>
       </div>
-    </mat-list-option>
-  </mat-selection-list>
-  <input type="file" name="file" (change)="upload(project, $event)">
+      <div>
+        Tags:
+        <mat-chip-list aria-label="project tags">
+          <mat-chip *ngFor="let tag of project.tags">{{tag}}</mat-chip>
+        </mat-chip-list>
+      </div>
+      <button mat-button>Delete Project</button>
+    </mat-tab>
+  </mat-tab-group>
 </div>
