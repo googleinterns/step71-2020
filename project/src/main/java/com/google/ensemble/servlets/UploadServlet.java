@@ -45,36 +45,45 @@ import java.util.Map;
 @WebServlet(Constants.SERVLET_UPLOAD)
 public class UploadServlet extends HttpServlet {
 
-  private static final String FILE_INPUT_NAME = "file";
+  private static final String COLLECTION_PROJECTS = "projects";
+  private static final String COLLECTION_FILES = "files";
+
+  private static final String INPUT_NAME_PROJECT = "project";
+  private static final String INPUT_NAME_FILENAME = "filename";
+  private static final String INPUT_NAME_FILES = "files";
+
+  private static final String FIELD_FILENAME = "filename";
+  private static final String FIELD_CONTENT_TYPE = "contentType";
+  private static final String FIELD_FILE_URL = "fileUrl";
+
   private static final BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-  private static final FirestoreOptions firestoreOptions =
+  private static final Firestore db =
     FirestoreOptions.getDefaultInstance().toBuilder()
     .setProjectId(Constants.PROJECT_ID)
-    .build();
-  private static final Firestore db = firestoreOptions.getService();
+    .build()
+    .getService();
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String project = request.getParameter("project");
-    String filename = request.getParameter("filename");
-    String fileUrl = getUploadedFileUrl(request, FILE_INPUT_NAME);
+    String project = request.getParameter(INPUT_NAME_PROJECT);
 
-    Map<String, Object> docData = new HashMap<>();
-    docData.put("filename", filename);
-    docData.put("fileUrl", fileUrl);
-    ApiFuture<WriteResult> future = db.collection("projects").document(project).collection("files").document(filename).set(docData);
-    try {
-      System.out.println("File " + filename + " uploaded at time " + future.get().getUpdateTime());
-    } catch (Exception e) {
-      System.out.println(e);
+    List<Map<String, Object>> docDataList = getFilesData(request, INPUT_NAME_FILES);
+    for (Map<String, Object> docData: docDataList) {
+      String filename = docData.get(FIELD_FILENAME);
+      ApiFuture<WriteResult> future = db.collection(COLLECTION_PROJECTS).document(project)
+        .collection(COLLECTION_FILES).document(filename).set(docData);
+      try {
+        System.out.println("File " + filename + " uploaded at time " + future.get().getUpdateTime());
+      } catch (Exception e) {
+        System.out.println(e);
+      }
     }
   }
 
   /** 
-   * Returns a URL that points to the uploaded file, or null if the user didn't upload a file. 
+   * Returns a list of document data maps, ready to be written to Firestore or to have more data appended before writing
    */
-  @Nullable
-  private String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
+  private List<Map<String, Object>> getFilesData(HttpServletRequest request, String formInputElementName) {
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get(formInputElementName);
 
@@ -83,19 +92,38 @@ public class UploadServlet extends HttpServlet {
       return null;
     }
 
-    // Our form only contains a single file input, so get the first index.
-    BlobKey blobKey = blobKeys.get(0);
+    BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
+    List<Map<String, Object>> docDataList = new ArrayList<>();
+    for (BlobKey blobKey: blobKeys) {
+      Map<String, Object> docData = getBlobData(blobInfoFactory, blobKey);
+      if (docData != null) {
+        docDataList.add(docData)
+      }
+    }
+
+    return docDataList;
+  }
+
+  /**
+   * Returns a new map containing file information for a given blob
+   */
+  @Nullable
+  private Map<String, Object> getBlobData(BlobInfoFactory blobInfoFactory, BlobKey blobKey) {
+    BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(blobKey);
 
     // User submitted form without selecting a file, so we can't get a URL. (live server)
-    BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
     if (blobInfo.getSize() == 0) {
       blobstoreService.delete(blobKey);
       return null;
     }
 
-    // TODO: issue#32 file (image) validity check
-    // https://stackoverflow.com/q/10779564/873165
+    String fileUrl = Constants.SERVLET_SERVE_BLOB + "?blob-key=" + blobKey.getKeyString();
 
-    return Constants.SERVLET_SERVE_BLOB + "?blob-key=" + blobKey.getKeyString();
+    Map<String, Object> docData = new HashMap<>();
+    docData.put(FIELD_FILENAME, blobInfo.getFilename());
+    docData.put(FIELD_CONTENT_TYPE, blobInfo.getContentType());
+    docData.put(FIELD_FILE_URL, fileUrl);
+
+    return docData;
   }
 }
