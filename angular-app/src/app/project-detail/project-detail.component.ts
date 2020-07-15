@@ -8,6 +8,7 @@ import { Project } from '../project';
 import { ProjectFile } from '../project-file';
 import { ToggleRightDrawerService } from '../toggle-right-drawer.service';
 import { ProjectService } from '../project.service';
+import { ProjectSettingsComponent } from '../project-settings/project-settings.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -52,7 +53,7 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   openDialog(project): void {
-    this.dialog.open(ProjectSettingsDialog, { data: project });
+    this.dialog.open(ProjectSettingsComponent, { data: project });
   }
 
   toggleRightDrawer(): void {
@@ -66,20 +67,5 @@ export class ProjectDetailComponent implements OnInit {
       event.target.value = '';
     }
     this.setBlobstoreUploadUrl();
-  }
-}
-
-@Component({
-  selector: 'app-project-settings-dialog',
-  templateUrl: 'project-settings-dialog.html',
-})
-export class ProjectSettingsDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<ProjectSettingsDialog>,
-    @Inject(MAT_DIALOG_DATA) public project: Project) {}
-
-  exitSettings() {
-    this.dialogRef.close();
   }
 }
