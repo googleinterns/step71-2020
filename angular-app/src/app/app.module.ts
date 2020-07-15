@@ -35,7 +35,7 @@ import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
-import { ProjectSettingsDialog } from './project-detail/project-detail.component';
+import { ProjectSettingsComponent } from './project-settings/project-settings.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DiscoveryComponent } from './discovery/discovery.component';
@@ -57,10 +57,11 @@ import { ProjectService } from './project.service';
     UserProfileComponent,
     DiscoveryComponent,
     MainFeedComponent,
-    ProjectSettingsDialog,
+    ProjectSettingsComponent,
     PageNotFoundComponent,
     WorkspaceComponent,
-    CreateProjectDialogComponent
+    CreateProjectDialogComponent,
+    ProjectSettingsComponent
   ],
   imports: [
     BrowserModule,
