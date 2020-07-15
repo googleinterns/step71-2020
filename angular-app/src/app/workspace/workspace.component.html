@@ -1,4 +1,5 @@
-<body>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
     <div id="new-workspace-prompt">
         <h1 id="prompt">Create a New Project?</h1>
         <!-- TODO #47: Link up New Project Button with Gwyneth's function -->
@@ -45,4 +46,8 @@
             </div>
         </div>
     </div>
-</body>
+  </mat-sidenav-content>
+  <mat-sidenav #projectInfo class="project-info-container" mode="side" position="end" opened>
+    <app-project-detail></app-project-detail>
+  </mat-sidenav>
+</mat-sidenav-container>

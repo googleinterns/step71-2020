@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as WaveSurfer from '../../assets/js/wavesurfer.js';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-workspace',
@@ -8,6 +9,8 @@ import * as WaveSurfer from '../../assets/js/wavesurfer.js';
 })
 
 export class WorkspaceComponent implements OnInit {
+
+  @ViewChild('projectInfo') public projectInfo: MatSidenav;
 
   constructor() { }
 

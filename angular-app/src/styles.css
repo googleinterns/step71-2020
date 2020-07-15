@@ -30,7 +30,8 @@ body {
   height: 100vh;
 }
 
-.right-drawer-container {
+.project-info-container {
+  width: 400px;
   height: 100vh;
 }
 
