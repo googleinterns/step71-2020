@@ -18,4 +18,10 @@ export class MainFeedComponent implements OnInit {
   ngOnInit() {
       this.posts$ = this.postService.getPosts();
   }
+
+  msbapTitle = 'Audio Title';
+  msbapAudioUrl = 'Link to audio URL';   
+   
+  msbapDisplayTitle = false; 
+  msbapDisplayVolumeControls = true;
 }

@@ -23,10 +23,13 @@
     <mat-card-content>
         <p>
            {{post.content}}
-           <br>
-           <br>
-           {{post.audio}}
         </p>    
+        <mat-basic-audio-player [audioUrl]="msbapAudioUrl" 
+                                [title]="msbapTitle" 
+                                [autoPlay]="false" muted="muted" (trackEnded)="onEnded($event)"
+                                [displayTitle]="msbapDisplayTitle" 
+                                [displayVolumeControls]="msaapDisplayVolumeControls" >
+        </mat-basic-audio-player>
     </mat-card-content>
     <mat-card-actions>
         <button mat-icon-button color="Teal" aria-label="Like">
