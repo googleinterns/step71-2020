@@ -5,10 +5,6 @@
         <mat-list-option *ngFor="let file of files$ | async">
           <div class="list-item-content">
             <a target="_blank" rel="noopener noreferrer" href="{{file.fileUrl}}">{{file.filename}}</a>
-            <span class="spacer"></span>
-            <button mat-icon-button matTooltip="Open in Workspace">
-              <mat-icon>edit</mat-icon>
-            </button>
           </div>
         </mat-list-option>
       </mat-selection-list>
