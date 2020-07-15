@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
@@ -35,7 +36,6 @@ import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
-import { ProjectSettingsComponent } from './project-settings/project-settings.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DiscoveryComponent } from './discovery/discovery.component';
@@ -61,7 +61,6 @@ import { ProjectService } from './project.service';
     PageNotFoundComponent,
     WorkspaceComponent,
     CreateProjectDialogComponent,
-    ProjectSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +83,7 @@ import { ProjectService } from './project.service';
     MatMenuModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
+    MatTabsModule,
     MatTooltipModule,
     MatToolbarModule,
     CdkScrollableModule,
