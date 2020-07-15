@@ -48,6 +48,6 @@
     </div>
   </mat-sidenav-content>
   <mat-sidenav #projectInfo class="project-info-container" mode="side" position="end" opened>
-    <app-project-detail></app-project-detail>
+    <app-project-detail [project$]="project$"></app-project-detail>
   </mat-sidenav>
 </mat-sidenav-container>

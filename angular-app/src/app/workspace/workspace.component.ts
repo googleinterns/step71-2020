@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as WaveSurfer from '../../assets/js/wavesurfer.js';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router'; 
+import { Observable } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
+
+import { Project } from '../project';
+import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-workspace',
@@ -12,7 +17,13 @@ export class WorkspaceComponent implements OnInit {
 
   @ViewChild('projectInfo') public projectInfo: MatSidenav;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private projectService: ProjectService,
+  ) { }
+
+    public project$: Observable<Project>;
 
     public waveHTML : HTMLElement;
     public uploadHTML : HTMLElement;
@@ -36,7 +47,21 @@ export class WorkspaceComponent implements OnInit {
     } else {
         this.loadWaveSurfer(this.audioFileToUpload);
     }
+    this.initProject();
   }
+
+    initProject(): void {
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        let projectId = params.get('id');
+        if (projectId !== null && projectId.length > 0) {
+          this.project$ = this.projectService.getProject(projectId);
+        }
+        else {
+          this.project$ = null;
+        }
+      });
+    }
+
 
     playPause() {
         this.wavesurfer.playPause();
