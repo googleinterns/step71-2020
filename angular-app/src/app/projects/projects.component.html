@@ -1,9 +1,5 @@
 <mat-toolbar>
   <span>Projects Overview</span>
-  <span class="spacer"></span>
-  <button mat-icon-button (click)="toggleChat()" aria-label="toggle chat" matTooltip="Toggle Chat">
-    <mat-icon>chat</mat-icon>
-  </button>
 </mat-toolbar>
 <mat-accordion>
   <mat-expansion-panel *ngFor="let project of projects$ | async">
