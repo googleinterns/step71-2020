@@ -1,12 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router'; 
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { Project } from '../project';
 import { ProjectFile } from '../project-file';
-import { ToggleRightDrawerService } from '../toggle-right-drawer.service';
 import { ProjectService } from '../project.service';
 
 @Component({
@@ -14,29 +12,29 @@ import { ProjectService } from '../project.service';
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.css']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit, OnChanges {
 
   private blobstoreUploadUrl: string;
-  project$: Observable<Project>;
+  @Input() project$: Observable<Project>;
   files$: Observable<ProjectFile[]>;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private projectService: ProjectService,
-    private toggleRightDrawerService: ToggleRightDrawerService,
     public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      let title = params.get('id');
-      if (title !== null && title.length > 0) {
-        this.project$ = this.projectService.getProject(title);
-        this.files$ = this.projectService.getProjectFiles(title);
-      }
-    });
     this.setBlobstoreUploadUrl();
+  }
+  
+  ngOnChanges(changes: SimpleChanges) {
+    const currentProject$: Observable<Project> = changes.project$.currentValue;
+    if (currentProject$) {
+      currentProject$.subscribe(project => {
+        this.files$ = this.projectService.getProjectFiles(project.title);
+      });
+    }
+
   }
 
   setBlobstoreUploadUrl(): void {
@@ -51,14 +49,6 @@ export class ProjectDetailComponent implements OnInit {
     );
   }
 
-  openDialog(project): void {
-    this.dialog.open(ProjectSettingsDialog, { data: project });
-  }
-
-  toggleRightDrawer(): void {
-    this.toggleRightDrawerService.toggle();
-  }
-
   upload(project, event): void {
     if (event.target.files.length > 0) {
       let file: File = event.target.files[0];
@@ -66,20 +56,5 @@ export class ProjectDetailComponent implements OnInit {
       event.target.value = '';
     }
     this.setBlobstoreUploadUrl();
-  }
-}
-
-@Component({
-  selector: 'app-project-settings-dialog',
-  templateUrl: 'project-settings-dialog.html',
-})
-export class ProjectSettingsDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<ProjectSettingsDialog>,
-    @Inject(MAT_DIALOG_DATA) public project: Project) {}
-
-  exitSettings() {
-    this.dialogRef.close();
   }
 }
