@@ -3,9 +3,18 @@
     <mat-tab label="Files">
       <mat-selection-list [multiple]="false">
         <mat-list-option *ngFor="let file of files$ | async">
-          <div class="list-item-content">
-            <a target="_blank" rel="noopener noreferrer" href="{{file.fileUrl}}">{{file.filename}}</a>
+          <div class="mat-list-item-content">
+            <span>{{file.filename}}</span>
+            <span class="spacer"></span>
+            <button mat-icon-button [matMenuTriggerFor]="filemenu" aria-label="file actions menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
           </div>
+          <mat-menu #filemenu="matMenu">
+            <button mat-menu-item>
+              <a [href]="file.fileUrl" [download]="file.filename">Download</a>
+            </button>
+          </mat-menu>
         </mat-list-option>
       </mat-selection-list>
       <input type="file" name="file" (change)="upload(project, $event)">
