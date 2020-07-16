@@ -55,6 +55,11 @@ export class ProjectService {
     .catch(error => console.error("Error adding document: ", error));
   }
 
+  public deleteProject(project: Project) {
+    this.firestore.collection(COLLECTION_PROJECTS).doc(project.title).delete()
+      .catch(error => console.error(`Error deleting project ${project.title}: `, error));
+  }
+
   public uploadFile(blobstoreUploadUrl: string, project: Project, file: File): void {
     const formData: FormData = new FormData();
     formData.append('project', project.title);

@@ -46,6 +46,10 @@ $dark-theme: mat-dark-theme((
   color: mat-color($dark-accent, 700);
 }
 
+.warn {
+  color: mat-color($dark-warn);
+}
+
 mat-nav-list a.active {
   outline: none;
   color: mat-color($dark-primary, 600);

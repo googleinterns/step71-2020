@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 import { Project } from '../project';
 import { ProjectFile } from '../project-file';
 import { ProjectService } from '../project.service';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -26,7 +27,7 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.setBlobstoreUploadUrl();
   }
-  
+
   ngOnChanges(changes: SimpleChanges) {
     const currentProject$: Observable<Project> = changes.project$.currentValue;
     if (currentProject$) {
@@ -56,5 +57,21 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
       event.target.value = '';
     }
     this.setBlobstoreUploadUrl();
+  }
+
+  deleteProject(project: Project) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: `Deleting ${project.title} will permanently delete the project and all of its files. 
+      Are you sure you want to continue?`
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed === "confirm") {
+        console.log("deleting project: " + project.title);
+        this.projectService.deleteProject(project);
+      } else {
+        console.log("project deletion canceled");
+      }
+    });
   }
 }
