@@ -7,6 +7,9 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Project } from '../project';
 import { ProjectService } from '../project.service';
 
+import { CreateProjectDialogComponent } from '../create-project-dialog/create-project-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
@@ -21,6 +24,7 @@ export class WorkspaceComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private projectService: ProjectService,
+    public dialog: MatDialog
   ) { }
 
     public project$: Observable<Project>;
@@ -106,11 +110,7 @@ export class WorkspaceComponent implements OnInit {
         }
     }
 
-    newProject() {
-        var new_prompt = document.getElementById("new-workspace-prompt");
-        var project = document.getElementById("workspace-content");
-
-        new_prompt.classList.add("hidden");
-        project.classList.remove("hidden");
+    newProject() : void {
+        const dialogRef = this.dialog.open(CreateProjectDialogComponent);
     }
 }
