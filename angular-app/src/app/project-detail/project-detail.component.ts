@@ -59,6 +59,10 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
     this.setBlobstoreUploadUrl();
   }
 
+  deleteFile(project: Project, file: ProjectFile) {
+    this.projectService.deleteFile(project, file);
+  }
+
   deleteProject(project: Project) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: `Deleting ${project.title} will permanently delete the project and all of its files. 
