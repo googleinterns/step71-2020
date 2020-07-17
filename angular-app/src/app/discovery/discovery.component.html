@@ -48,10 +48,38 @@
                         (click)="tag.selected = !tag.selected;"
                         [selected]="tag.selected"
                         [value]="tag">
-                        {{tag.name}} - {{tag.selected}}
+                        {{tag.name}}
           </mat-list-option>
         </mat-selection-list>
       </div>
     </div>
   </mat-menu>
+</div>
+
+<div class= "discovered-user">
+  <mat-card class= "discover-card">
+    <mat-card-header>
+        <div mat-card-avatar></div>
+        <mat-card-title>John Doe</mat-card-title>
+        <mat-card-subtitle>johndoe</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            Hello everyone! I love listening to all kinds of music but 
+            I play guitar and like to produce country tracks. Check out
+            my snippets, and if you want to collaborate, let's make
+            it happen!
+        </p>    
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button>FOLLOW</button>
+        <button mat-button>INVITE TO WORKSPACE</button>
+    </mat-card-actions>
+    <mat-chip-list aria-label= "Tags">
+      <mat-chip>Country</mat-chip>
+      <mat-chip>Guitar</mat-chip>
+      <mat-chip>Jazz</mat-chip>
+      <mat-chip>Producer</mat-chip>
+  </mat-chip-list>
+</mat-card>
 </div>
