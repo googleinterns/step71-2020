@@ -5,35 +5,23 @@
   <mat-divider></mat-divider>
 </mat-list>
 <mat-nav-list role="list">
-  <mat-list-item role="listitem" matTooltip="Profile">
-    <a mat-icon-button aria-label="profile page link" routerLink="/user-profile" routerLinkActive="active">
-      <mat-icon>account_circle</mat-icon>
-    </a>
-  </mat-list-item>
-  <mat-list-item role="listitem" matTooltip="Logout">
-    <button mat-icon-button aria-label="logout button" (click)="logout()">
-      <mat-icon>lock</mat-icon>
-    </button>
+  <a mat-list-item role="listitem" routerLink="/user-profile" routerLinkActive="active" matTooltip="Profile">
+    <mat-icon>account_circle</mat-icon>
+  </a>
+  <mat-list-item role="listitem" (click)="logout()" matTooltip="Logout">
+    <mat-icon>lock</mat-icon>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item role="listitem" matTooltip="Main Feed">
-    <a mat-icon-button aria-label="main feed page link" routerLink="/main-feed" routerLinkActive="active">
-      <mat-icon>dashboard</mat-icon>
-    </a>
-  </mat-list-item>
-  <mat-list-item role="listitem" matTooltip="Discover">
-    <a mat-icon-button aria-label="discover page link" routerLink="/discover" routerLinkActive="active">
-      <mat-icon>explore</mat-icon>
-    </a>
-  </mat-list-item>
-  <mat-list-item role="listitem" matTooltip="Projects">
-    <a mat-icon-button aria-label="projects page link" routerLink="/projects" routerLinkActive="active">
-      <mat-icon>source</mat-icon>
-    </a>
-  </mat-list-item>
-  <mat-list-item role="listitem" matTooltip="Workspace">
-    <a mat-icon-button aria-label="workspace page link" routerLink="/workspace" routerLinkActive="active">
-      <mat-icon>picture_in_picture</mat-icon>
-    </a>
-  </mat-list-item>
+  <a mat-list-item role="listitem" routerLink="/main-feed" routerLinkActive="active" matToolTip="Main Feed">
+    <mat-icon>dashboard</mat-icon>
+  </a>
+  <a mat-list-item role="listitem" routerLink="/discover" routerLinkActive="active" matToolTip="Discover">
+    <mat-icon>explore</mat-icon>
+  </a>
+  <a mat-list-item role="listitem" routerLink="/projects" routerLinkActive="active" matToolTip="Projects Overview">
+    <mat-icon>source</mat-icon>
+  </a>
+  <a mat-list-item role="listitem"  routerLink="/workspace" routerLinkActive="active" matToolTip="Workspace">
+    <mat-icon>picture_in_picture</mat-icon>
+  </a>
 </mat-nav-list>
