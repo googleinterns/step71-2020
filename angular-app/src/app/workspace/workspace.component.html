@@ -1,20 +1,13 @@
 <mat-sidenav-container class="component-drawer-container">
   <mat-sidenav-content>
-    <div id="new-workspace-prompt">
+    <!-- <div id="new-workspace-prompt">
         <h1 id="prompt">Create a New Project?</h1>
         <button id="new-project-button" (click)="newProject()">New Project</button>
-    </div>
-    <div id="workspace-content" class="hidden">
+    </div> -->
+    <div id="workspace-content">
         <button class="save-button">Save</button>
-        <div id="project-name" class="center">
-            <mat-form-field class="center input-project-name">
-                    <mat-label>Project Name</mat-label>
-                    <textarea matInput
-                        cdkTextareaAutosize
-                        #autosize="cdkTextareaAutosize"
-                        cdkAutosizeMinRows="1"
-                        cdkAutosizeMaxRows="2"></textarea>
-                </mat-form-field>
+        <div id="project-name" class="center" *ngIf="project$ | async as project">
+            <h1 class="project-name">{{project.title}}</h1>
         </div>
 
         <div id="top-element" class="resizeable-content center">

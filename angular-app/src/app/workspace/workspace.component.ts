@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as WaveSurfer from '../../assets/js/wavesurfer.js';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router'; 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { Project } from '../project';
@@ -9,6 +9,8 @@ import { ProjectService } from '../project.service';
 
 import { CreateProjectDialogComponent } from '../create-project-dialog/create-project-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-workspace',
@@ -20,6 +22,8 @@ export class WorkspaceComponent implements OnInit {
 
   @ViewChild('projectInfo') public projectInfo: MatSidenav;
 
+  public project$: Observable<Project>;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -27,10 +31,11 @@ export class WorkspaceComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
-    public project$: Observable<Project>;
+    private blobstoreUploadUrl: string;
 
     public waveHTML : HTMLElement;
     public uploadHTML : HTMLElement;
+    public projectTitle : HTMLElement;
 
     public context = new AudioContext();
     public wavesurfer;
@@ -40,7 +45,9 @@ export class WorkspaceComponent implements OnInit {
     public audioFileToUpload: File = null;
 
   ngOnInit() {
-    
+
+    this.setBlobstoreUploadUrl();
+
     this.waveHTML = document.getElementById("wave-html");
     this.uploadHTML = document.getElementById("wave-upload-html");
 
@@ -112,5 +119,17 @@ export class WorkspaceComponent implements OnInit {
 
     newProject() : void {
         const dialogRef = this.dialog.open(CreateProjectDialogComponent);
+    }
+
+    setBlobstoreUploadUrl(): void {
+        this.projectService.getBlobstoreUploadUrl().pipe(
+        first()
+        ).subscribe(
+            url => { 
+                this.blobstoreUploadUrl = url;
+                console.log("blobstore upload URL set");
+            },
+            error => console.log("Error getting blobstore upload URL: " + error)
+        );
     }
 }

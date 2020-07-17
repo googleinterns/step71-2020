@@ -12,6 +12,11 @@
     max-width: fit-content;
 }
 
+.project-name {
+    font-size: 22px;
+    font-weight: bold;
+}
+
 #workspace-content {
     margin-left: auto;
     margin-right: auto;
