@@ -12,11 +12,11 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 const routes: Routes = [
   { path: 'discover', component: DiscoveryComponent },
   { path: 'main-feed', component: MainFeedComponent },
-  { path: 'projects/:id', component: ProjectDetailComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'workspace/:id', component: WorkspaceComponent },
   { path: 'workspace', component: WorkspaceComponent },
+  { path: '',   redirectTo: '/main-feed', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
 
