@@ -3,6 +3,7 @@
 </mat-toolbar>
 
 <div class="filter-chip">
+
   <mat-chip class="pi-chip-filter"
                   [matMenuTriggerFor]="longListFilter"
                   [selected]="selectedLongListTags.length > 0">
@@ -16,10 +17,12 @@
   </mat-chip>
 
   <mat-menu #longListFilter="matMenu"
+
                   class="pi-chip-filter-menu"
                   overlapTrigger="false"
                   xPosition="before"
                   yPosition="below">
+    
     <!-- HACK: Stop the mat-menu from closing by stopping event propagation -->
     <div class="pi-ui mat-typography"
                    (click)="$event.stopPropagation()">
@@ -38,7 +41,7 @@
         <mat-form-field>
           <input matInput #tagSearch placeholder="Search for tags">
         </mat-form-field>
-        <mat-selection-list #tags
+        <mat-selection-list #interestTags
                       (selectionChange)="onSelectedOptionsChange()"
                       [disableRipple]="true">
           <mat-list-option *ngFor="let tag of (tags | tagSearch:tagSearch.value)"
@@ -52,5 +55,3 @@
     </div>
   </mat-menu>
 </div>
-
-

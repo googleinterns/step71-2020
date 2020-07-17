@@ -25,13 +25,17 @@ body {
   text-align: center;
 }
 
-.sidenav-container {
+.app-sidenav-container {
   width: 100vw;
   height: 100vh;
 }
 
-.sidechat-container {
-  width: 400px;
+.component-drawer-container {
+  width: 100%;
+  height: 100%;
+}
+
+.project-info-container {
   height: 100vh;
 }
 

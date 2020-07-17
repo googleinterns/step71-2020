@@ -1,12 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router'; 
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 import { Project } from '../project';
-import { PROJECTS } from '../mock-projects';
-import { ToggleChatService } from '../toggle-chat.service';
+import { ProjectFile } from '../project-file';
 import { ProjectService } from '../project.service';
 
 @Component({
@@ -14,48 +12,49 @@ import { ProjectService } from '../project.service';
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.css']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit, OnChanges {
 
-  private files: string[] = ['audio.wav', 'audio.mp3', 'lyric1.txt', 'lyric2.docx']
-  project$: Observable<Project>; // $ postfix simply indicates an Observable and has no function
+  private blobstoreUploadUrl: string;
+  @Input() project$: Observable<Project>;
+  files$: Observable<ProjectFile[]>;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private projectService: ProjectService,
-    private chatService: ToggleChatService,
     public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    console.log("opening project detail view")
-    this.project$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.projectService.getProject(params.get('id')))
+    this.setBlobstoreUploadUrl();
+  }
+  
+  ngOnChanges(changes: SimpleChanges) {
+    const currentProject$: Observable<Project> = changes.project$.currentValue;
+    if (currentProject$) {
+      currentProject$.subscribe(project => {
+        this.files$ = this.projectService.getProjectFiles(project.title);
+      });
+    }
+
+  }
+
+  setBlobstoreUploadUrl(): void {
+    this.projectService.getBlobstoreUploadUrl().pipe(
+      first()
+    ).subscribe(
+      url => { 
+        this.blobstoreUploadUrl = url;
+        console.log("blobstore upload URL set");
+      },
+      error => console.log("Error getting blobstore upload URL: " + error)
     );
   }
 
-  openDialog(): void {
-    const dialogRed = this.dialog.open(ProjectSettingsDialog, { data: this.project$ });
-  }
-
-  toggleChat(): void {
-    console.log("toggling chat");
-    this.chatService.toggle();
-  }
-}
-
-@Component({
-  selector: 'app-project-settings-dialog',
-  templateUrl: 'project-settings-dialog.html',
-})
-export class ProjectSettingsDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<ProjectSettingsDialog>,
-    @Inject(MAT_DIALOG_DATA) public project$: Observable<Project>) {}
-
-  exitSettings() {
-    this.dialogRef.close();
+  upload(project, event): void {
+    if (event.target.files.length > 0) {
+      let file: File = event.target.files[0];
+      this.projectService.uploadFile(this.blobstoreUploadUrl, project, file);
+      event.target.value = '';
+    }
+    this.setBlobstoreUploadUrl();
   }
 }
