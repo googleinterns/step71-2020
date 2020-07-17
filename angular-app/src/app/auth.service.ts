@@ -16,7 +16,7 @@ export class AuthService {
   login() {
     let googleAuthProvider = new auth.GoogleAuthProvider();
     googleAuthProvider.setCustomParameters({
-      prompt: 'consent' // TODO: probably better as 'select_account' when in production
+      prompt: 'consent' // TODO(#70): probably better as 'select_account' when in production
     });
     this.auth.signInWithPopup(googleAuthProvider);
   }
