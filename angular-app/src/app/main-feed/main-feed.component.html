@@ -1,1 +1,46 @@
-<p>main-feed works!</p>
+<mat-toolbar>
+  <span>Main Feed</span>
+</mat-toolbar>
+
+<div>
+  <mat-form-field appearance="outline">
+    <mat-label>Make a Post</mat-label>
+    <textarea matInput></textarea>
+    </mat-form-field>
+</div>
+<button mat-button color="Teal">Attach Audio</button>
+<button mat-raised-button>Post</button>
+
+<br>
+
+<div> Posts:
+<mat-card class= "main-feed-post" *ngFor="let post of posts$ | async">
+    <mat-card-header>
+        <div mat-card-avatar></div>
+        <mat-card-title>{{post.user}}</mat-card-title>
+        <mat-card-subtitle>nickname</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+           {{post.content}}
+        </p>    
+        <mat-basic-audio-player [audioUrl]="msbapAudioUrl" 
+                                [title]="msbapTitle" 
+                                [autoPlay]="false" muted="muted" (trackEnded)="onEnded($event)"
+                                [displayTitle]="msbapDisplayTitle" 
+                                [displayVolumeControls]="msaapDisplayVolumeControls" >
+        </mat-basic-audio-player>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-icon-button color="Teal" aria-label="Like">
+          <mat-icon>favorite</mat-icon>
+        </button>  
+    </mat-card-actions>
+    <p> {{post.likes}} </p>
+    
+    <mat-card-footer>
+        {{post.timestamp}}
+    </mat-card-footer>
+</mat-card>
+</div>
+

@@ -3,57 +3,55 @@
 </mat-toolbar>
 
 <div class="filter-chip">
-        <mat-chip class="pi-chip-filter"
+
+  <mat-chip class="pi-chip-filter"
                   [matMenuTriggerFor]="longListFilter"
                   [selected]="selectedLongListTags.length > 0">
-            {{getMultiSelectChipName(selectedLongListTags) || "Search filter"}}
-            <mat-icon matChipRemove
-                      (click)="selectedLongListTags = clearSelectedTags()"
-                      *ngIf="selectedLongListTags.length > 0">cancel</mat-icon>
-            <mat-icon matChipRemove
-                      *ngIf="selectedLongListTags.length === 0"
-                      class="pi-chip-filter-dropdown">arrow_drop_down</mat-icon>
-        </mat-chip>
+                  {{getMultiSelectChipName(selectedLongListTags) || "Search filter"}}
+    <mat-icon matChipRemove
+                    (click)="selectedLongListTags = clearSelectedTags()"
+                    *ngIf="selectedLongListTags.length > 0">cancel</mat-icon>
+    <mat-icon matChipRemove
+                    *ngIf="selectedLongListTags.length === 0"
+                    class="pi-chip-filter-dropdown">arrow_drop_down</mat-icon>
+  </mat-chip>
 
-        <mat-menu #longListFilter="matMenu"
+  <mat-menu #longListFilter="matMenu"
+
                   class="pi-chip-filter-menu"
                   overlapTrigger="false"
                   xPosition="before"
                   yPosition="below">
-            <!-- HACK: Stop the mat-menu from closing by stopping event propagation -->
-            <div class="pi-ui mat-typography"
-                 (click)="$event.stopPropagation()">
-                <div class="pi-chip-filter-header">
-                    <div class="pi-chip-filter-title">
-                        Long list filter
-                    </div>
-                    <div class="pi-chip-filter-close">
-                        <button mat-icon-button
-                                (click)="closeMenus()">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </div>
-                </div>
+    
+    <!-- HACK: Stop the mat-menu from closing by stopping event propagation -->
+    <div class="pi-ui mat-typography"
+                   (click)="$event.stopPropagation()">
+      <div class="pi-chip-filter-header">
+        <div class="pi-chip-filter-title">
+                        Discovery Filter
+        </div>
+        <div class="pi-chip-filter-close">
+          <button mat-icon-button (click)="closeMenus()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
 
-                <div class="pi-chip-filter-content">
-                    <mat-form-field>
-                        <input matInput
-                               #tagSearch
-                               placeholder="Search for tags">
-                    </mat-form-field>
-                    <mat-selection-list #interestTags
-                                        (selectionChange)="onSelectedOptionsChange()"
-                                        [disableRipple]="true">
-                        <mat-list-option *ngFor="let tag of (tags | tagSearch:tagSearch.value)"
-                                         (click)="tag.selected = !tag.selected;"
-                                         [selected]="tag.selected"
-                                         [value]="tag">
-                            {{tag.name}} - {{tag.selected}}
-                        </mat-list-option>
-                    </mat-selection-list>
-                </div>
-            </div>
-        </mat-menu>
+      <div class="pi-chip-filter-content">
+        <mat-form-field>
+          <input matInput #tagSearch placeholder="Search for tags">
+        </mat-form-field>
+        <mat-selection-list #interestTags
+                      (selectionChange)="onSelectedOptionsChange()"
+                      [disableRipple]="true">
+          <mat-list-option *ngFor="let tag of (tags | tagSearch:tagSearch.value)"
+                        (click)="tag.selected = !tag.selected;"
+                        [selected]="tag.selected"
+                        [value]="tag">
+                        {{tag.name}} - {{tag.selected}}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
     </div>
-
-
+  </mat-menu>
+</div>

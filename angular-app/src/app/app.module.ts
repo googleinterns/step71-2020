@@ -29,6 +29,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
 import { environment } from '../environments/environment';
 import { ProjectsComponent } from './projects/projects.component';
@@ -87,6 +88,7 @@ import { ProjectService } from './project.service';
     MatToolbarModule,
     CdkScrollableModule,
     TextFieldModule,
+    NgxAudioPlayerModule,
   ],
   providers: [
     AuthService,
