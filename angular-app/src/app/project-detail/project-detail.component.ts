@@ -65,8 +65,11 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
 
   deleteProject(project: Project) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: `Deleting ${project.title} will permanently delete the project and all of its files. 
-      Are you sure you want to continue?`
+      data: {
+        message:`Deleting ${project.title} will permanently delete the project and all of its files. 
+      Are you sure you want to continue?`,
+        continueText: "Delete"
+      }
     });
 
     dialogRef.afterClosed().subscribe(confirmed => {
