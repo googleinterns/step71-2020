@@ -1,11 +1,8 @@
 <mat-sidenav-container class="component-drawer-container">
   <mat-sidenav-content>
-    <!-- <div id="new-workspace-prompt">
-        <h1 id="prompt">Create a New Project?</h1>
-        <button id="new-project-button" (click)="newProject()">New Project</button>
-    </div> -->
     <div id="workspace-content">
-        <button class="save-button">Save</button>
+        <button class="right-button" (click)="newProject()">Create New Project</button>
+        <button class="right-button">Save</button>
         <div id="project-name" class="center" *ngIf="project$ | async as project">
             <h1 class="project-name">{{project.title}}</h1>
         </div>
