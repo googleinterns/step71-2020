@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
@@ -19,6 +20,7 @@ export class CreateProjectDialogComponent implements OnInit {
   public tags: string[] = [];
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private projectService: ProjectService,
     public dialogRef: MatDialogRef<CreateProjectDialogComponent>) { }
@@ -36,6 +38,7 @@ export class CreateProjectDialogComponent implements OnInit {
       files: []
     });
 
+    this.router.navigate(['/workspace', this.title]);
     this.dialogRef.close();
   }
 
