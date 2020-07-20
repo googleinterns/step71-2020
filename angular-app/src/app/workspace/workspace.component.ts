@@ -127,7 +127,6 @@ export class WorkspaceComponent implements OnInit {
         ).subscribe(
             url => { 
                 this.blobstoreUploadUrl = url;
-                console.log("blobstore upload URL set");
             },
             error => console.log("Error getting blobstore upload URL: " + error)
         );
