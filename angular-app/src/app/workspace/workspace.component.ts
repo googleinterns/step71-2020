@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { Project } from '../project';
+import { ProjectFile } from '../project-file';
 import { ProjectService } from '../project.service';
 
 import { CreateProjectDialogComponent } from '../create-project-dialog/create-project-dialog.component';
@@ -23,6 +24,7 @@ export class WorkspaceComponent implements OnInit {
   @ViewChild('projectInfo') public projectInfo: MatSidenav;
 
   public project$: Observable<Project>;
+  public files$: Observable<ProjectFile[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,6 +68,7 @@ export class WorkspaceComponent implements OnInit {
         let projectId = params.get('id');
         if (projectId !== null && projectId.length > 0) {
           this.project$ = this.projectService.getProject(projectId);
+          this.files$ = this.projectService.getProjectFiles(projectId);
         }
         else {
           this.project$ = null;
@@ -73,11 +76,26 @@ export class WorkspaceComponent implements OnInit {
       });
     }
 
+    play() {
+        var playButton = document.getElementById("play");
+        var pauseButton = document.getElementById("pause");
 
-    playPause() {
+        playButton.classList.add("hidden");
+        pauseButton.classList.remove("hidden");
+
         this.wavesurfer.playPause();
     }
 
+    pause() {
+        var playButton = document.getElementById("play");
+        var pauseButton = document.getElementById("pause");
+
+        playButton.classList.remove("hidden");
+        pauseButton.classList.add("hidden");
+
+        this.wavesurfer.playPause();
+    }
+    
     upload() {
         if (this.hasFileChanged) {
             this.uploadHTML.innerHTML = "";
@@ -130,5 +148,13 @@ export class WorkspaceComponent implements OnInit {
             },
             error => console.log("Error getting blobstore upload URL: " + error)
         );
+    }
+
+    skipBack() {
+        this.wavesurfer.skipBackward(5);
+    }
+
+    skipForward() {
+        this.wavesurfer.skipForward(5);
     }
 }
