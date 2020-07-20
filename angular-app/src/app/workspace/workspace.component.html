@@ -1,29 +1,35 @@
 <mat-sidenav-container class="component-drawer-container">
   <mat-sidenav-content>
-    <div id="new-workspace-prompt">
-        <h1 id="prompt">Create a New Project?</h1>
-        <!-- TODO #47: Link up New Project Button with Gwyneth's function -->
-        <button id="new-project-button" (click)="newProject()">New Project</button>
-    </div>
-    <div id="workspace-content" class="hidden">
-        <button class="save-button">Save</button>
-        <div id="project-name" class="center">
-            <mat-form-field class="center input-project-name">
-                    <mat-label>Project Name</mat-label>
-                    <textarea matInput
-                        cdkTextareaAutosize
-                        #autosize="cdkTextareaAutosize"
-                        cdkAutosizeMinRows="1"
-                        cdkAutosizeMaxRows="2"></textarea>
-                </mat-form-field>
+    <div id="workspace-content">
+        <button mat-flat-button color="primary" (click)="newProject()">Create New Project</button>
+        <div id="project-name" class="center" *ngIf="project$ | async as project">
+            <h1 class="project-name">{{project.title}}</h1>
         </div>
 
         <div id="top-element" class="resizeable-content center">
+            <mat-selection-list [multiple]="false">
+                <mat-list-option *ngFor="let file of files$ | async">
+                    <div>
+                        <a target="_blank" rel="noopener noreferrer">{{file.filename}}</a>
+                    </div>
+                </mat-list-option>
+            </mat-selection-list>
             <h1 id="audio-name" class="center">Audio File Name</h1>
             <p id="wave-html"></p>
             <p id="wave-upload-html"></p>
             <div id="wave-container"></div>
-                <button (click)="playPause()">Play/Pause</button>
+                <button id="rewind" mat-icon-button color="primary" (click)="skipBack()" aria-label="Rewind button">
+                    <mat-icon>fast_rewind</mat-icon>
+                </button>
+                <button id="play" mat-icon-button color="primary" (click)="play()" aria-label="Play button">
+                    <mat-icon>play_arrow</mat-icon>
+                </button>
+                <button id="pause" mat-icon-button color="primary" (click)="pause()" class="hidden" aria-label="Pause Button">
+                    <mat-icon>pause</mat-icon>
+                </button>
+                <button id="skip" mat-icon-button color="primary" (click)="skipForward()" aria-label="Skip Button">
+                    <mat-icon>fast_forward</mat-icon>
+                </button>
             <label for="wav">Select audio:</label>
             <input type="file" id="input" (change)="handleFileInput($event.target.files)"/>
             <audio id="sound"></audio>
