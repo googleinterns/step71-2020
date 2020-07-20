@@ -50,7 +50,7 @@ public class UploadServlet extends HttpServlet {
 
   private static final String INPUT_NAME_PROJECT = "project";
   private static final String INPUT_NAME_FILENAME = "filename";
-  private static final String INPUT_NAME_FILES = "files";
+  private static final String INPUT_NAME_FILES = "file";
 
   private static final String FIELD_FILENAME = "filename";
   private static final String FIELD_CONTENT_TYPE = "contentType";
@@ -68,6 +68,11 @@ public class UploadServlet extends HttpServlet {
     String project = request.getParameter(INPUT_NAME_PROJECT);
 
     List<Map<String, Object>> docDataList = getFilesData(request, INPUT_NAME_FILES);
+    if (docDataList == null) {
+      System.out.println("Could not find uploaded files");
+      return;
+    }
+
     for (Map<String, Object> docData: docDataList) {
       String filename = docData.get(FIELD_FILENAME).toString();
       ApiFuture<WriteResult> future = db.collection(COLLECTION_PROJECTS).document(project)
