@@ -69,7 +69,7 @@ public class UploadServlet extends HttpServlet {
 
     List<Map<String, Object>> docDataList = getFilesData(request, INPUT_NAME_FILES);
     for (Map<String, Object> docData: docDataList) {
-      String filename = docData.get(FIELD_FILENAME);
+      String filename = docData.get(FIELD_FILENAME).toString();
       ApiFuture<WriteResult> future = db.collection(COLLECTION_PROJECTS).document(project)
         .collection(COLLECTION_FILES).document(filename).set(docData);
       try {

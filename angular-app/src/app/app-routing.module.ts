@@ -12,7 +12,6 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 const routes: Routes = [
   { path: 'discover', component: DiscoveryComponent },
   { path: 'main-feed', component: MainFeedComponent },
-  { path: 'projects/:id', component: ProjectDetailComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'workspace/:id', component: WorkspaceComponent },

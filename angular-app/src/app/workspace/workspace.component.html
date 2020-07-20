@@ -1,5 +1,6 @@
 <mat-sidenav-container class="component-drawer-container">
   <mat-sidenav-content>
+<<<<<<< Updated upstream
     <div id="new-workspace-prompt">
         <h1 id="prompt">Create a New Project?</h1>
         <!-- TODO #47: Link up New Project Button with Gwyneth's function -->
@@ -16,9 +17,23 @@
                         cdkAutosizeMinRows="1"
                         cdkAutosizeMaxRows="2"></textarea>
                 </mat-form-field>
+=======
+    <div id="workspace-content">
+        <button (click)="newProject()">Create New Project</button>
+        <!-- <button>Save</button> -->
+        <div id="project-name" class="center" *ngIf="project$ | async as project">
+            <h1 class="project-name">{{project.title}}</h1>
+>>>>>>> Stashed changes
         </div>
 
         <div id="top-element" class="resizeable-content center">
+            <mat-selection-list [multiple]="false">
+                <mat-list-option *ngFor="let file of files$ | async">
+                    <div>
+                        <a target="_blank" rel="noopener noreferrer" (click)="displayAudioFile({file.fileUrl})">{{file.filename}}</a>
+                    </div>
+                </mat-list-option>
+            </mat-selection-list>
             <h1 id="audio-name" class="center">Audio File Name</h1>
             <p id="wave-html"></p>
             <p id="wave-upload-html"></p>

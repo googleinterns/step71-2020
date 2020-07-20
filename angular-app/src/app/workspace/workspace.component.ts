@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { Project } from '../project';
+import { ProjectFile } from '../project-file';
 import { ProjectService } from '../project.service';
 
 @Component({
@@ -17,6 +18,12 @@ export class WorkspaceComponent implements OnInit {
 
   @ViewChild('projectInfo') public projectInfo: MatSidenav;
 
+<<<<<<< Updated upstream
+=======
+  public project$: Observable<Project>;
+  public files$: Observable<ProjectFile[]>;
+
+>>>>>>> Stashed changes
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -55,6 +62,7 @@ export class WorkspaceComponent implements OnInit {
         let projectId = params.get('id');
         if (projectId !== null && projectId.length > 0) {
           this.project$ = this.projectService.getProject(projectId);
+          this.files$ = this.projectService.getProjectFiles(projectId);
         }
         else {
           this.project$ = null;
@@ -62,9 +70,14 @@ export class WorkspaceComponent implements OnInit {
       });
     }
 
-
     playPause() {
         this.wavesurfer.playPause();
+    }
+
+    displayAudioFile(files) {
+        this.loadWaveSurfer(files);
+        this.uploadHTML.innerHTML = "";
+        this.waveHTML.innerHTML = "";
     }
 
     upload() {
