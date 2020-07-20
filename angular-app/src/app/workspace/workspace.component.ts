@@ -1,12 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as WaveSurfer from '../../assets/js/wavesurfer.js';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router'; 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { Project } from '../project';
 import { ProjectFile } from '../project-file';
 import { ProjectService } from '../project.service';
+
+import { CreateProjectDialogComponent } from '../create-project-dialog/create-project-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-workspace',
@@ -18,22 +23,21 @@ export class WorkspaceComponent implements OnInit {
 
   @ViewChild('projectInfo') public projectInfo: MatSidenav;
 
-<<<<<<< Updated upstream
-=======
   public project$: Observable<Project>;
   public files$: Observable<ProjectFile[]>;
 
->>>>>>> Stashed changes
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private projectService: ProjectService,
+    public dialog: MatDialog
   ) { }
 
-    public project$: Observable<Project>;
+    private blobstoreUploadUrl: string;
 
     public waveHTML : HTMLElement;
     public uploadHTML : HTMLElement;
+    public projectTitle : HTMLElement;
 
     public context = new AudioContext();
     public wavesurfer;
@@ -43,7 +47,9 @@ export class WorkspaceComponent implements OnInit {
     public audioFileToUpload: File = null;
 
   ngOnInit() {
-    
+
+    this.setBlobstoreUploadUrl();
+
     this.waveHTML = document.getElementById("wave-html");
     this.uploadHTML = document.getElementById("wave-upload-html");
 
@@ -70,16 +76,26 @@ export class WorkspaceComponent implements OnInit {
       });
     }
 
-    playPause() {
+    play() {
+        var playButton = document.getElementById("play");
+        var pauseButton = document.getElementById("pause");
+
+        playButton.classList.add("hidden");
+        pauseButton.classList.remove("hidden");
+
         this.wavesurfer.playPause();
     }
 
-    displayAudioFile(files) {
-        this.loadWaveSurfer(files);
-        this.uploadHTML.innerHTML = "";
-        this.waveHTML.innerHTML = "";
-    }
+    pause() {
+        var playButton = document.getElementById("play");
+        var pauseButton = document.getElementById("pause");
 
+        playButton.classList.remove("hidden");
+        pauseButton.classList.add("hidden");
+
+        this.wavesurfer.playPause();
+    }
+    
     upload() {
         if (this.hasFileChanged) {
             this.uploadHTML.innerHTML = "";
@@ -119,11 +135,26 @@ export class WorkspaceComponent implements OnInit {
         }
     }
 
-    newProject() {
-        var new_prompt = document.getElementById("new-workspace-prompt");
-        var project = document.getElementById("workspace-content");
+    newProject() : void {
+        const dialogRef = this.dialog.open(CreateProjectDialogComponent);
+    }
 
-        new_prompt.classList.add("hidden");
-        project.classList.remove("hidden");
+    setBlobstoreUploadUrl(): void {
+        this.projectService.getBlobstoreUploadUrl().pipe(
+        first()
+        ).subscribe(
+            url => { 
+                this.blobstoreUploadUrl = url;
+            },
+            error => console.log("Error getting blobstore upload URL: " + error)
+        );
+    }
+
+    skipBack() {
+        this.wavesurfer.skipBackward(5);
+    }
+
+    skipForward() {
+        this.wavesurfer.skipForward(5);
     }
 }

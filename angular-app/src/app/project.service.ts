@@ -55,6 +55,12 @@ export class ProjectService {
     .catch(error => console.error("Error adding document: ", error));
   }
 
+  public deleteProject(project: Project) {
+    this.firestore.collection(COLLECTION_PROJECTS).doc(project.title).delete()
+      .then(() => console.log(`Successfully deleted project ${project.title}`))
+      .catch(error => console.error(`Error deleting project ${project.title}: `, error));
+  }
+
   public uploadFile(blobstoreUploadUrl: string, project: Project, file: File): void {
     const formData: FormData = new FormData();
     formData.append('project', project.title);
@@ -66,5 +72,11 @@ export class ProjectService {
       (response) => console.log("Successfully uploaded " + file.name),
       (error) => console.log("Error uploading file: " + error.message)
     )
+  }
+
+  public deleteFile(project: Project, file: ProjectFile): void {
+    this.firestore.collection(COLLECTION_PROJECTS).doc(project.title).collection(COLLECTION_FILES).doc(file.filename).delete()
+    .then(() => console.log(`Successfully deleted file ${file.filename}`))
+    .catch(error => console.error(`Error deleting ${file.filename}: `, error));
   }
 }

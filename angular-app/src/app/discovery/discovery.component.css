@@ -17,7 +17,6 @@ mat-chip {
 	 padding: 0;
 }
  .mat-menu-panel.pi-chip-filter-menu .pi-chip-filter-header {
-	 background-color: whitesmoke;
 	 display: flex;
 	 align-items: center;
 	 justify-content: space-between;

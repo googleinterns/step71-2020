@@ -97,7 +97,7 @@ public class UploadServlet extends HttpServlet {
     for (BlobKey blobKey: blobKeys) {
       Map<String, Object> docData = getBlobData(blobInfoFactory, blobKey);
       if (docData != null) {
-        docDataList.add(docData)
+        docDataList.add(docData);
       }
     }
 
