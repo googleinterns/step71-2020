@@ -38,14 +38,6 @@ $dark-theme: mat-dark-theme((
   color: map-get(map-get($dark-theme, foreground),text);
 }
 
-.primary {
-  color: mat-color($dark-primary, 600);
-}
-
-.accent {
-  color: mat-color($dark-accent, 700);
-}
-
 mat-nav-list a.active {
   outline: none;
   color: mat-color($dark-primary, 600);

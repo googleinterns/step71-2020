@@ -38,8 +38,8 @@ export class CreateProjectDialogComponent implements OnInit {
       files: []
     });
 
-    this.router.navigate(['/workspace', this.title]);
     this.dialogRef.close();
+    this.router.navigate(['/workspace', this.title]);
   }
 
   addCollaborator(event: MatChipInputEvent): void {
