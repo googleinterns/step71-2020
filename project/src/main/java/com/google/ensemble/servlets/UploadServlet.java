@@ -69,7 +69,7 @@ public class UploadServlet extends HttpServlet {
 
     List<Map<String, Object>> docDataList = getFilesData(request, INPUT_NAME_FILES);
     if (docDataList == null) {
-      System.out.println("Could not find uploaded files");
+      response.sendError(500, "Could not find uploaded files");
       return;
     }
 
