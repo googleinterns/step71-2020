@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  backendUrl: "https://backend-dot-music-collab-280719.uc.r.appspot.com",
   firebase: {
     apiKey: "AIzaSyAf2uEjfbX8aE6AR_hpwUYSlEjTifrDECg",
     authDomain: "music-collab-280719.firebaseapp.com",

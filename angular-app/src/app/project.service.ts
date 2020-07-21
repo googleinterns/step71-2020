@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+import { environment } from '../environments/environment';
 import { Project } from './project';
 import { ProjectFile } from './project-file';
 
@@ -26,7 +27,9 @@ export class ProjectService {
   }
 
   public getBlobstoreUploadUrl(): Observable<string> {
-    return this.httpClient.get('/blobstore-upload-url', {responseType: 'text'});
+    return this.httpClient.get('/blobstore-upload-url', {responseType: 'text'}).pipe(
+      map(url => environment.production ? environment.backendUrl + url : url),
+    );
   }
 
   public getProjects(): Observable<Project[]> {
