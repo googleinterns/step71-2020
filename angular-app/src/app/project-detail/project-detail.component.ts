@@ -44,7 +44,7 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
     ).subscribe(
       url => { 
         this.blobstoreUploadUrl = url;
-        console.log("blobstore upload URL set");
+        console.log("blobstore upload URL set to " + this.blobstoreUploadUrl);
       },
       error => console.log("Error getting blobstore upload URL: " + error)
     );
