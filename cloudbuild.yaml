@@ -1,8 +1,0 @@
-steps:
-  #install/update
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['install']
-
-  #deploy front end
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy']
