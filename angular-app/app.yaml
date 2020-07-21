@@ -1,0 +1,23 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /(.*\.[^.]+)$
+  static_files: dist/ensemble/\1
+  upload: dist/ensemble/(.*)
+- url: /(.*)
+  static_files: dist/ensemble/index.html
+  upload: dist/ensemble/index.html
+- url: /
+  static_dir: dist/ensemble
+
+skip_files:
+- e2e/
+- node_modules/
+- src/
+- ^(.*/)?\..*$
+- ^(.*/)?.*\.json$
+- ^(.*/)?.*\.md$
+- ^(.*/)?.*\.yaml$
+- ^LICENSE
