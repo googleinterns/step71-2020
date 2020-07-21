@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * Servlet that stores and returns visitor comments
  */
@@ -69,7 +68,7 @@ public class UploadServlet extends HttpServlet {
 
     List<Map<String, Object>> docDataList = getFilesData(request, INPUT_NAME_FILE);
     if (docDataList == null) {
-      response.sendError(500, "Could not find uploaded files");
+      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Could not find uploaded files");
       return;
     }
 
