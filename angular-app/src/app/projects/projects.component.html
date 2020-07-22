@@ -1,27 +1,30 @@
 <mat-toolbar>
   <span>Projects Overview</span>
 </mat-toolbar>
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let project of projects$ | async">
-    <mat-expansion-panel-header>
-      <mat-panel-title>{{project.title}}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <div>Owner: {{project.owner}}</div>
-    <div>
-      Collaborators:
-      <mat-chip-list aria-label="project collaborators">
-        <mat-chip *ngFor="let collaborator of project.collaborators">{{collaborator}}</mat-chip>
-      </mat-chip-list>
-    </div>
-    <div>
-      Tags:
-      <mat-chip-list aria-label="project tags">
-        <mat-chip *ngFor="let tag of project.tags">{{tag}}</mat-chip>
-      </mat-chip-list>
-    </div>
-    <mat-action-row>
+<div class="card-deck-container">
+  <mat-card *ngFor="let project of projects$ | async">
+    <mat-card-header>
+      <mat-card-title>{{project.title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>
+
+          Collaborators:
+          <mat-chip-list aria-label="project collaborators">
+            <mat-chip *ngFor="let collaborator of project.collaborators">{{collaborator}}</mat-chip>
+          </mat-chip-list>
+        </mat-list-item>
+        <mat-list-item>
+          Tags:
+          <mat-chip-list aria-label="project tags">
+            <mat-chip *ngFor="let tag of project.tags">{{tag}}</mat-chip>
+          </mat-chip-list>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
       <a mat-button aria-label="Open project button" [routerLink]="['/workspace', project.title]" routerLinkActive="active">Open Project</a>
-    </mat-action-row>
-  </mat-expansion-panel>
-  <mat-divider></mat-divider>
-</mat-accordion>
+    </mat-card-actions>
+  </mat-card>
+</div>
