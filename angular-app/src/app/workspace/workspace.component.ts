@@ -83,7 +83,7 @@ export class WorkspaceComponent implements OnInit {
         this.uploadHTML.innerHTML = "";
 
         var decodedData = this.context.decodeAudioData();
-
+        this.removeLastWaveform();
         this.context.resume();
         this.wavesurfer = WaveSurfer.create({
         container: '#wave-container',
@@ -93,6 +93,11 @@ export class WorkspaceComponent implements OnInit {
         progressColor: 'purple',
         });
         this.wavesurfer.load(file.fileUrl);
+    }
+
+    removeLastWaveform() {
+        var waveContainer = document.getElementById("wave-container");
+        waveContainer.innerHTML = "";
     }
 
     play() {
