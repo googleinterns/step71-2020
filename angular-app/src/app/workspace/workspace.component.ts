@@ -39,7 +39,7 @@ export class WorkspaceComponent implements OnInit {
     public uploadHTML : HTMLElement;
     public projectTitle : HTMLElement;
 
-    public context = new AudioContext();
+    public context;
     public wavesurfer;
 
     public hasFileChanged: boolean = false;
@@ -49,6 +49,8 @@ export class WorkspaceComponent implements OnInit {
   ngOnInit() {
 
     this.setBlobstoreUploadUrl();
+
+    this.context = new AudioContext();
 
     this.waveHTML = document.getElementById("wave-html");
     this.uploadHTML = document.getElementById("wave-upload-html");
@@ -74,6 +76,23 @@ export class WorkspaceComponent implements OnInit {
           this.project$ = null;
         }
       });
+    }
+
+    displayAudioFile(file) {
+        this.waveHTML.innerHTML = "";
+        this.uploadHTML.innerHTML = "";
+
+        var decodedData = this.context.decodeAudioData();
+
+        this.context.resume();
+        this.wavesurfer = WaveSurfer.create({
+        container: '#wave-container',
+        waveColor : 'red',
+        backgroundColor: '#303030',
+        scrollParent: true,
+        progressColor: 'purple',
+        });
+        this.wavesurfer.load(file.fileUrl);
     }
 
     play() {
