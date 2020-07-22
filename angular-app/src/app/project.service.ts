@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, of, Subject } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+import { environment } from '../environments/environment';
 import { Project } from './project';
 import { ProjectFile } from './project-file';
 
@@ -21,12 +24,15 @@ export class ProjectService {
   constructor(
     private firestore: AngularFirestore,
     private httpClient: HttpClient,
+    private snackBar: MatSnackBar,
   ) { 
     this.projects$ = firestore.collection<Project>('projects').valueChanges();
   }
 
   public getBlobstoreUploadUrl(): Observable<string> {
-    return this.httpClient.get('/blobstore-upload-url', {responseType: 'text'});
+    return this.httpClient.get('/blobstore-upload-url', {responseType: 'text'}).pipe(
+      map(url => environment.production ? environment.backendUrl + url : url),
+    );
   }
 
   public getProjects(): Observable<Project[]> {
@@ -70,7 +76,10 @@ export class ProjectService {
     .post(blobstoreUploadUrl, formData)
     .subscribe(
       (response) => console.log("Successfully uploaded " + file.name),
-      (error) => console.log("Error uploading file: " + error.message)
+      (error) => {
+        console.log("Error uploading file: " + error.message);
+        this.snackBar.open("Encountered an error while uploading " + file.name, "Dismiss", { duration: 3000 });
+      }
     )
   }
 

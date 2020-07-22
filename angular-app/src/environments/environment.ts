@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  backendUrl: "",
   firebase: {
     apiKey: "AIzaSyAf2uEjfbX8aE6AR_hpwUYSlEjTifrDECg",
     authDomain: "music-collab-280719.firebaseapp.com",

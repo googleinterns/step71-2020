@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule, MAT_TABS_CONFIG } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -84,6 +85,7 @@ import { ProjectService } from './project.service';
     MatMenuModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatTabsModule,
     MatTooltipModule,
     MatToolbarModule,
