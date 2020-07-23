@@ -30,11 +30,6 @@
                 <button id="skip" mat-icon-button color="primary" (click)="skipForward()" aria-label="Skip Button">
                     <mat-icon>fast_forward</mat-icon>
                 </button>
-            <label for="wav">Select audio:</label>
-            <input type="file" id="input" (change)="handleFileInput($event.target.files)"/>
-            <audio id="sound"></audio>
-
-            <button id="upload-button" (click)="upload()">Upload</button>
         </div>
 
         <div id="bottom-element" class="resizeable-content center">
