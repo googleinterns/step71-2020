@@ -112,8 +112,10 @@ export class WorkspaceComponent implements OnInit {
         var playButton = document.getElementById("play");
         var pauseButton = document.getElementById("pause");
 
-        playButton.classList.add("hidden");
-        pauseButton.classList.remove("hidden");
+        if (!this.checkIfPlaying()) {
+            playButton.classList.add("hidden");
+            pauseButton.classList.remove("hidden");
+        }
 
         this.wavesurfer.playPause();
     }
@@ -122,10 +124,16 @@ export class WorkspaceComponent implements OnInit {
         var playButton = document.getElementById("play");
         var pauseButton = document.getElementById("pause");
 
-        playButton.classList.remove("hidden");
-        pauseButton.classList.add("hidden");
+        if (this.checkIfPlaying()) {
+            playButton.classList.remove("hidden");
+            pauseButton.classList.add("hidden");
+        }
 
         this.wavesurfer.playPause();
+    }
+
+    checkIfPlaying(): boolean {
+        return this.wavesurfer.isPlaying();
     }
     
     upload() {
