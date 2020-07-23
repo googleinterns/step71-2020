@@ -48,6 +48,14 @@ a:link, a:visited, a:active {
   flex: 1 1 auto;
 }
 
+.active .mat-list-item-content {
+   color: inherit;
+}
+
+.active .mat-icon {
+   color: inherit;
+}
+
 .mat-list-text * {
   margin-top: auto;
   margin-bottom: auto;
