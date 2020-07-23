@@ -10,7 +10,7 @@
             <mat-selection-list [multiple]="false">
                 <mat-list-option *ngFor="let file of files$ | async">
                     <div>
-                        <a target="_blank" rel="noopener noreferrer">{{file.filename}}</a>
+                        <a target="_blank" rel="noopener noreferrer" (click)="displayAudioFile(file)">{{file.filename}}</a>
                     </div>
                 </mat-list-option>
             </mat-selection-list>
