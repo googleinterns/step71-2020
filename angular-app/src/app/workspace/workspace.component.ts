@@ -55,13 +55,8 @@ export class WorkspaceComponent implements OnInit {
     this.waveHTML = document.getElementById("wave-html");
     this.uploadHTML = document.getElementById("wave-upload-html");
 
-    this.getAudioName();
     this.context.resume();
-    if (this.audioFileToUpload == null) {
-        this.waveHTML.innerHTML = "Upload Audio File";
-    } else {
-        this.loadWaveSurfer(this.audioFileToUpload);
-    }
+
     this.initProject();
   }
 
@@ -78,16 +73,33 @@ export class WorkspaceComponent implements OnInit {
       });
     }
 
+    randomColor(): String {
+
+        let colors: string[] = ['#FF2D00', '#001FFF', '#009688']; // red, blue, green
+
+        var randNum = Math.floor(Math.random() * Math.floor(3));
+
+        return colors[randNum];
+
+    }
+
+    setAudioFileName(file) {
+        var audioName = document.getElementById("audio-name");
+        audioName.innerHTML = file.filename;
+    }
+
     displayAudioFile(file) {
         this.waveHTML.innerHTML = "";
         this.uploadHTML.innerHTML = "";
 
-        var decodedData = this.context.decodeAudioData();
+        
         this.removeLastWaveform();
         this.context.resume();
+        this.setAudioFileName(file);
+
         this.wavesurfer = WaveSurfer.create({
         container: '#wave-container',
-        waveColor : 'red',
+        waveColor : this.randomColor(),
         backgroundColor: '#303030',
         scrollParent: true,
         progressColor: 'purple',
@@ -101,42 +113,36 @@ export class WorkspaceComponent implements OnInit {
     }
 
     play() {
-        var playButton = document.getElementById("play");
-        var pauseButton = document.getElementById("pause");
+        const playButton = document.getElementById("play");
+        const pauseButton = document.getElementById("pause");
 
-        playButton.classList.add("hidden");
-        pauseButton.classList.remove("hidden");
+        if (!this.checkIfPlaying()) {
+            playButton.classList.add("hidden");
+            pauseButton.classList.remove("hidden");
+        }
 
         this.wavesurfer.playPause();
     }
 
     pause() {
-        var playButton = document.getElementById("play");
-        var pauseButton = document.getElementById("pause");
+        const playButton = document.getElementById("play");
+        const pauseButton = document.getElementById("pause");
 
-        playButton.classList.remove("hidden");
-        pauseButton.classList.add("hidden");
+        if (this.checkIfPlaying()) {
+            playButton.classList.remove("hidden");
+            pauseButton.classList.add("hidden");
+        }
 
         this.wavesurfer.playPause();
     }
-    
-    upload() {
-        if (this.hasFileChanged) {
-            this.uploadHTML.innerHTML = "";
-            this.loadWaveSurfer(this.audioFileToUpload);
-        }
+
+    checkIfPlaying(): boolean {
+        return this.wavesurfer.isPlaying();
     }
+    
 
     removeErrorText() {
         this.waveHTML.innerHTML = "";
-    }
-
-    handleFileInput(files: FileList) {
-        this.hasFileChanged = true;
-        this.audioFileToUpload = files.item(0);
-        this.getAudioName();
-        this.removeErrorText();
-        this.uploadHTML.innerHTML = "Please Select the Upload Button";
     }
 
     loadWaveSurfer(audio) {
@@ -150,14 +156,6 @@ export class WorkspaceComponent implements OnInit {
         this.wavesurfer.loadBlob(audio);
     }
 
-    getAudioName() {
-        var audioName = document.getElementById("audio-name");
-        if (this.audioFileToUpload == null) {
-            audioName.innerHTML = "Please Select an Audio File to Upload";
-        } else {
-            audioName.innerHTML = this.audioFileToUpload.name;
-        }
-    }
 
     newProject() : void {
         const dialogRef = this.dialog.open(CreateProjectDialogComponent);
