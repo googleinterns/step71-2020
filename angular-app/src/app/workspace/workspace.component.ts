@@ -83,7 +83,7 @@ export class WorkspaceComponent implements OnInit {
 
     }
 
-    getAudioName(file) {
+    setAudioFileName(file) {
         var audioName = document.getElementById("audio-name");
         audioName.innerHTML = file.filename;
     }
@@ -95,7 +95,7 @@ export class WorkspaceComponent implements OnInit {
         
         this.removeLastWaveform();
         this.context.resume();
-        this.getAudioName(file);
+        this.setAudioFileName(file);
 
         this.wavesurfer = WaveSurfer.create({
         container: '#wave-container',
