@@ -18,6 +18,7 @@ export class CreateProjectDialogComponent implements OnInit {
   public title: string;
   public collaborators: string[] = [];
   public tags: string[] = [];
+  public lyricDoc: string;
 
   constructor(
     private router: Router,
@@ -35,7 +36,8 @@ export class CreateProjectDialogComponent implements OnInit {
       title: this.title,
       collaborators: this.collaborators,
       tags: this.tags,
-      files: []
+      files: [],
+      textDoc: this.lyricDoc
     });
 
     this.dialogRef.close();

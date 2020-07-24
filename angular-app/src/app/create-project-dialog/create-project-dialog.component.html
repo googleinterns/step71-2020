@@ -6,6 +6,11 @@
   </mat-form-field>
   <br>
   <mat-form-field>
+    <mat-label>Lyric Doc Name</mat-label>
+    <input matInput type="text" required [(ngModel)]="lyricDoc">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
     <mat-label>Add Collaborators</mat-label>
     <mat-chip-list #collaboratorList>
       <mat-chip *ngFor="let collaborator of collaborators" 

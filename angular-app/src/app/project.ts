@@ -7,4 +7,5 @@ export interface Project {
   collaborators: string[];
   tags: string[];
   files: string[];
+  textDoc: string;
 }
