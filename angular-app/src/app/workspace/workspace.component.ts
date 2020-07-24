@@ -113,8 +113,8 @@ export class WorkspaceComponent implements OnInit {
     }
 
     play() {
-        var playButton = document.getElementById("play");
-        var pauseButton = document.getElementById("pause");
+        const playButton = document.getElementById("play");
+        const pauseButton = document.getElementById("pause");
 
         if (!this.checkIfPlaying()) {
             playButton.classList.add("hidden");
@@ -125,8 +125,8 @@ export class WorkspaceComponent implements OnInit {
     }
 
     pause() {
-        var playButton = document.getElementById("play");
-        var pauseButton = document.getElementById("pause");
+        const playButton = document.getElementById("play");
+        const pauseButton = document.getElementById("pause");
 
         if (this.checkIfPlaying()) {
             playButton.classList.remove("hidden");
