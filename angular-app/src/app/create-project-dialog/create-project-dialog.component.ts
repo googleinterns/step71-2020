@@ -37,7 +37,8 @@ export class CreateProjectDialogComponent implements OnInit {
       collaborators: this.collaborators,
       tags: this.tags,
       files: [],
-      textDoc: this.lyricDoc
+      textDoc: this.lyricDoc,
+      docInfo: ""
     });
 
     this.dialogRef.close();

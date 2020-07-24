@@ -37,11 +37,14 @@
             <button id="upload-button" (click)="upload()">Upload</button>
         </div>
 
-        <div id="bottom-element" class="resizeable-content center">
+        <div id="bottom-element" class="resizeable-content center" *ngIf="project$ | async as project">
             <div id="bottom-content">
-                <h1 id="lyric-doc-name" class="center" *ngIf="project$ | async as project">{{project.textDoc}}</h1>
+                <h1 id="lyric-doc-name" class="center">{{project.textDoc}}</h1>
                 <br/>
                 <textarea id="lyric-doc" placeholder="Type Here..." rows="50" cols="100"></textarea>
+                <br/>
+                <button mat-flat-button color="primary" class="center" (click)="saveLyrics(project)">Save Lyric Doc</button>
+                <button mat-flat-button color="primary" class="center" (click)="getLatestLyrics(project)">Get Latest Lyric Doc</button>
             </div>
         </div>
     </div>

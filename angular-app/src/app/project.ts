@@ -8,4 +8,5 @@ export interface Project {
   tags: string[];
   files: string[];
   textDoc: string;
+  docInfo: string;
 }

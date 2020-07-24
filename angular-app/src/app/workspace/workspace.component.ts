@@ -6,6 +6,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 import { Project } from '../project';
 import { ProjectFile } from '../project-file';
+import { ProjectTextDoc } from '../project-text-doc';
 import { ProjectService } from '../project.service';
 
 import { CreateProjectDialogComponent } from '../create-project-dialog/create-project-dialog.component';
@@ -76,6 +77,18 @@ export class WorkspaceComponent implements OnInit {
           this.project$ = null;
         }
       });
+    }
+
+    saveLyrics(project) {
+        var lyrics = project.docInfo;
+        var lyricDoc = document.getElementById("lyric-doc");
+        lyrics = lyricDoc.nodeValue;
+    }
+
+    getLatestLyrics(project) {
+        var lyrics = project.docInfo;
+        var lyricDoc = document.getElementById("lyric-doc");
+        lyricDoc.nodeValue = lyrics;
     }
 
     displayAudioFile(file) {
@@ -181,4 +194,7 @@ export class WorkspaceComponent implements OnInit {
     skipForward() {
         this.wavesurfer.skipForward(5);
     }
+
+
+
 }
