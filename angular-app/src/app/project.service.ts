@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment';
 import { Project } from './project';
@@ -12,6 +11,7 @@ import { ProjectFile } from './project-file';
 
 const COLLECTION_PROJECTS: string = "projects";
 const COLLECTION_FILES: string = "files";
+const DOC_INFO: string = "docInfo";
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +54,12 @@ export class ProjectService {
 
   public getProjectFiles(id: string): Observable<ProjectFile[]> {
     return this.firestore.collection(COLLECTION_PROJECTS).doc<Project>(id).collection<ProjectFile>(COLLECTION_FILES).valueChanges();
+  }
+
+  public updateLyricDoc(id: string, text: string): void {
+    this.firestore.collection(COLLECTION_PROJECTS).doc<Project>(id).update({
+      docInfo: text
+    });
   }
 
   public addProject(project: Project): void {

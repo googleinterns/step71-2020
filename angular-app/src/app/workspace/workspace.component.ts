@@ -39,6 +39,8 @@ export class WorkspaceComponent implements OnInit {
     public uploadHTML : HTMLElement;
     public projectTitle : HTMLElement;
 
+    private currProjId;
+
     public context;
     public wavesurfer;
 
@@ -68,6 +70,7 @@ export class WorkspaceComponent implements OnInit {
     initProject(): void {
       this.route.paramMap.subscribe((params: ParamMap) => {
         let projectId = params.get('id');
+        this.currProjId = projectId;
         if (projectId !== null && projectId.length > 0) {
           this.project$ = this.projectService.getProject(projectId);
           this.files$ = this.projectService.getProjectFiles(projectId);
@@ -78,16 +81,15 @@ export class WorkspaceComponent implements OnInit {
       });
     }
 
-    saveLyrics(project) {
-        var lyrics = project.docInfo;
-        var lyricDoc = document.getElementById("lyric-doc");
-        lyrics = lyricDoc.nodeValue;
+    saveLyrics() {
+        var lyricDoc = (document.getElementById("lyric-doc") as HTMLInputElement);
+        this.projectService.updateLyricDoc(this.currProjId, lyricDoc.value);
     }
 
     getLatestLyrics(project) {
         var lyrics = project.docInfo;
         var lyricDoc = document.getElementById("lyric-doc");
-        lyricDoc.nodeValue = lyrics;
+        lyricDoc.innerHTML = lyrics;
     }
 
     displayAudioFile(file) {
