@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { Project } from '../project';
@@ -11,15 +12,16 @@ import { ProjectService } from '../project.service';
   styleUrls: ['./manage-collaborators.component.css']
 })
 export class ManageCollaboratorsComponent implements OnInit {
-  public project: Project
+  public project: Project;
   public collaboratorId: string;
+  public tableColumns = ['uid', 'role'];
 
   constructor(
     private projectService: ProjectService,
     public dialogRef: MatDialogRef<ManageCollaboratorsComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
   ) { 
-    this.project = data;
+    data.subscribe(project => this.project = project);
   }
 
   ngOnInit(): void {

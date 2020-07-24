@@ -64,10 +64,10 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
     this.projectService.deleteFile(project, file);
   }
 
-  manageCollaborators(project: Project): void {
+  manageCollaborators(): void {
     this.dialog.open(ManageCollaboratorsComponent, { 
       width: '400px',
-      data: project,
+      data: this.project$,
     });
   }
 
