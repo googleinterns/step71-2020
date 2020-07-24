@@ -1,5 +1,4 @@
 /* Add application styles & imports to this file! */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 mat-chip {
   max-width: 200px;
