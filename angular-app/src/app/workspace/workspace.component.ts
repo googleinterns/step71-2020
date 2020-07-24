@@ -6,7 +6,6 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 import { Project } from '../project';
 import { ProjectFile } from '../project-file';
-import { ProjectTextDoc } from '../project-text-doc';
 import { ProjectService } from '../project.service';
 
 import { CreateProjectDialogComponent } from '../create-project-dialog/create-project-dialog.component';
