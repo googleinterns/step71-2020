@@ -55,13 +55,8 @@ export class WorkspaceComponent implements OnInit {
     this.waveHTML = document.getElementById("wave-html");
     this.uploadHTML = document.getElementById("wave-upload-html");
 
-    this.getAudioName();
     this.context.resume();
-    if (this.audioFileToUpload == null) {
-        this.waveHTML.innerHTML = "Upload Audio File";
-    } else {
-        this.loadWaveSurfer(this.audioFileToUpload);
-    }
+
     this.initProject();
   }
 
@@ -79,20 +74,29 @@ export class WorkspaceComponent implements OnInit {
     }
 
     randomColor(): String {
-        var color = Math.floor(Math.random() * Math.pow(256, 3)).toString(16);
-        while(color.length < 6) {
-            color = "0" + color;
-        }
-        return "#" + color;
+
+        let colors: string[] = ['#FF2D00', '#001FFF', '#009688']; // red, blue, green
+
+        var randNum = Math.floor(Math.random() * Math.floor(3));
+
+        return colors[randNum];
+
+    }
+
+    getAudioName(file) {
+        var audioName = document.getElementById("audio-name");
+        audioName.innerHTML = file.filename;
     }
 
     displayAudioFile(file) {
         this.waveHTML.innerHTML = "";
         this.uploadHTML.innerHTML = "";
 
-        var decodedData = this.context.decodeAudioData();
+        
         this.removeLastWaveform();
         this.context.resume();
+        this.getAudioName(file);
+
         this.wavesurfer = WaveSurfer.create({
         container: '#wave-container',
         waveColor : this.randomColor(),
@@ -136,23 +140,9 @@ export class WorkspaceComponent implements OnInit {
         return this.wavesurfer.isPlaying();
     }
     
-    upload() {
-        if (this.hasFileChanged) {
-            this.uploadHTML.innerHTML = "";
-            this.loadWaveSurfer(this.audioFileToUpload);
-        }
-    }
 
     removeErrorText() {
         this.waveHTML.innerHTML = "";
-    }
-
-    handleFileInput(files: FileList) {
-        this.hasFileChanged = true;
-        this.audioFileToUpload = files.item(0);
-        this.getAudioName();
-        this.removeErrorText();
-        this.uploadHTML.innerHTML = "Please Select the Upload Button";
     }
 
     loadWaveSurfer(audio) {
@@ -166,14 +156,6 @@ export class WorkspaceComponent implements OnInit {
         this.wavesurfer.loadBlob(audio);
     }
 
-    getAudioName() {
-        var audioName = document.getElementById("audio-name");
-        if (this.audioFileToUpload == null) {
-            audioName.innerHTML = "Please Select an Audio File to Upload";
-        } else {
-            audioName.innerHTML = this.audioFileToUpload.name;
-        }
-    }
 
     newProject() : void {
         const dialogRef = this.dialog.open(CreateProjectDialogComponent);
