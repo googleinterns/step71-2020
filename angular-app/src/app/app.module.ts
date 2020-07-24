@@ -25,6 +25,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule, MAT_TABS_CONFIG } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -38,6 +39,7 @@ import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ManageCollaboratorsComponent } from './manage-collaborators/manage-collaborators.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -57,6 +59,7 @@ import { ProjectService } from './project.service';
     ChatDrawerComponent,
     CreateProjectDialogComponent,
     ConfirmationDialogComponent,
+    ManageCollaboratorsComponent,
     ProjectDetailComponent,
     UserProfileComponent,
     DiscoveryComponent,
@@ -86,6 +89,7 @@ import { ProjectService } from './project.service';
     MatProgressSpinnerModule,
     MatSidenavModule,
     MatSnackBarModule,
+    MatTableModule,
     MatTabsModule,
     MatTooltipModule,
     MatToolbarModule,
