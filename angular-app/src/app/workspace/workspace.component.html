@@ -39,14 +39,7 @@
 
         <div id="bottom-element" class="resizeable-content center">
             <div id="bottom-content">
-                <mat-form-field class="center input-headline">
-                    <mat-label>Doc Name</mat-label>
-                    <textarea matInput
-                        cdkTextareaAutosize
-                        #autosize="cdkTextareaAutosize"
-                        cdkAutosizeMinRows="1"
-                        cdkAutosizeMaxRows="2"></textarea>
-                </mat-form-field>
+                <h1 id="lyric-doc-name" class="center" *ngIf="project$ | async as project">{{project.textDoc}}</h1>
                 <br/>
                 <textarea id="lyric-doc" placeholder="Type Here..." rows="50" cols="100"></textarea>
             </div>
