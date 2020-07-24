@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
@@ -7,6 +7,7 @@ import { Project } from '../project';
 import { ProjectFile } from '../project-file';
 import { ProjectService } from '../project.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ManageCollaboratorsComponent } from '../manage-collaborators/manage-collaborators.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -61,6 +62,13 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
 
   deleteFile(project: Project, file: ProjectFile) {
     this.projectService.deleteFile(project, file);
+  }
+
+  manageCollaborators(project: Project): void {
+    this.dialog.open(ManageCollaboratorsComponent, { 
+      width: '400px',
+      data: project,
+    });
   }
 
   deleteProject(project: Project) {

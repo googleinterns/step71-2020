@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Manage Collaborators</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Collaborator user ID</mat-label>
+    <input matInput [(ngModel)]="collaboratorId">
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)="addCollaborator()">Add</button>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-flat-button (click)='closeDialog()'>Exit</button>
+</mat-dialog-actions>

@@ -38,6 +38,7 @@ import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ManageCollaboratorsComponent } from './manage-collaborators/manage-collaborators.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -57,6 +58,7 @@ import { ProjectService } from './project.service';
     ChatDrawerComponent,
     CreateProjectDialogComponent,
     ConfirmationDialogComponent,
+    ManageCollaboratorsComponent,
     ProjectDetailComponent,
     UserProfileComponent,
     DiscoveryComponent,

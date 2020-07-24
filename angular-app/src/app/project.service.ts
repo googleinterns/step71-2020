@@ -69,6 +69,11 @@ export class ProjectService {
     .catch(error => console.error("Error adding document: ", error));
   }
 
+  public updateProject(project: Project, changes: object): void {
+    this.firestore.collection<Project>(COLLECTION_PROJECTS).doc(project.title).update(changes)
+    .catch(error => console.error("Error updating document: ", error));
+  }
+
   public deleteProject(project: Project) {
     this.firestore.collection(COLLECTION_PROJECTS).doc(project.title).delete()
       .then(() => console.log(`Successfully deleted project ${project.title}`))
