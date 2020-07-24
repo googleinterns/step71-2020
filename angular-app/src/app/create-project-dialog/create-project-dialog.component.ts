@@ -30,10 +30,15 @@ export class CreateProjectDialogComponent implements OnInit {
   }
 
   createProject(): void {
+    let roles = {};
+    roles[this.user.uid] = "owner";
+    for (let collaborator of this.collaborators) {
+      roles[collaborator] = "editor";
+    }
+
     this.projectService.addProject({
-      owner: this.user.uid,
       title: this.title,
-      collaborators: this.collaborators,
+      roles: roles,
       tags: this.tags,
     });
 

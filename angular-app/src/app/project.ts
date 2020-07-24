@@ -4,6 +4,7 @@
  */
 export interface Project {
   title: string;
-  roles: Map<string, string>;
+  // mapping of uids to permission roles
+  roles: object;
   tags: string[];
 }
