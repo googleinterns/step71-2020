@@ -31,11 +31,10 @@ export class CreateProjectDialogComponent implements OnInit {
 
   createProject(): void {
     this.projectService.addProject({
-      owner: this.user.displayName,
+      owner: this.user.uid,
       title: this.title,
       collaborators: this.collaborators,
       tags: this.tags,
-      files: []
     });
 
     this.dialogRef.close();
