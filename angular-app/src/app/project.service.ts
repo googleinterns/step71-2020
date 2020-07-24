@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment';
 import { Project } from './project';
