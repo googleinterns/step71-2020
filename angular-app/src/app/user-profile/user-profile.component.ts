@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { ProfileService } from '../profile.service';
 import { Profile } from '../profile';
 
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -15,8 +16,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private profileService: ProfileService) { }
 
   ngOnInit() {
-       this.profiles$ = this.profileService.getUser();
+    this.profiles$ = this.profileService.getUser();
   }
 
-  panelOpenState = false;
 }

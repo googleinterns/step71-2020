@@ -5,5 +5,5 @@ export interface Profile {
   bio?: string;
   following: number;
   snippets?: string[];
-  tags?: string[];
+  tags: string[];
 }
