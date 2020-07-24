@@ -3,28 +3,38 @@
     <mat-tab label="Files">
       <mat-selection-list [multiple]="false">
         <mat-list-option *ngFor="let file of files$ | async">
-          <div class="list-item-content">
-            <a target="_blank" rel="noopener noreferrer" href="{{file.fileUrl}}">{{file.filename}}</a>
+          <div class="mat-list-item-content">
+            <span>{{file.filename}}</span>
+            <span class="spacer"></span>
+            <button mat-icon-button [matMenuTriggerFor]="filemenu" aria-label="file actions menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
           </div>
+          <mat-menu #filemenu="matMenu">
+            <button mat-menu-item>
+              <a [href]="file.fileUrl" [download]="file.filename">Download</a>
+            </button>
+            <button mat-menu-item (click)="deleteFile(project, file)">Delete</button>
+          </mat-menu>
         </mat-list-option>
       </mat-selection-list>
       <input type="file" name="file" (change)="upload(project, $event)">
     </mat-tab>
     <mat-tab label="Settings">
-      <div>Owner: {{project.owner}}</div>
-      <div>
-        Collaborators:
-        <mat-chip-list aria-label="project collaborators">
-          <mat-chip *ngFor="let collaborator of project.collaborators">{{collaborator}}</mat-chip>
-        </mat-chip-list>
-      </div>
-      <div>
-        Tags:
-        <mat-chip-list aria-label="project tags">
-          <mat-chip *ngFor="let tag of project.tags">{{tag}}</mat-chip>
-        </mat-chip-list>
-      </div>
-      <button mat-button>Delete Project</button>
+      <mat-list role="list of project settings">
+        <mat-list-item>
+          <button mat-flat-button color="primary" (click)="manageCollaborators()">View/Edit Collaborators</button>
+        </mat-list-item>
+        <mat-list-item>
+          Tags:
+          <mat-chip-list aria-label="project tags">
+            <mat-chip *ngFor="let tag of project.tags">{{tag}}</mat-chip>
+          </mat-chip-list>
+        </mat-list-item>
+        <mat-list-item>
+          <button mat-flat-button color="warn" (click)="deleteProject(project)">Delete Project</button>
+        </mat-list-item>
+      </mat-list>
     </mat-tab>
   </mat-tab-group>
 </div>

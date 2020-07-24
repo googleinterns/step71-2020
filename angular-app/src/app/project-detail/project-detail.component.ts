@@ -1,11 +1,13 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { Project } from '../project';
 import { ProjectFile } from '../project-file';
 import { ProjectService } from '../project.service';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ManageCollaboratorsComponent } from '../manage-collaborators/manage-collaborators.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -26,7 +28,7 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.setBlobstoreUploadUrl();
   }
-  
+
   ngOnChanges(changes: SimpleChanges) {
     const currentProject$: Observable<Project> = changes.project$.currentValue;
     if (currentProject$) {
@@ -43,7 +45,7 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
     ).subscribe(
       url => { 
         this.blobstoreUploadUrl = url;
-        console.log("blobstore upload URL set");
+        console.log("blobstore upload URL set to " + this.blobstoreUploadUrl);
       },
       error => console.log("Error getting blobstore upload URL: " + error)
     );
@@ -56,5 +58,35 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
       event.target.value = '';
     }
     this.setBlobstoreUploadUrl();
+  }
+
+  deleteFile(project: Project, file: ProjectFile) {
+    this.projectService.deleteFile(project, file);
+  }
+
+  manageCollaborators(): void {
+    this.dialog.open(ManageCollaboratorsComponent, { 
+      width: '400px',
+      data: this.project$,
+    });
+  }
+
+  deleteProject(project: Project) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message:`Deleting ${project.title} will permanently delete the project and all of its files. 
+      Are you sure you want to continue?`,
+        continueText: "Delete"
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed === "confirm") {
+        console.log("deleting project: " + project.title);
+        this.projectService.deleteProject(project);
+      } else {
+        console.log("project deletion canceled");
+      }
+    });
   }
 }

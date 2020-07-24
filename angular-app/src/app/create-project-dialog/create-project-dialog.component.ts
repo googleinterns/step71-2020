@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
@@ -19,6 +20,7 @@ export class CreateProjectDialogComponent implements OnInit {
   public tags: string[] = [];
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private projectService: ProjectService,
     public dialogRef: MatDialogRef<CreateProjectDialogComponent>) { }
@@ -28,15 +30,20 @@ export class CreateProjectDialogComponent implements OnInit {
   }
 
   createProject(): void {
+    let roles = {};
+    roles[this.user.uid] = "owner";
+    for (let collaborator of this.collaborators) {
+      roles[collaborator] = "editor";
+    }
+
     this.projectService.addProject({
-      owner: this.user.displayName,
       title: this.title,
-      collaborators: this.collaborators,
+      roles: roles,
       tags: this.tags,
-      files: []
     });
 
     this.dialogRef.close();
+    this.router.navigate(['/workspace', this.title]);
   }
 
   addCollaborator(event: MatChipInputEvent): void {
