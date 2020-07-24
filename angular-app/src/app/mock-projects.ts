@@ -1,6 +1,4 @@
-import { Project } from './project';
-
-export const PROJECTS: Project[] = [
+export const PROJECTS = [
   
   { title: "Sonata 2020", owner: "Scarlatti", collaborators: ["Beethoven", "Mozart"], tags: ["classical"] },
   { title: "A Hard Place", owner: "Keffir", collaborators: ["Baz"], tags: ["rock"] },
