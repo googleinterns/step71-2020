@@ -1,9 +1,10 @@
 <mat-toolbar>
   <span>Profile</span>
 </mat-toolbar>
+
 <mat-card class= "profile-card" *ngFor= "let profile of profiles$ | async">
     <mat-card-header>
-        <div mat-card-avatar></div>
+        <div mat-card-avatar>{{profile.photoUrl}}</div>
         <mat-card-title>{{profile.fullName}}</mat-card-title>
         <mat-card-subtitle>{{profile.email}}</mat-card-subtitle>
     </mat-card-header>
@@ -17,6 +18,14 @@
         <button mat-button a routerLink= "/workspace">INVITE TO WORKSPACE</button>
     </mat-card-actions>
 
+<div>
+  <mat-chip-list aria-label= "Tags">
+    <mat-chip *ngFor="let tag of profile.tags">
+        {{tag}}
+    </mat-chip>
+  </mat-chip-list>
+</div>  
+<br>
 
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
@@ -29,17 +38,12 @@
     </mat-expansion-panel-header>
     <mat-list role="list">
       <mat-list-item role="listitem" *ngFor= "let snippet of profile.snippets">
+          {{snippet}}
       </mat-list-item>
     </mat-list>
   </mat-expansion-panel>
 
-<div> Tags:
-  <mat-chip-list aria-label= "Tags">
-    <mat-chip *ngFor="let tag of profile.tags">
-    </mat-chip>
-  </mat-chip-list>
-</div>  
-</mat-card>
+  </mat-card>
 
 <div> Posts:
 <mat-card class= "profile-post">
