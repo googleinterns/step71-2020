@@ -8,6 +8,6 @@ export interface Project {
   roles: object;
   tags: string[];
   files: string[];
-  textDoc: string;
-  docInfo: string;
+  lyricsFileName: string;
+  lyricsContent: string;
 }

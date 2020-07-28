@@ -82,7 +82,7 @@ export class WorkspaceComponent implements OnInit {
     }
 
     getLatestLyrics(project) {
-        var lyrics = project.docInfo;
+        var lyrics = project.lyricsContent;
         var lyricDoc = document.getElementById("lyric-doc");
         lyricDoc.innerHTML = lyrics;
     }

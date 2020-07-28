@@ -13,7 +13,6 @@ import { ProjectFile } from './project-file';
 
 const COLLECTION_PROJECTS: string = "projects";
 const COLLECTION_FILES: string = "files";
-const DOC_INFO: string = "docInfo";
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +66,7 @@ export class ProjectService {
 
   public updateLyricDoc(id: string, text: string): void {
     this.firestore.collection(COLLECTION_PROJECTS).doc<Project>(id).update({
-      docInfo: text
+      lyricsContent: text
     });
   }
 
