@@ -38,9 +38,7 @@ export class ProjectService {
   }
 
   public getBlobstoreUploadUrl(): Observable<string> {
-    return this.httpClient.get('/blobstore-upload-url', {responseType: 'text'}).pipe(
-      map(url => environment.production ? environment.backendUrl + url : url),
-    );
+    return this.httpClient.get('/blobstore-upload-url', {responseType: 'text'});
   }
 
   public getProjects(): Observable<Project[]> {

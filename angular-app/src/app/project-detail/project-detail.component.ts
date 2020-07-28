@@ -16,7 +16,6 @@ import { ManageCollaboratorsComponent } from '../manage-collaborators/manage-col
 })
 export class ProjectDetailComponent implements OnInit, OnChanges {
 
-  private blobstoreUploadUrl: string;
   @Input() project$: Observable<Project>;
   files$: Observable<ProjectFile[]>;
 
@@ -26,7 +25,6 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit(): void {
-    this.setBlobstoreUploadUrl();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -39,54 +37,49 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
 
   }
 
-  setBlobstoreUploadUrl(): void {
+  upload(project, event): void {
     this.projectService.getBlobstoreUploadUrl().pipe(
       first()
     ).subscribe(
-      url => { 
-        this.blobstoreUploadUrl = url;
-        console.log("blobstore upload URL set to " + this.blobstoreUploadUrl);
+      blobstoreUploadUrl => { 
+        console.log("blobstore upload URL received");
+        if (event.target.files.length > 0) {
+          let file: File = event.target.files[0];
+          this.projectService.uploadFile(blobstoreUploadUrl, project, file);
+          event.target.value = '';
+        }
       },
-      error => console.log("Error getting blobstore upload URL: " + error)
+      error => console.error("Error getting blobstore upload URL: ", error)
     );
-  }
+}
 
-  upload(project, event): void {
-    if (event.target.files.length > 0) {
-      let file: File = event.target.files[0];
-      this.projectService.uploadFile(this.blobstoreUploadUrl, project, file);
-      event.target.value = '';
-    }
-    this.setBlobstoreUploadUrl();
-  }
+deleteFile(project: Project, file: ProjectFile) {
+  this.projectService.deleteFile(project, file);
+}
 
-  deleteFile(project: Project, file: ProjectFile) {
-    this.projectService.deleteFile(project, file);
-  }
+manageCollaborators(): void {
+  this.dialog.open(ManageCollaboratorsComponent, { 
+    width: '400px',
+    data: this.project$,
+  });
+}
 
-  manageCollaborators(): void {
-    this.dialog.open(ManageCollaboratorsComponent, { 
-      width: '400px',
-      data: this.project$,
-    });
-  }
-
-  deleteProject(project: Project) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {
-        message:`Deleting ${project.title} will permanently delete the project and all of its files. 
+deleteProject(project: Project) {
+  const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    data: {
+      message:`Deleting ${project.title} will permanently delete the project and all of its files. 
       Are you sure you want to continue?`,
-        continueText: "Delete"
-      }
-    });
+      continueText: "Delete"
+    }
+  });
 
-    dialogRef.afterClosed().subscribe(confirmed => {
-      if (confirmed === "confirm") {
-        console.log("deleting project: " + project.title);
-        this.projectService.deleteProject(project);
-      } else {
-        console.log("project deletion canceled");
-      }
-    });
-  }
+  dialogRef.afterClosed().subscribe(confirmed => {
+    if (confirmed === "confirm") {
+      console.log("deleting project: " + project.title);
+      this.projectService.deleteProject(project);
+    } else {
+      console.log("project deletion canceled");
+    }
+  });
+}
 }
