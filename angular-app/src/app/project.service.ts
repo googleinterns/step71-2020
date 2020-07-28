@@ -1,11 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
+import { AuthService } from './auth.service';
 import { Project } from './project';
 import { ProjectFile } from './project-file';
 
@@ -18,6 +20,7 @@ const DOC_INFO: string = "docInfo";
 })
 export class ProjectService {
 
+  private user: firebase.User;
   private projects$: Observable<Project[]>;
   private currentProject$: Subject<Observable<Project>>;
 
@@ -25,8 +28,14 @@ export class ProjectService {
     private firestore: AngularFirestore,
     private httpClient: HttpClient,
     private snackBar: MatSnackBar,
+    private authService: AuthService,
   ) { 
-    this.projects$ = firestore.collection<Project>('projects').valueChanges();
+    this.authService.getUser().subscribe(user => {
+      this.user = user;
+      this.projects$ = firestore.collection<Project>('projects', 
+        ref => ref.where("roles." + this.user.uid, "in", ["owner", "editor"])
+      ).valueChanges({ idField: "projectId" });
+    });
   }
 
   public getBlobstoreUploadUrl(): Observable<string> {
@@ -65,6 +74,11 @@ export class ProjectService {
   public addProject(project: Project): void {
     this.firestore.collection<Project>(COLLECTION_PROJECTS).doc(project.title).set(project)
     .catch(error => console.error("Error adding document: ", error));
+  }
+
+  public updateProject(project: Project, changes: object): void {
+    this.firestore.collection<Project>(COLLECTION_PROJECTS).doc(project.title).update(changes)
+    .catch(error => console.error("Error updating document: ", error));
   }
 
   public deleteProject(project: Project) {

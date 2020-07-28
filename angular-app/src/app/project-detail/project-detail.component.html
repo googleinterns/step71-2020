@@ -23,13 +23,7 @@
     <mat-tab label="Settings">
       <mat-list role="list of project settings">
         <mat-list-item>
-          Owner: {{project.owner}}
-        </mat-list-item>
-        <mat-list-item>
-          Collaborators:
-          <mat-chip-list aria-label="project collaborators">
-            <mat-chip *ngFor="let collaborator of project.collaborators">{{collaborator}}</mat-chip>
-          </mat-chip-list>
+          <button mat-flat-button color="primary" (click)="manageCollaborators()">View/Edit Collaborators</button>
         </mat-list-item>
         <mat-list-item>
           Tags:
@@ -38,7 +32,7 @@
           </mat-chip-list>
         </mat-list-item>
         <mat-list-item>
-          <button mat-button color="dark-warn" (click)="deleteProject(project)">Delete Project</button>
+          <button mat-flat-button color="warn" (click)="deleteProject(project)">Delete Project</button>
         </mat-list-item>
       </mat-list>
     </mat-tab>

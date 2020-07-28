@@ -13,7 +13,7 @@
                     </div>
                 </mat-list-option>
             </mat-selection-list>
-            <h1 id="audio-name" class="center">Audio File Name</h1>
+            <h1 id="audio-name" class="center">Select an Audio File</h1>
             <p id="wave-html"></p>
             <p id="wave-upload-html"></p>
             <div id="wave-container"></div>
@@ -29,11 +29,6 @@
                 <button id="skip" mat-icon-button color="primary" (click)="skipForward()" aria-label="Skip Button">
                     <mat-icon>fast_forward</mat-icon>
                 </button>
-            <label for="wav">Select audio:</label>
-            <input type="file" id="input" (change)="handleFileInput($event.target.files)"/>
-            <audio id="sound"></audio>
-
-            <button id="upload-button" (click)="upload()">Upload</button>
         </div>
 
         <div id="bottom-element" class="resizeable-content center" *ngIf="project$ | async as project">

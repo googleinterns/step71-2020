@@ -38,7 +38,11 @@ $dark-theme: mat-dark-theme((
   color: map-get(map-get($dark-theme, foreground),text);
 }
 
-mat-nav-list a.active {
+.primary {
+  color: mat-color($dark-primary, 600);
+}
+
+mat-nav-list a.mat-list-item.active {
   outline: none;
   color: mat-color($dark-primary, 600);
 }
