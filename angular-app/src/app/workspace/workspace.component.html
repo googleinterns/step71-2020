@@ -5,7 +5,6 @@
         <div id="project-name" class="center" *ngIf="project$ | async as project">
             <h1 class="project-name">{{project.title}}</h1>
         </div>
-
         <div id="top-element" class="resizeable-content center">
             <mat-selection-list [multiple]="false">
                 <mat-list-option *ngFor="let file of files$ | async">
@@ -43,8 +42,8 @@
                 <br/>
                 <textarea id="lyric-doc" placeholder="Type Here..." rows="50" cols="100"></textarea>
                 <br/>
-                <button mat-flat-button color="primary" class="center" (click)="saveLyrics()">Save Lyric Doc</button>
-                <button mat-flat-button color="primary" class="center" (click)="getLatestLyrics(project)">Get Latest Lyric Doc</button>
+                <button mat-flat-button color="primary" class="center" (click)="saveLyrics()">Save</button>
+                <button mat-flat-button color="primary" class="center" (click)="getLatestLyrics(project)">Reload</button>
             </div>
         </div>
     </div>
