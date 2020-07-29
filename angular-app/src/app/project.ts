@@ -7,4 +7,7 @@ export interface Project {
   // mapping of uids to permission roles
   roles: object;
   tags: string[];
+  files: string[];
+  lyricsFileName: string;
+  lyricsContent: string;
 }

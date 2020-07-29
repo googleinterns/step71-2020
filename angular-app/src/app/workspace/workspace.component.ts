@@ -39,6 +39,8 @@ export class WorkspaceComponent implements OnInit {
     public uploadHTML : HTMLElement;
     public projectTitle : HTMLElement;
 
+    private currProjId;
+
     public context;
     public wavesurfer;
 
@@ -63,6 +65,7 @@ export class WorkspaceComponent implements OnInit {
     initProject(): void {
       this.route.paramMap.subscribe((params: ParamMap) => {
         let projectId = params.get('id');
+        this.currProjId = projectId;
         if (projectId !== null && projectId.length > 0) {
           this.project$ = this.projectService.getProject(projectId);
           this.files$ = this.projectService.getProjectFiles(projectId);
@@ -73,6 +76,17 @@ export class WorkspaceComponent implements OnInit {
       });
     }
 
+    saveLyrics() {
+        var lyricDoc = (document.getElementById("lyric-doc") as HTMLInputElement);
+        this.projectService.updateLyricDoc(this.currProjId, lyricDoc.value);
+    }
+
+    getLatestLyrics(project) {
+        var lyrics = project.lyricsContent;
+        var lyricDoc = document.getElementById("lyric-doc");
+        lyricDoc.innerHTML = lyrics;
+    }
+  
     randomColor(): String {
 
         let colors: string[] = ['#FF2D00', '#001FFF', '#009688']; // red, blue, green
@@ -179,4 +193,7 @@ export class WorkspaceComponent implements OnInit {
     skipForward() {
         this.wavesurfer.skipForward(5);
     }
+
+
+
 }

@@ -64,6 +64,12 @@ export class ProjectService {
     return this.firestore.collection(COLLECTION_PROJECTS).doc<Project>(id).collection<ProjectFile>(COLLECTION_FILES).valueChanges();
   }
 
+  public updateLyricDoc(id: string, text: string): void {
+    this.firestore.collection(COLLECTION_PROJECTS).doc<Project>(id).update({
+      lyricsContent: text
+    });
+  }
+
   public addProject(project: Project): void {
     this.firestore.collection<Project>(COLLECTION_PROJECTS).doc(project.title).set(project)
     .catch(error => console.error("Error adding document: ", error));
