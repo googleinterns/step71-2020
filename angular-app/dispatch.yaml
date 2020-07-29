@@ -1,9 +1,1 @@
-dispatch:
-  - url: "*/blobstore-upload-url"
-    service: backend
-
-  - url: "*/upload"
-    service: backend
-
-  - url: "*/serve*"
-    service: backend
+dispatch: []
