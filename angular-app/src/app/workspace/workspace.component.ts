@@ -81,11 +81,6 @@ export class WorkspaceComponent implements OnInit {
         this.projectService.updateLyricDoc(this.currProjId, lyricDoc.value);
     }
 
-    getLatestLyrics(project) {
-        var lyrics = project.lyricsContent;
-        var lyricDoc = document.getElementById("lyric-doc");
-        lyricDoc.innerHTML = lyrics;
-    }
   
     randomColor(): String {
 
