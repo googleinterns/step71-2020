@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app'
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable, of, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, Subject, Subscription } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
 import { AuthService } from './auth.service';
@@ -84,20 +84,22 @@ export class ProjectService {
       .catch(error => console.error(`Error deleting project ${project.title}: `, error));
   }
 
-  public uploadFile(blobstoreUploadUrl: string, project: Project, file: File): void {
+  // Returns true on completion
+  public uploadFile(blobstoreUploadUrl: string, project: Project, file: File): Subscription {
     const formData: FormData = new FormData();
     formData.append('project', project.title);
     formData.append('filename', file.name);
     formData.append('file', file, file.name);
-    this.httpClient
-    .post(blobstoreUploadUrl, formData)
-    .subscribe(
-      (response) => console.log("Successfully uploaded " + file.name),
-      (error) => {
-        console.log("Error uploading file: " + error.message);
-        this.snackBar.open("Encountered an error while uploading " + file.name, "Dismiss", { duration: 3000 });
-      }
-    )
+    return this.httpClient
+      .post(blobstoreUploadUrl, formData)
+      .pipe(first())
+      .subscribe(
+        (response) => console.log("Successfully uploaded " + file.name),
+        (error) => {
+          console.log("Error uploading file: " + error.message);
+          this.snackBar.open("Encountered an error while uploading " + file.name, "Dismiss", { duration: 3000 });
+        }
+      );
   }
 
   public deleteFile(project: Project, file: ProjectFile): void {

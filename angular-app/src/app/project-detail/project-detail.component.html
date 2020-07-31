@@ -2,6 +2,15 @@
   <mat-tab-group>
     <mat-tab label="Files">
       <mat-selection-list [multiple]="false">
+        <mat-list-item>
+          <button mat-stroked-button [disabled]="isUploading">
+            <label for="upload">
+              <span>Upload File</span>
+              <input type="file" name="file" id="upload" hidden (change)="upload(project, $event)" [disabled]="isUploading">
+            </label>
+          </button>
+          <mat-spinner diameter="20" *ngIf="isUploading"></mat-spinner>
+        </mat-list-item>
         <mat-list-option *ngFor="let file of files$ | async">
           <div class="mat-list-item-content">
             <span>{{file.filename}}</span>
@@ -18,7 +27,6 @@
           </mat-menu>
         </mat-list-option>
       </mat-selection-list>
-      <input type="file" name="file" (change)="upload(project, $event)">
     </mat-tab>
     <mat-tab label="Settings">
       <mat-list role="list of project settings">
