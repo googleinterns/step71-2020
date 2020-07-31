@@ -1,6 +1,7 @@
 <mat-toolbar>
   <span>Projects Overview</span>
 </mat-toolbar>
+<button mat-flat-button color="primary" (click)="createNewProject()">+ Create New Project</button>
 <div class="card-deck-container">
   <mat-card *ngFor="let project of projects$ | async">
     <mat-card-header>
