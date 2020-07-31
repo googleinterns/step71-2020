@@ -8,10 +8,6 @@
   <a mat-list-item role="listitem" routerLink="/user-profile" routerLinkActive="active" matTooltip="Profile" matTooltipPosition="right">
     <mat-icon>account_circle</mat-icon>
   </a>
-  <mat-list-item role="listitem" (click)="logout()" matTooltip="Logout" matTooltipPosition="right">
-    <mat-icon>lock</mat-icon>
-  </mat-list-item>
-  <mat-divider></mat-divider>
   <a mat-list-item role="listitem" routerLink="/main-feed" routerLinkActive="active" matTooltip="Main Feed" matTooltipPosition="right">
     <mat-icon>dashboard</mat-icon>
   </a>
@@ -20,9 +16,13 @@
     <mat-icon>explore</mat-icon>
   </a>
   <a mat-list-item role="listitem" routerLink="/projects" routerLinkActive="active" matTooltip="Projects Overview" matTooltipPosition="right">
-    <mat-icon>source</mat-icon>
+    <mat-icon>folder</mat-icon>
   </a>
   <a mat-list-item role="listitem" routerLink="/workspace" routerLinkActive="active" matTooltip="Workspace" matTooltipPosition="right">
-    <mat-icon>picture_in_picture</mat-icon>
+    <mat-icon>queue_music</mat-icon>
   </a>
+  <div class="spacer"></div>
+  <mat-list-item role="listitem" (click)="logout()" matTooltip="Logout" matTooltipPosition="right">
+    <mat-icon>exit_to_app</mat-icon>
+  </mat-list-item>
 </mat-nav-list>
