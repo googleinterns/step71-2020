@@ -14,7 +14,7 @@
     <mat-label>Add Collaborators</mat-label>
     <mat-chip-list #collaboratorList>
       <mat-chip *ngFor="let collaborator of collaborators" 
-                    [removable]="true" (removed)="remove(collaborator)">
+                    [removable]="true" (removed)="removeCollaborator(collaborator)">
         {{collaborator}}
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
@@ -28,7 +28,7 @@
     <mat-label>Add Tags</mat-label>
     <mat-chip-list #tagList>
       <mat-chip *ngFor="let tag of tags" 
-                  [removable]="true" (removed)="remove(tag)">
+                  [removable]="true" (removed)="removeTag(tag)">
         {{tag}}
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
