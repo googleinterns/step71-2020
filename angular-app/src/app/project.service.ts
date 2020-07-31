@@ -28,12 +28,16 @@ export class ProjectService {
     private httpClient: HttpClient,
     private snackBar: MatSnackBar,
     private authService: AuthService,
-  ) { 
+  ) { }
+
+  public load() { 
     this.authService.getUser().subscribe(user => {
       this.user = user;
-      this.projects$ = firestore.collection<Project>('projects', 
-        ref => ref.where("roles." + this.user.uid, "in", ["owner", "editor"])
-      ).valueChanges({ idField: "projectId" });
+      if (this.user != null) {
+        this.projects$ = this.firestore.collection<Project>('projects', 
+          ref => ref.where("roles." + this.user.uid, "in", ["owner", "editor"])
+        ).valueChanges({ idField: "projectId" });
+      }
     });
   }
 

@@ -5,6 +5,7 @@ import { TagFilterPipe} from './filter.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
@@ -100,6 +101,13 @@ import { ProjectService } from './project.service';
   providers: [
     AuthService,
     ProjectService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (projectService: ProjectService) =>
+      () => projectService.load(),
+      deps: [ProjectService],
+      multi: true,
+    },  
     {
       provide: MAT_CHIPS_DEFAULT_OPTIONS,
       useValue: {
