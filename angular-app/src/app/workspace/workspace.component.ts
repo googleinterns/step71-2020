@@ -39,6 +39,9 @@ export class WorkspaceComponent implements OnInit {
     public uploadHTML : HTMLElement;
     public projectTitle : HTMLElement;
 
+    public audioSection : HTMLElement;
+    public workspaceMessage : HTMLElement;
+
     private currProjId;
 
     public context;
@@ -57,6 +60,8 @@ export class WorkspaceComponent implements OnInit {
     this.waveHTML = document.getElementById("wave-html");
     this.uploadHTML = document.getElementById("wave-upload-html");
 
+    this.audioSection = document.getElementById("audio-section");
+
     this.context.resume();
 
     this.initProject();
@@ -69,9 +74,11 @@ export class WorkspaceComponent implements OnInit {
         if (projectId !== null && projectId.length > 0) {
           this.project$ = this.projectService.getProject(projectId);
           this.files$ = this.projectService.getProjectFiles(projectId);
+          this.audioSection.classList.remove("hidden");
         }
         else {
           this.project$ = null;
+          this.audioSection.classList.add("hidden");
         }
       });
     }
