@@ -2,9 +2,12 @@
   <mat-sidenav-content>
     <div id="workspace-content">
         <button mat-flat-button color="primary" (click)="newProject()">Create New Project</button>
-        <div id="project-name" class="center" *ngIf="project$ | async as project">
+        <div id="project-name" class="center" *ngIf="project$ | async as project; else prompt">
             <h1 class="project-name">{{project.title}}</h1>
         </div>
+        <ng-template #prompt>
+            <h1 id="workspace-message">Please create a new project or select a previous project to continue</h1>
+        </ng-template>
         <div id="top-element" class="resizeable-content center">
             <mat-selection-list [multiple]="false">
                 <mat-list-option *ngFor="let file of files$ | async">
@@ -13,10 +16,11 @@
                     </div>
                 </mat-list-option>
             </mat-selection-list>
-            <h1 id="audio-name" class="center">Select an Audio File</h1>
-            <p id="wave-html"></p>
-            <p id="wave-upload-html"></p>
-            <div id="wave-container"></div>
+            <div id="audio-section">
+                <h1 id="audio-name" class="center">Select an Audio File</h1>
+                <p id="wave-html"></p>
+                <p id="wave-upload-html"></p>
+                <div id="wave-container"></div>
                 <button id="rewind" mat-icon-button color="primary" (click)="skipBack()" aria-label="Rewind button">
                     <mat-icon>fast_rewind</mat-icon>
                 </button>
@@ -29,16 +33,16 @@
                 <button id="skip" mat-icon-button color="primary" (click)="skipForward()" aria-label="Skip Button">
                     <mat-icon>fast_forward</mat-icon>
                 </button>
+            </div>
         </div>
 
         <div id="bottom-element" class="resizeable-content center" *ngIf="project$ | async as project">
             <div id="bottom-content">
                 <h1 id="lyric-doc-name" class="center">{{project.lyricsFileName}}</h1>
                 <br/>
-                <textarea id="lyric-doc" placeholder="Type Here..." rows="50" cols="100"></textarea>
+                <textarea id="lyric-doc" placeholder="Type Here..." rows="50" cols="100">{{project.lyricsContent}}</textarea>
                 <br/>
                 <button mat-flat-button color="primary" class="center" (click)="saveLyrics()">Save</button>
-                <button mat-flat-button color="primary" class="center" (click)="getLatestLyrics(project)">Reload</button>
             </div>
         </div>
     </div>
