@@ -3,8 +3,8 @@ export interface Profile {
   fullName: string;
   email: string;
   photoUrl: string;
-  bio?: string;
+  bio: string;
   following: number;
-  snippets?: string[];
+  snippets: string[];
   tags: string[];
 }
