@@ -29,18 +29,17 @@
       </mat-selection-list>
     </mat-tab>
     <mat-tab label="Settings">
-      <mat-list role="list of project settings">
+      <mat-list class="settings" role="list of project settings">
         <mat-list-item>
           <button mat-flat-button color="primary" (click)="manageCollaborators()">View/Edit Collaborators</button>
         </mat-list-item>
         <mat-list-item>
-          Tags:
+          <button mat-flat-button color="primary" (click)="manageTags()">Manage Tags</button>
+        </mat-list-item>
+        <mat-list-item>
           <mat-chip-list aria-label="project tags">
             <mat-chip *ngFor="let tag of project.tags">{{tag}}</mat-chip>
           </mat-chip-list>
-        </mat-list-item>
-        <mat-list-item>
-          <button mat-flat-button color="primary" (click)="manageTags()">Manage Tags</button>
         </mat-list-item>
         <mat-list-item>
           <button mat-flat-button color="warn" (click)="deleteProject(project)">Delete Project</button>

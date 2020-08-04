@@ -1,3 +1,7 @@
+.project-info-container {
+  max-width: 321px;
+}
+
 .adjustable {
     resize: vertical;
     overflow: auto;

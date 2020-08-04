@@ -1,3 +1,9 @@
 .mat-spinner {
   margin-left: 10px;
 }
+
+.settings .mat-list-item {
+  height: auto;
+  padding: 5px 0;
+}
+
