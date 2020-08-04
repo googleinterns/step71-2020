@@ -1,3 +1,9 @@
 #menu-logo {
   text-align: center;
 }
+
+.mat-nav-list {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+}

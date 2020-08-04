@@ -1,23 +1,32 @@
 <mat-toolbar>
   <span>Projects Overview</span>
 </mat-toolbar>
-<div class="card-deck-container">
-  <mat-card *ngFor="let project of projects$ | async">
-    <mat-card-header>
-      <mat-card-title>{{project.title}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item>
-          Tags:
-          <mat-chip-list aria-label="project tags">
-            <mat-chip *ngFor="let tag of project.tags">{{tag}}</mat-chip>
-          </mat-chip-list>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-    <mat-card-actions>
-      <a mat-button aria-label="Open project button" [routerLink]="['/workspace', project.title]" routerLinkActive="active">Open Project</a>
-    </mat-card-actions>
-  </mat-card>
+<button mat-flat-button color="primary" (click)="createNewProject()" class="with-margin">+ Create New Project</button>
+<div *ngIf="projects$ | async as projects; else loading">
+  <div *ngIf="projects.length == 0" class="with-margin">
+    You don't have any projects yet! To get started, create a new project or be added as a collaborator.
+  </div>
+  <div class="card-deck-container">
+    <mat-card *ngFor="let project of projects">
+      <mat-card-header>
+        <mat-card-title>{{project.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            Tags:
+            <mat-chip-list aria-label="project tags">
+              <mat-chip *ngFor="let tag of project.tags">{{tag}}</mat-chip>
+            </mat-chip-list>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button aria-label="Open project button" [routerLink]="['/workspace', project.title]" routerLinkActive="active">Open Project</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
+<ng-template #loading>
+  <mat-spinner class="with-margin"></mat-spinner>
+</ng-template>

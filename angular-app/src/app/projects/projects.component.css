@@ -6,6 +6,10 @@
   margin: 10px;
 }
 
+.with-margin {
+  margin: 10px;
+}
+
 @media only screen and (max-width: 992px) {
   .card-deck-container { grid-template-columns: 1fr 1fr; }
 }

@@ -19,6 +19,10 @@ a:link, a:visited, a:active {
   font-size: 2em;
 }
 
+.title {
+  font-size: 5em;
+}
+
 .vertical-center-container {
   height:100vh;
   display: flex;
