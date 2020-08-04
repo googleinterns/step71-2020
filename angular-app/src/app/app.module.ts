@@ -50,6 +50,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 
 import { AuthService } from './auth.service';
 import { ProjectService } from './project.service';
+import { ManageTagsComponent } from './manage-tags/manage-tags.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { ProjectService } from './project.service';
     MainFeedComponent,
     PageNotFoundComponent,
     WorkspaceComponent,
+    ManageTagsComponent,
   ],
   imports: [
     BrowserModule,

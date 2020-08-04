@@ -8,6 +8,7 @@ import { ProjectFile } from '../project-file';
 import { ProjectService } from '../project.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { ManageCollaboratorsComponent } from '../manage-collaborators/manage-collaborators.component';
+import { ManageTagsComponent } from '../manage-tags/manage-tags.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -63,6 +64,13 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
 
   manageCollaborators(): void {
     this.dialog.open(ManageCollaboratorsComponent, { 
+      width: '400px',
+      data: this.project$,
+    });
+  }
+
+  manageTags(): void {
+    this.dialog.open(ManageTagsComponent, { 
       width: '400px',
       data: this.project$,
     });
