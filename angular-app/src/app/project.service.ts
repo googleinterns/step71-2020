@@ -18,7 +18,6 @@ const COLLECTION_FILES: string = "files";
 })
 export class ProjectService {
 
-  private projects$: Observable<Project[]>;
   private currentProject$: Subject<Observable<Project>>;
 
   constructor(
@@ -32,7 +31,7 @@ export class ProjectService {
   }
 
   public getUserProjects(uid: string): Observable<Project[]> {
-    return this.projects$ = this.firestore.collection<Project>('projects', 
+    return this.firestore.collection<Project>('projects', 
       ref => ref.where("roles." + uid, "in", ["owner", "editor"])
     ).valueChanges({ idField: "projectId" });
   }
