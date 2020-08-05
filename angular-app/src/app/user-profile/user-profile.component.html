@@ -2,10 +2,10 @@
   <span>Profile</span>
 </mat-toolbar>
 
-<mat-card class= "profile-card" *ngFor= "let profile of profiles$ | async">
+<mat-card class= "profile-card" *ngIf= "profile$ | async as profile">
     <mat-card-header>
         <div mat-card-avatar>{{profile.photoUrl}}</div>
-        <mat-card-title>{{profile.fullName}}</mat-card-title>
+        <mat-card-title>{{profile.displayName}}</mat-card-title>
         <mat-card-subtitle>{{profile.email}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>

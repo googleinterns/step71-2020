@@ -10,7 +10,6 @@ import { NgModule } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -50,6 +49,7 @@ import { MainFeedComponent } from './main-feed/main-feed.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 
 import { AuthService } from './auth.service';
+import { ProfileService } from './profile.service';
 import { ProjectService } from './project.service';
 
 @NgModule({
@@ -102,6 +102,7 @@ import { ProjectService } from './project.service';
   ],
   providers: [
     AuthService,
+    ProfileService,
     ProjectService,
     {
       provide: APP_INITIALIZER,

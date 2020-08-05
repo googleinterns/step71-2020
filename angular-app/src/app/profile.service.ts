@@ -1,46 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import * as firebase from 'firebase/app'
 import { AngularFirestore } from '@angular/fire/firestore';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { AuthService } from './auth.service';
-import { environment } from '../environments/environment';
-import { Observable, of, Subject } from 'rxjs';
-
-
 import { Profile } from './profile';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  private profiles$: Observable<Profile[]>;
   private user: firebase.User;
-  private currentUser$: Subject<Observable<Profile>>;
+  private currentProfile$: Observable<Profile>;
 
   constructor(
     private firestore: AngularFirestore,
-    private snackBar: MatSnackBar,
     private authService: AuthService,
-  ) { 
-      this.authService.getProfile().subscribe(user => {
+  ) {
+    this.authService.getUser().subscribe(user => {
       this.user = user;
-      this.profiles$ = firestore.collection<Profile>('users').valueChanges();
+      if (this.user != null) {
+        this.currentProfile$ = this.getProfile(this.user.uid);
+      }
     });
-   }
-
-    public getProfile(): Observable<Profile[]> {
-      return this.profiles$;
   }
 
-  public saveProfile(email: string): Observable<Profile> {
-    return this.firestore.collection('users').doc<Profile>(email);
+  public getProfile(uid: string): Observable<Profile> {
+    return this.firestore.collection('users').doc<Profile>(uid).valueChanges();
   }
 
-  public getCurrentUser(profile: Profile): Subject<Observable<Profile>>{
-    if (this.currentUser$ == null) {
-          this.firestore.collection<Profile>('users').doc(profile.email).set(profile)
-    .catch(error => console.error("Error adding user: ", error));
-    }    
-    // else return currentUSer
+  public getCurrentProfile(): Observable<Profile> {
+    return this.currentProfile$;
+  }
+
+  public saveProfile() {
   }
 }

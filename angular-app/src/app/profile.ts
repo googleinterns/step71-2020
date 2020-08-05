@@ -1,10 +1,10 @@
 export interface Profile {
   id: string;
-  fullName: string;
+  displayName: string;
   email: string;
   photoUrl: string;
   bio: string;
-  following: number;
+  following: string[];
   snippets: string[];
   tags: string[];
 }
