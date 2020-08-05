@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Project Tags for {{project.title}}</h2>
+<mat-dialog-content>
+  <mat-form-field hintLabel="Add tags here">
+    <mat-chip-list #tagList>
+      <mat-chip *ngFor="let tag of tags" 
+                  [removable]="true" (removed)="removeTag(tag)">
+        {{tag}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input
+                  [matChipInputFor]="tagList"
+                  (matChipInputTokenEnd)="addTag($event.input)"
+                  (focusout)="addTag($event.target)">
+    </mat-chip-list>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button (click)='saveTags()' color="primary">Save</button>
+  <button mat-flat-button (click)='closeDialog()' color="primary">Close</button>
+</mat-dialog-actions>

@@ -50,31 +50,29 @@ export class CreateProjectDialogComponent implements OnInit {
     this.router.navigate(['/workspace', this.title]);
   }
 
-  addCollaborator(event: MatChipInputEvent): void {
-    this.add(this.collaborators, event);
+  addCollaborator(element): void {
+    this.add(this.collaborators, element);
   }
 
   removeCollaborator(collaborator: string): void {
     this.remove(this.collaborators, collaborator);
   }
 
-  addTag(event: MatChipInputEvent): void {
-    this.add(this.tags, event);
+  addTag(element): void {
+    this.add(this.tags, element);
   }
 
   removeTag(tag: string): void {
     this.remove(this.tags, tag);
   }
 
-  add(list: string[], event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    if ((value || '').trim()) {
-      list.push(value.trim());
+  add(list: string[], element): void {
+    let cleaned = (element.value || '').trim();
+    if (cleaned && list.findIndex(element => element === cleaned) === -1) {
+      list.push(cleaned);
     }
-    if (input) {
-      input.value = '';
+    if (element) {
+      element.value = '';
     }
   }
 

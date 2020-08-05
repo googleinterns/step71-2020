@@ -14,13 +14,14 @@
     <mat-label>Add Collaborators</mat-label>
     <mat-chip-list #collaboratorList>
       <mat-chip *ngFor="let collaborator of collaborators" 
-                    [removable]="true" (removed)="remove(collaborator)">
+                    [removable]="true" (removed)="removeCollaborator(collaborator)">
         {{collaborator}}
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
       <input 
                   [matChipInputFor]="collaboratorList"
-                  (matChipInputTokenEnd)="addCollaborator($event)">
+                  (matChipInputTokenEnd)="addCollaborator($event.input)"
+                  (focusout)="addCollaborator($event.target)">
     </mat-chip-list>
   </mat-form-field>
   <br>
@@ -28,13 +29,14 @@
     <mat-label>Add Tags</mat-label>
     <mat-chip-list #tagList>
       <mat-chip *ngFor="let tag of tags" 
-                  [removable]="true" (removed)="remove(tag)">
+                  [removable]="true" (removed)="removeTag(tag)">
         {{tag}}
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
       <input 
                   [matChipInputFor]="tagList"
-                  (matChipInputTokenEnd)="addTag($event)">
+                  (matChipInputTokenEnd)="addTag($event.input)"
+                  (focusout)="addTag($event.target)">
     </mat-chip-list>
   </mat-form-field>
 </mat-dialog-content>
