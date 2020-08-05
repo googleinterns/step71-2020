@@ -5,12 +5,12 @@ import { TagFilterPipe} from './filter.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { APP_INITIALIZER } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -49,6 +49,7 @@ import { MainFeedComponent } from './main-feed/main-feed.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 
 import { AuthService } from './auth.service';
+import { ProfileService } from './profile.service';
 import { ProjectService } from './project.service';
 import { ManageTagsComponent } from './manage-tags/manage-tags.component';
 
@@ -74,6 +75,7 @@ import { ManageTagsComponent } from './manage-tags/manage-tags.component';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -102,14 +104,8 @@ import { ManageTagsComponent } from './manage-tags/manage-tags.component';
   ],
   providers: [
     AuthService,
+    ProfileService,
     ProjectService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (projectService: ProjectService) =>
-      () => projectService.load(),
-      deps: [ProjectService],
-      multi: true,
-    },  
     {
       provide: MAT_CHIPS_DEFAULT_OPTIONS,
       useValue: {

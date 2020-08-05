@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Project } from '../project';
-import { ProjectService } from '../project.service';
 
+import { AuthService } from '../auth.service';
+import { ProjectService } from '../project.service';
+import { Project } from '../project';
 import { CreateProjectDialogComponent } from '../create-project-dialog/create-project-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -17,12 +18,15 @@ export class ProjectsComponent implements OnInit {
   selectedProject: Project;
 
   constructor(
+    private authService: AuthService,
     private projectService: ProjectService,
     public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    this.projects$ = this.projectService.getProjects();
+    this.authService.getUser().subscribe(user => {
+      this.projects$ = this.projectService.getUserProjects(user.uid);
+    });
   }
 
   createNewProject() : void {

@@ -7,7 +7,6 @@ import { Observable, of, Subject, Subscription } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
-import { AuthService } from './auth.service';
 import { Project } from './project';
 import { ProjectFile } from './project-file';
 
@@ -19,7 +18,6 @@ const COLLECTION_FILES: string = "files";
 })
 export class ProjectService {
 
-  private user: firebase.User;
   private projects$: Observable<Project[]>;
   private currentProject$: Subject<Observable<Project>>;
 
@@ -27,26 +25,16 @@ export class ProjectService {
     private firestore: AngularFirestore,
     private httpClient: HttpClient,
     private snackBar: MatSnackBar,
-    private authService: AuthService,
   ) { }
-
-  public load() { 
-    this.authService.getUser().subscribe(user => {
-      this.user = user;
-      if (this.user != null) {
-        this.projects$ = this.firestore.collection<Project>('projects', 
-          ref => ref.where("roles." + this.user.uid, "in", ["owner", "editor"])
-        ).valueChanges({ idField: "projectId" });
-      }
-    });
-  }
 
   public getBlobstoreUploadUrl(): Observable<string> {
     return this.httpClient.get('/blobstore-upload-url', {responseType: 'text'});
   }
 
-  public getProjects(): Observable<Project[]> {
-    return this.projects$;
+  public getUserProjects(uid: string): Observable<Project[]> {
+    return this.projects$ = this.firestore.collection<Project>('projects', 
+      ref => ref.where("roles." + uid, "in", ["owner", "editor"])
+    ).valueChanges({ idField: "projectId" });
   }
 
   public setCurrentProject(id: string): void {
