@@ -10,7 +10,6 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -75,7 +74,6 @@ import { ManageTagsComponent } from './manage-tags/manage-tags.component';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAnalyticsModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
     FormsModule,
