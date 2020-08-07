@@ -18,6 +18,12 @@ export class ProfileService {
     return this.firestore.collection('users').doc<Profile>(uid).valueChanges();
   }
 
+  public getProfiles(uids: string[]): Observable<Profile[]> {
+    return this.firestore.collection<Profile>('users', 
+      ref => ref.where("uid", "in", uids)
+    ).valueChanges();
+  }
+
   public saveProfile() {
   }
 }

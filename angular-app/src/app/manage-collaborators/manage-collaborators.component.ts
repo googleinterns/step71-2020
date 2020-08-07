@@ -3,6 +3,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
+import { Profile } from '../profile';
+import { ProfileService } from '../profile.service';
 import { Project } from '../project';
 import { ProjectService } from '../project.service';
 
@@ -13,18 +15,22 @@ import { ProjectService } from '../project.service';
 })
 export class ManageCollaboratorsComponent implements OnInit {
   public project: Project;
+  public collaborators$: Observable<Profile[]>;
   public collaboratorId: string;
   public tableColumns = ['uid', 'role'];
 
   constructor(
+    private profileService: ProfileService,
     private projectService: ProjectService,
     public dialogRef: MatDialogRef<ManageCollaboratorsComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-  ) { 
-    data.subscribe(project => this.project = project);
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.data.subscribe(project => {
+      this.project = project;
+      this.collaborators$ = this.profileService.getProfiles(Object.keys(this.project.roles));
+    });
   }
 
   addCollaborator(): void {
